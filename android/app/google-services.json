@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "194873241875",
+      "project_id": "nfcproject-54f62",
+      "storage_bucket": "nfcproject-54f62.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:194873241875:android:a6837c1db82ff0ce706ae6",
+          "android_client_info": {
+            "package_name": "com.naokiokada.nfcmanager"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "194873241875-b2iqvglkfr37906nk5fjqic5hf6dlibh.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyAXbAqWxMlUfy7JUolyFCd_jg5ggLrPcnA"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "194873241875-b2iqvglkfr37906nk5fjqic5hf6dlibh.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
