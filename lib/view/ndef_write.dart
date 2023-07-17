@@ -86,7 +86,7 @@ class NdefWritePage extends StatelessWidget {
                         //   onPressed: () => Navigator.pop(context, 'mime'),
                         // ),
                         SimpleDialogOption(
-                          child: Text('Contact'),
+                          child: Text('Write Data using Reg_no'),
                           onPressed: () => Navigator.pop(context, 'external'),
                         ),
                       ],

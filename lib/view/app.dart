@@ -63,7 +63,7 @@ class _HomeState extends State<_Home> {
           child: Row(
             children: [
               Icon(FontAwesomeIcons.nfcSymbol),
-              Text('  NFC Project',textAlign: TextAlign.center,),
+              Text('  Smart Docs',textAlign: TextAlign.center,),
             ],
           ),
         ),
@@ -74,35 +74,46 @@ class _HomeState extends State<_Home> {
           FormSection(children: [
             FormSection(
               children: [
-                FormRow(
-                  emoji: Icon(FontAwesomeIcons.eye),
-                  title: Text('  NFC Tag - Read'),
-                  trailing: Icon(Icons.chevron_right),
-                  onTap: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => TagReadPage.withDependency(),
-                  )),
+                Container(
+                  color: Colors.red,
+                  child: FormRow(
+                    
+                    emoji: Icon(FontAwesomeIcons.eye),
+                    title: Text('  NFC Tag - Read'),
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () => Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => TagReadPage.withDependency(),
+                    )),
+                  ),
                 ),
               ],
             ),
             FormSection(
               children: [
-                FormRow(
-                  emoji: Icon(FontAwesomeIcons.pen),
-                  title: Text('  NFC Tag - Write'),
-                  trailing: Icon(Icons.chevron_right),
-                  onTap: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => NdefWritePage.withDependency(),
-                  )),
+                Container(
+                  color: Colors.green,
+                  child: FormRow(
+                    emoji: Icon(FontAwesomeIcons.pen),
+                    title: Text('  NFC Tag - Write'),
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () => Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => NdefWritePage.withDependency(),
+                    )),
+                  ),
                 ),
+                
               ],
             ),
             FormSection(
               children: [
-                FormRow(
-                  emoji: Icon(FontAwesomeIcons.lock),
-                  title: Text('  Export Csv Data'),
-                  trailing: Icon(Icons.chevron_right),
-                  onTap: () => exportData()
+                Container(
+                  color: Colors.amber,
+                  child: FormRow(
+                    emoji: Icon(FontAwesomeIcons.lock),
+                    title: Text('  Export Csv Data'),
+                    trailing: Icon(Icons.chevron_right),
+                    onTap: () => exportData()
+                  ),
                 ),
               ],
             ),
@@ -240,7 +251,7 @@ class _HomeState extends State<_Home> {
                           headers[2]: data[i][2],
                           headers[3]: data[i][3],
                           headers[4]: data[i][4],
-                          headers[5]: data[i][5],
+                          // headers[5]: data[i][5],
                           // headers[6]: data[i][6],
                         
                       }).then((DocumentReference docRef) {

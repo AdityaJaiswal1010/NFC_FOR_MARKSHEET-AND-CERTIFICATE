@@ -371,7 +371,7 @@ class _TagInfoState extends State<_TagInfo> {
       //     subtitle: Text('$canMakeReadOnly'),
       //   ));
       if (cachedMessage != null)
-        Iterable.generate(cachedMessage.records.length).forEach((i) {
+        Iterable.generate(cachedMessage.records.length).forEach((i) async {
           final record = cachedMessage.records[i];
           final info = NdefRecordInfo.fromNdef(record);
           // ndefWidgets.add(FormRow(
@@ -440,25 +440,48 @@ class _TagInfoState extends State<_TagInfo> {
                 maildata+=vari[i];
               }
           }
-          List<String> childidList=[];
-          List<String> regNoList=[];
+          
+          // List<String> regNoList=[];
+          // print('-----------------------');
+          // print(maildata.toString());
+          // String refid=maildata.toString().trim();
+          // var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
+          // Map<String, dynamic> m=resultData.data()!;
+          // List<dynamic> childidList=m['childid'];
+          
+          // for(int i=0;i<m['childid'].length;i++){
+          //   setState(() {
+          //     childidList.add(m['childid'][i].toString());
+          //   });
+          // }
+          // print(childidList);
+          // List<String> allcgpi=[];
+          // print(childidList.length.toInt());
+          // for(var i=0;i<childidList.length.toInt();i++){
+          //   var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
+          //   Map<String,dynamic> mdata=r.data()!;
+          //   if(allcgpi.length==childidList.length.toInt())
+          //     break;
+          //   setState(() {
+          //     allcgpi.add(mdata['sgpi'].toString());
+          //   });
+          // }
+          // print(allcgpi);
 
-          FirebaseFirestore.instance.collection('users').doc(maildata).get().then((DocumentSnapshot snapshot){
-            childidList=snapshot['childid'];
-            print(childidList);
-            for(int i=0;i<childidList.length;i++)
-            {
-              FirebaseFirestore.instance.collection('users').doc(childidList[i].toString()).get().then((DocumentSnapshot s){
-                regNoList.add(s['reg_no'].toString());
-              });
-            }
-          });
+
+
+
+
+
+
+
+        
            ndefWidgets.add(
           Column(
             children: [
               Row(
                 children: [
-                  Text('FirstName - '),
+                  Text('Reg_No - '),
                   
                   Text(fname),
                 ],
@@ -467,7 +490,7 @@ class _TagInfoState extends State<_TagInfo> {
               SizedBox(height: 12),
              Row(
                 children: [
-                  Text('Lastname - '),
+                  Text('Prn No- '),
                   Text(lname),
                 ],
                 
@@ -475,7 +498,7 @@ class _TagInfoState extends State<_TagInfo> {
               SizedBox(height: 12),
                Row(
                 children: [
-                  Text('Phone - '),
+                  Text('Seat_No- '),
                   Text(phonenum),
                 ],
                 
@@ -483,12 +506,21 @@ class _TagInfoState extends State<_TagInfo> {
               SizedBox(height: 12),
               Row(
                 children: [
-                  Text('Email - '),
+                  Text('Sem- '),
                   Text(maildata),
                 ],
                 
               ),
               SizedBox(height: 12),
+              // for(int i=0;i<childidList.length;i++)
+              // Row(
+                
+              //   children: [
+              //     Text('Sem ${i} Cgpa- '),
+              //     Text(allcgpi[i]),
+              //   ],
+                
+              // ),
               // FloatingActionButton(
               //   child: Text('Add to contact',style: TextStyle(fontSize: 10.0,),),
               //         backgroundColor: Colors.blue,

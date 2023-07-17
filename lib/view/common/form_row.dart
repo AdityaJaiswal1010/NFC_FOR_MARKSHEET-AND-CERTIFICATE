@@ -21,7 +21,7 @@ class FormRow extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: EdgeInsets.fromLTRB(14, 10, 8, 10),
-          constraints: BoxConstraints(minHeight: 48),
+          constraints: BoxConstraints(minHeight: 100),
           child: Row(
             children: [
               if (emoji != null)
