@@ -1,4 +1,6 @@
+// import 'dart:html';
 import 'dart:io';
+
 
 import 'package:app/repository/repository.dart';
 import 'package:app/view/about.dart';
@@ -150,20 +152,41 @@ class _HomeState extends State<_Home> {
       });
     }
     
-    Map<String,dynamic> m={};
+    Map<String,String>? m={};
     List<String> ls=[];
-    FirebaseFirestore.instance.collection('entry').get().then((QuerySnapshot? querySnapshot){
-      querySnapshot!.docs.forEach((document) { 
-        setState(() {
-        
-            m=document['map'];
+    // 
+    // FirebaseFirestorDocumentSnapshot response = await FirebaseFirestore.instance.collection('entry').doc('l1nqyFzkPCKoUqhU1eML').get(); 
+    // m=response['map'];e.instance.collection('entry').doc('l1nqyFzkPCKoUqhU1eML').snapshots(data)
+    //   (QuerySnapshot? querySnapshot){
+    //   querySnapshot!.docs.forEach((document) { 
+    //     setState(() {
+            
+    //         m=document['map'];
   
       
-        });
-      });
+    //     });
+    //   });
+    // }
+    // );
+    // if(m!.isNotEmpty)
+    // {
+    //   for(var i=0;i<m.length;i++)
+    // {
+    //   setState(() {
+    //     // ls.add(m[i]?.key);
+    //     m!.keys.forEach((key) {
+    //     ls.add(key.toString());
+    //   });
+    //   });
+    // }
+    // }
+    m['12345']='kCzCGjOzxuL034JneCKx';
+    FirebaseFirestore.instance.collection('entry').doc('l1nqyFzkPCKoUqhU1eML').set({
+      'map': m
     });
-    
     print(headers);
+    print(m);
+    print(ls);
     // for(var i=1;i<data.length;i++){
     //   FirebaseFirestore.instance.collection('forms').add({
     //     'name': data[i][0],
@@ -179,13 +202,37 @@ class _HomeState extends State<_Home> {
       
       // var docId=FirebaseFirestore.instance.collection('forms').doc();
       // var docIdForUsers=FirebaseFirestore.instance.collection('users').doc();
-    
+    setState(() {
+      flag=1;
+    });
         FirebaseFirestore.instance.collection('forms').add({
           for(var k=0;k<data[i].length;k++)
           
                           headers[k]: data[i][k],
                         }).then((DocumentReference docId){
-                         if(m[data[i][0]].isUndefined){
+                          // for(int i=0;i<ls.length;i++)
+                          // {
+                          //   if(ls[i].toString()==data[i][0].toString())
+                          //   {
+                          //     setState(() {
+                          //       flag=0;
+                                
+                          //     });
+                              
+                          //   }
+                          //   if(flag==0)
+                          //     break;
+                          // }
+                          // print(flag);
+                         if(m.containsKey(data[i][0].toString())){
+                          FirebaseFirestore.instance.collection('users').doc(m[data[i][0]].toString()).update({
+                            'childid': FieldValue.arrayUnion([docId.toString()])
+                          });
+                          // setState(() {
+                          //   flag=1;
+                          // });
+                         }
+                         else{
                           FirebaseFirestore.instance.collection('users').add({
                           headers[0]: data[i][0],
                           'childid': FieldValue.arrayUnion([docId.id.toString()]),
@@ -197,25 +244,20 @@ class _HomeState extends State<_Home> {
                           // headers[6]: data[i][6],
                         
                       }).then((DocumentReference docRef) {
-                        m[data[i][0]]=docRef.id.toString();
-                        
+                        setState(() {
+                          // m?.addAll({data[i][0].toString(): docRef.id.toString()});
+                          
+                          m[data[i][0].toString()]=docRef.id.toString();
+                          ls.add(data[i][0].toString());
+                          print('------------------------------------------------------------');
+                          print(m);
+                          print(ls);
+                        });
                       });
                          }
-                         else{
-                          FirebaseFirestore.instance.collection('users').doc(m[data[i][0]]).update({
-                            'childid': FieldValue.arrayUnion([docId.toString()])
-                          });
-                          
-                      
-                         }
-                      
-                      
-                     
                         });
     }
-    FirebaseFirestore.instance.collection('entry').doc('l1nqyFzkPCKoUqhU1eML').set({
-      'map': m
-    });
+    
   }
 }
 

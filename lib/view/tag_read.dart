@@ -5,7 +5,9 @@ import 'package:app/utility/extensions.dart';
 import 'package:app/view/common/form_row.dart';
 import 'package:app/view/common/nfc_session.dart';
 import 'package:app/view/ndef_record.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:contacts_service/contacts_service.dart";
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nfc_manager/platform_tags.dart';
@@ -372,18 +374,20 @@ class _TagInfoState extends State<_TagInfo> {
         Iterable.generate(cachedMessage.records.length).forEach((i) {
           final record = cachedMessage.records[i];
           final info = NdefRecordInfo.fromNdef(record);
-          ndefWidgets.add(FormRow(
-            title: Text('#$i ${info.title}'),
-            subtitle: Text('${info.subtitle}'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(context, MaterialPageRoute(
-              builder: (context) => NdefRecordPage(i, record),
+          // ndefWidgets.add(FormRow(
+          //   title: Text('#$i ${info.title}'),
+          //   subtitle: Text('${info.subtitle}'),
+          //   trailing: Icon(Icons.chevron_right),
+          //   onTap: () => Navigator.push(context, MaterialPageRoute(
+          //     builder: (context) => NdefRecordPage(i, record),
 
-            )),
+          //   )),
             
-          ));
+          // ));
           String vari='${info.subtitle}';
           String namedata='';
+          print(vari);
+          
           for(int i=1;i<vari.length;i++)
           {
             if(vari[i]==':')
@@ -436,6 +440,19 @@ class _TagInfoState extends State<_TagInfo> {
                 maildata+=vari[i];
               }
           }
+          List<String> childidList=[];
+          List<String> regNoList=[];
+
+          FirebaseFirestore.instance.collection('users').doc(maildata).get().then((DocumentSnapshot snapshot){
+            childidList=snapshot['childid'];
+            print(childidList);
+            for(int i=0;i<childidList.length;i++)
+            {
+              FirebaseFirestore.instance.collection('users').doc(childidList[i].toString()).get().then((DocumentSnapshot s){
+                regNoList.add(s['reg_no'].toString());
+              });
+            }
+          });
            ndefWidgets.add(
           Column(
             children: [
@@ -472,28 +489,28 @@ class _TagInfoState extends State<_TagInfo> {
                 
               ),
               SizedBox(height: 12),
-              FloatingActionButton(
-                child: Text('Add to contact',style: TextStyle(fontSize: 10.0,),),
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
+              // FloatingActionButton(
+              //   child: Text('Add to contact',style: TextStyle(fontSize: 10.0,),),
+              //         backgroundColor: Colors.blue,
+              //         foregroundColor: Colors.white,
                 
-                onPressed: ()  {
-                  // var newPerson=Contact();
-                  // newPerson.givenName=fname+lname;
-                  // newPerson.phones=[Item(label: 'mobile',value: phonenum)];
-                  // newPerson.emails=[Item(label: 'work',value: maildata)];
+              //   onPressed: ()  {
+              //     // var newPerson=Contact();
+              //     // newPerson.givenName=fname+lname;
+              //     // newPerson.phones=[Item(label: 'mobile',value: phonenum)];
+              //     // newPerson.emails=[Item(label: 'work',value: maildata)];
                   
-                  //   await ContactsService.addContact(newPerson);
+              //     //   await ContactsService.addContact(newPerson);
                     
-                  //   var contacts = await ContactsService.getContacts();
-                  //     //  call all of contacts
-                  //   setState(() {
-                  //     var name = contacts;
-                  //   });
-                  saveContactInPhone(fname,lname,phonenum,maildata);
-                },
+              //     //   var contacts = await ContactsService.getContacts();
+              //     //     //  call all of contacts
+              //     //   setState(() {
+              //     //     var name = contacts;
+              //     //   });
+              //     saveContactInPhone(fname,lname,phonenum,maildata);
+              //   },
                  
-              )
+              // )
             ],
             
           ),
