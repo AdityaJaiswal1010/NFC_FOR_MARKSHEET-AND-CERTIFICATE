@@ -14,6 +14,8 @@ import 'package:nfc_manager/platform_tags.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
+import 'display_data.dart';
+
 class TagReadModel with ChangeNotifier {
   NfcTag? tag;
 
@@ -97,6 +99,11 @@ class _TagInfo extends StatefulWidget {
 class _TagInfoState extends State<_TagInfo> {
   @override
   Widget build(BuildContext context) {
+    String maildata='';
+      int callFlag=1;
+      String fname='';
+      String lname='';
+      String phonenum='';
     final tagWidgets = <Widget>[];
     final ndefWidgets = <Widget>[];
 
@@ -370,6 +377,7 @@ class _TagInfoState extends State<_TagInfo> {
       //     title: Text('Can Make Read Only'),
       //     subtitle: Text('$canMakeReadOnly'),
       //   ));
+      
       if (cachedMessage != null)
         Iterable.generate(cachedMessage.records.length).forEach((i) async {
           final record = cachedMessage.records[i];
@@ -394,7 +402,7 @@ class _TagInfoState extends State<_TagInfo> {
               break;
             namedata+=vari[i];
           }
-          String fname='';
+          
           int j=0;
           for(j=0;j<namedata.length;j++)
           {
@@ -402,14 +410,14 @@ class _TagInfoState extends State<_TagInfo> {
               break;
             fname+=namedata[j];
           }
-          String lname='';
+          
           for(j=j+1;j<namedata.length;j++)
           {
             if(namedata[j]==' ')
               break;
             lname+=namedata[j];
           }
-          String phonenum='';
+          
           int flag=1;
           for(int i=1;i<vari.length;i++)
           {
@@ -424,7 +432,7 @@ class _TagInfoState extends State<_TagInfo> {
             }
             phonenum+=vari[i];
           }
-          String maildata='';
+          
           flag=1;
           for(int i=1;i<vari.length;i++)
           {
@@ -449,11 +457,11 @@ class _TagInfoState extends State<_TagInfo> {
           // Map<String, dynamic> m=resultData.data()!;
           // List<dynamic> childidList=m['childid'];
           
-          // for(int i=0;i<m['childid'].length;i++){
-          //   setState(() {
-          //     childidList.add(m['childid'][i].toString());
-          //   });
-          // }
+          // // for(int i=0;i<m['childid'].length;i++){
+          // //   setState(() {
+          // //     childidList.add(m['childid'][i].toString());
+          // //   });
+          // // }
           // print(childidList);
           // List<String> allcgpi=[];
           // print(childidList.length.toInt());
@@ -467,7 +475,9 @@ class _TagInfoState extends State<_TagInfo> {
           //   });
           // }
           // print(allcgpi);
-
+          // Navigator.push(context, MaterialPageRoute(
+          //             builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,),
+          //           ));
 
 
 
@@ -549,6 +559,39 @@ class _TagInfoState extends State<_TagInfo> {
           
            );
         });
+        
+        
+        
+          // print('-----------------------');
+          // print(maildata.toString());
+          // String refid=maildata.toString().trim();
+          // var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
+          // Map<String, dynamic> m=resultData.data()!;
+          // List<dynamic> childidList=m['childid'];
+          // print(childidList);
+          // List<String> allcgpi=[];
+          // print(childidList.length.toInt());
+          // for(var i=0;i<childidList.length.toInt();i++){
+          //   var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
+          //   Map<String,dynamic> mdata=r.data()!;
+          //   if(allcgpi.length==childidList.length.toInt())
+          //     break;
+          //   setState(() {
+          //     allcgpi.add(mdata['sgpi'].toString());
+          //   });
+          // }
+          // print(allcgpi);
+          // Navigator.push(context, MaterialPageRoute(
+          //             builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,),
+          //           ));
+
+
+
+
+
+
+
+        
     }
 
     return Column(
@@ -561,9 +604,54 @@ class _TagInfoState extends State<_TagInfo> {
           FormSection(
             header: Text('TAG'),
             children: ndefWidgets,
+        //     if(callFlag==1){
+        //   linkToPage(maildata,fname,lname,phonenum);
+        //   setState(() {
+        //     callFlag=0;
+        //   });
+          
+        // }
           ),
+          ElevatedButton(
+          child: Text('Elevated Button'),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.green,
+          ),
+          onPressed: () {
+            linkToPage(maildata, fname, lname, phonenum);
+          },
+        ),
       ],
     );
+  }
+  
+  Future<void> linkToPage(String maildata, String fname, String lname, String phonenum) async {
+    print('-----------------------');
+          print(maildata.toString());
+          String refid=maildata.toString().trim();
+          var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
+          Map<String, dynamic> m=resultData.data()!;
+          List<dynamic> childidList=m['childid'];
+          print(childidList);
+          List<String> allcgpi=[];
+          print(childidList.length.toInt());
+          for(var i=0;i<childidList.length.toInt();i++){
+            var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
+            Map<String,dynamic> mdata=r.data()!;
+            if(allcgpi.length==childidList.length.toInt())
+              break;
+            setState(() {
+              allcgpi.add(mdata['sgpi'].toString());
+            });
+          }
+          print(allcgpi);
+          Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,),
+                    ));
+
+
+
+
   }
 }
 
