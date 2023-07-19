@@ -30,7 +30,12 @@ dependencies:
   open_file: 
   uuid:
   csv:
+  flutter_native_splash: 
 
+flutter_native_splash:
+  image: "assets/icon/android.png"
+  color: "#f9f9f9"
+  text: "Welcome to Smart Docs"
   
   # cloud_firestore_platform_interface:
 
@@ -44,6 +49,7 @@ flutter:
   uses-material-design: true
   assets:
     - lib/res/
+    - "assets/icon/"
 
 flutter_icons:
   android: true

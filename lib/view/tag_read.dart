@@ -497,14 +497,14 @@ class _TagInfoState extends State<_TagInfo> {
                 ],
                 
               ),
-              SizedBox(height: 12),
-             Row(
-                children: [
-                  Text('Prn No- '),
-                  Text(lname),
-                ],
+            //   SizedBox(height: 12),
+            //  Row(
+            //     children: [
+            //       Text('Prn No- '),
+            //       Text(lname),
+            //     ],
                 
-              ),
+            //   ),
               SizedBox(height: 12),
                Row(
                 children: [
@@ -613,9 +613,9 @@ class _TagInfoState extends State<_TagInfo> {
         // }
           ),
           ElevatedButton(
-          child: Text('Elevated Button'),
+          child: Text('View Detail Record'),
           style: ElevatedButton.styleFrom(
-            primary: Colors.green,
+            primary: Color(0xFF00E5FF),
           ),
           onPressed: () {
             linkToPage(maildata, fname, lname, phonenum);

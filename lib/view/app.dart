@@ -75,7 +75,7 @@ class _HomeState extends State<_Home> {
             FormSection(
               children: [
                 Container(
-                  color: Colors.red,
+                  color: Color(0xFFAA00FF),
                   child: FormRow(
                     
                     emoji: Icon(FontAwesomeIcons.eye),
@@ -91,7 +91,7 @@ class _HomeState extends State<_Home> {
             FormSection(
               children: [
                 Container(
-                  color: Colors.green,
+                  color: Color(0xFF00E5FF),
                   child: FormRow(
                     emoji: Icon(FontAwesomeIcons.pen),
                     title: Text('  NFC Tag - Write'),
@@ -107,7 +107,7 @@ class _HomeState extends State<_Home> {
             FormSection(
               children: [
                 Container(
-                  color: Colors.amber,
+                  color: Color(0xFFff4667),
                   child: FormRow(
                     emoji: Icon(FontAwesomeIcons.lock),
                     title: Text('  Export Csv Data'),

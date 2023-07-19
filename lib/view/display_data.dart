@@ -42,14 +42,14 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
                 ],
                 
               ),
-              SizedBox(height: 12),
-              Row(
-                children: [
-                  Text('Sem- '),
-                  Text(widget.maildata),
-                ],
+              // SizedBox(height: 12),
+              // Row(
+              //   children: [
+              //     Text('Sem- '),
+              //     Text(widget.maildata),
+              //   ],
                 
-              ),
+              // ),
               SizedBox(height: 12),
               for(int i=0;i<widget.allcgpi.length;i++)
               Row(
