@@ -52,13 +52,14 @@ class _Home extends StatefulWidget {
 }
 
 class _HomeState extends State<_Home> {
+  bool isPressed = true;
   List <String> headers=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       
       appBar: AppBar(
-        
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Row(
             children: [
@@ -71,52 +72,168 @@ class _HomeState extends State<_Home> {
       body: ListView(
         padding: EdgeInsets.all(2),
         children: [
-          FormSection(children: [
-            FormSection(
-              children: [
-                Container(
-                  color: Color(0xFFAA00FF),
-                  child: FormRow(
-                    
-                    emoji: Icon(FontAwesomeIcons.eye),
-                    title: Text('  NFC Tag - Read'),
-                    trailing: Icon(Icons.chevron_right),
-                    onTap: () => Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => TagReadPage.withDependency(),
-                    )),
-                  ),
-                ),
-              ],
-            ),
-            FormSection(
-              children: [
-                Container(
-                  color: Color(0xFF00E5FF),
-                  child: FormRow(
-                    emoji: Icon(FontAwesomeIcons.pen),
-                    title: Text('  NFC Tag - Write'),
-                    trailing: Icon(Icons.chevron_right),
-                    onTap: () => Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => NdefWritePage.withDependency(),
-                    )),
-                  ),
-                ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 30,),
+              Center(
                 
-              ],
-            ),
-            FormSection(
-              children: [
-                Container(
-                  color: Color(0xFFff4667),
-                  child: FormRow(
-                    emoji: Icon(FontAwesomeIcons.lock),
-                    title: Text('  Export Csv Data'),
-                    trailing: Icon(Icons.chevron_right),
-                    onTap: () => exportData()
+                child: Container(
+                  
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Color(0xFFAA00FF),
+                    boxShadow: const[
+                      BoxShadow(
+                        blurRadius: 30,
+                        offset: Offset(-28, -28),
+                        color: Colors.white,
+                        
+                      ),
+                      BoxShadow(
+                        blurRadius: 30,
+                        offset: Offset(28, 28),
+                        color: Color(0xFFA7A9AF),
+                      )
+                    ]
                   ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => TagReadPage.withDependency(),
+                        ));
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset("assets/animation_lkh7vorm_small.gif", 
+                        gaplessPlayback: true, 
+                        fit: BoxFit.fill
+                        ),
+                        Text('Scan Smart Doc')
+                      ],
+                    ),
+                  )
+      //             child: FormRow(
+                        
+      //                   emoji: Icon(FontAwesomeIcons.eye),
+                        
+      //                   title: Image.asset("assets/animation_lkh7vorm_small.gif", 
+      // gaplessPlayback: true, 
+      // fit: BoxFit.fill
+      // ),
+      //                   trailing: Icon(Icons.chevron_right),
+      //                   onTap: () => Navigator.push(context, MaterialPageRoute(
+      //                     builder: (context) => TagReadPage.withDependency(),
+      //                   )),
+      //                 ),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: 50,),
+              Center(
+                
+                child: Container(
+                  
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Color(0xFFAA00FF),
+                    boxShadow: const[
+                      BoxShadow(
+                        blurRadius: 30,
+                        offset: Offset(-28, -28),
+                        color: Colors.white,
+                        
+                      ),
+                      BoxShadow(
+                        blurRadius: 30,
+                        offset: Offset(28, 28),
+                        color: Color(0xFFA7A9AF),
+                      )
+                    ]
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => NdefWritePage.withDependency(),
+                        ));
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset("assets/animation_lkh9buac_small.gif", 
+                        gaplessPlayback: true, 
+                        fit: BoxFit.fill
+                        ),
+                        Text('Write Into Smart Doc')
+                      ],
+                    ),
+                  )
+      //             child: FormRow(
+                        
+      //                   emoji: Icon(FontAwesomeIcons.eye),
+                        
+      //                   title: Image.asset("assets/animation_lkh7vorm_small.gif", 
+      // gaplessPlayback: true, 
+      // fit: BoxFit.fill
+      // ),
+      //                   trailing: Icon(Icons.chevron_right),
+      //                   onTap: () => Navigator.push(context, MaterialPageRoute(
+      //                     builder: (context) => TagReadPage.withDependency(),
+      //                   )),
+      //                 ),
+                ),
+              ),
+            ],
+          )
+          // FormSection(children: [
+          //   FormSection(
+          //     children: [
+          //       Container(
+          //         color: Color(0xFFAA00FF),
+          //         child: FormRow(
+                    
+          //           emoji: Icon(FontAwesomeIcons.eye),
+          //           title: Text('  NFC Tag - Read'),
+          //           trailing: Icon(Icons.chevron_right),
+          //           onTap: () => Navigator.push(context, MaterialPageRoute(
+          //             builder: (context) => TagReadPage.withDependency(),
+          //           )),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+            // FormSection(
+            //   children: [
+            //     Container(
+            //       color: Color(0xFF00E5FF),
+            //       child: FormRow(
+            //         emoji: Icon(FontAwesomeIcons.pen),
+            //         title: Text('  NFC Tag - Write'),
+            //         trailing: Icon(Icons.chevron_right),
+            //         onTap: () => Navigator.push(context, MaterialPageRoute(
+            //           builder: (context) => NdefWritePage.withDependency(),
+            //         )),
+            //       ),
+            //     ),
+                
+            //   ],
+            // ),
+            // FormSection(
+            //   children: [
+            //     Container(
+            //       color: Color(0xFFff4667),
+            //       child: FormRow(
+            //         emoji: Icon(FontAwesomeIcons.lock),
+            //         title: Text('  Export Csv Data'),
+            //         trailing: Icon(Icons.chevron_right),
+            //         onTap: () => exportData()
+            //       ),
+            //     ),
+            //   ],
+            // ),
           //   if (Platform.isAndroid)
             
           //     // FormSection(
@@ -142,8 +259,8 @@ class _HomeState extends State<_Home> {
           //     )),
           //   ),
           // ]),
-        ],
-          ),
+        // ],
+        //   ),
         ],
       ),
     );

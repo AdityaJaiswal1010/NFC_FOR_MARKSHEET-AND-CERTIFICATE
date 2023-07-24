@@ -31,6 +31,7 @@ dependencies:
   uuid:
   csv:
   flutter_native_splash: 
+  flutter_inset_box_shadow: 
 
 flutter_native_splash:
   image: "assets/icon/android.png"
@@ -50,6 +51,7 @@ flutter:
   assets:
     - lib/res/
     - "assets/icon/"
+    - assets/
 
 flutter_icons:
   android: true

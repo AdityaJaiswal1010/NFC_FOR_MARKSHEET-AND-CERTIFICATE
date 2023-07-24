@@ -55,7 +55,7 @@ class TagReadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tag - Read'),
+        title: Text('Scan Smart Doc'),
       ),
       body: ListView(
         padding: EdgeInsets.all(2),
