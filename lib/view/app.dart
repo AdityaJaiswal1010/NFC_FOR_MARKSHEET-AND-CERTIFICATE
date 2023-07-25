@@ -64,7 +64,7 @@ class _HomeState extends State<_Home> {
           child: Row(
             children: [
               Icon(FontAwesomeIcons.nfcSymbol),
-              Text('  Smart Docs',textAlign: TextAlign.center,),
+              Text('  Smart Docs' ,textAlign: TextAlign.center,),
             ],
           ),
         ),
@@ -81,8 +81,8 @@ class _HomeState extends State<_Home> {
                 
                 child: Container(
                   
-                  height: 150,
-                  width: 150,
+                  height: 350,
+                  width: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Color(0xFFAA00FF),
@@ -110,7 +110,9 @@ class _HomeState extends State<_Home> {
                       children: [
                         Image.asset("assets/animation_lkh7vorm_small.gif", 
                         gaplessPlayback: true, 
-                        fit: BoxFit.fill
+                        fit: BoxFit.fill,
+                        height: 300,
+                        width: 300,
                         ),
                         Text('Scan Smart Doc')
                       ],
@@ -136,8 +138,8 @@ class _HomeState extends State<_Home> {
                 
                 child: Container(
                   
-                  height: 150,
-                  width: 150,
+                  height: 350,
+                  width: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Color(0xFFAA00FF),
@@ -165,7 +167,9 @@ class _HomeState extends State<_Home> {
                       children: [
                         Image.asset("assets/animation_lkh9buac_small.gif", 
                         gaplessPlayback: true, 
-                        fit: BoxFit.fill
+                        fit: BoxFit.fill,
+                        height: 300,
+                        width: 300,
                         ),
                         Text('Write Into Smart Doc')
                       ],

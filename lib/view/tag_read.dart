@@ -5,6 +5,7 @@ import 'package:app/utility/extensions.dart';
 import 'package:app/view/common/form_row.dart';
 import 'package:app/view/common/nfc_session.dart';
 import 'package:app/view/ndef_record.dart';
+import 'package:app/view/viewDetailRecord.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:contacts_service/contacts_service.dart";
 import 'package:firebase_core/firebase_core.dart';
@@ -516,7 +517,7 @@ class _TagInfoState extends State<_TagInfo> {
               SizedBox(height: 12),
               Row(
                 children: [
-                  Text('Sem- '),
+                  Text('Key- '),
                   Text(maildata),
                 ],
                 
@@ -615,10 +616,12 @@ class _TagInfoState extends State<_TagInfo> {
           ElevatedButton(
           child: Text('View Detail Record'),
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFF00E5FF),
+            // primary: Color(0xFF00E5FF),
           ),
           onPressed: () {
-            linkToPage(maildata, fname, lname, phonenum);
+            Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => viewDetailRecord(maildata, fname, lname, phonenum)));
+            // linkToPage(maildata, fname, lname, phonenum);
           },
         ),
       ],

@@ -1,14 +1,18 @@
 import 'dart:convert';
 
 
+
 import 'dart:typed_data';
 
 import 'package:app/model/record.dart';
 import 'package:app/model/write_record.dart';
 import 'package:app/repository/repository.dart';
+import 'package:app/view/successRegNo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'error_SplashScreen.dart';
 
 class EditExternalModel with ChangeNotifier {
   EditExternalModel(this._repo, this.old) {
@@ -124,9 +128,28 @@ class EditExternalPage extends StatelessWidget {
             // SizedBox(height: 12),
             ElevatedButton(
               child: Text('Save'),
-              onPressed: () => Provider.of<EditExternalModel>(context, listen: false).save()
-                .then((_) => Navigator.pop(context))
-                .catchError((e) => print('=== $e ===')),
+              onPressed: () async {
+                var response = await FirebaseFirestore.instance.collection('entry').doc('l1nqyFzkPCKoUqhU1eML').get(); 
+    
+    Map<String, dynamic> m=response.data()!;
+  print(m['map']);
+  Map<String,dynamic> allres=m['map'];
+  // print(m.keys.runtimeType);
+  print(allres['12345']);
+  print('the provider');
+  print(Provider.of<EditExternalModel>(context, listen: false).emailController.text.toString());
+  String temp=Provider.of<EditExternalModel>(context, listen: false).emailController.text.toString();
+   if(allres[temp.toString()]==null || allres[temp.toString()]=='')
+    Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => errorSplashScreen()));
+    else{
+Provider.of<EditExternalModel>(context, listen: false).save()
+                .then((_) => Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => successRegNo())))
+                .catchError((e) => print('=== $e ==='));
+    }
+                
+              } 
             ),
           ],
         ), 
@@ -134,3 +157,4 @@ class EditExternalPage extends StatelessWidget {
 );
 }
 }
+
