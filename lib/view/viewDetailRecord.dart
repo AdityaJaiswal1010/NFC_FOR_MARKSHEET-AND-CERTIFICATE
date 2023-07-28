@@ -90,6 +90,15 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
           List<dynamic> childidList=m['childid'];
           print(childidList);
           List<String> allcgpi=[];
+          List<dynamic> refmarksheet=m['allmarksheet'];
+          List<String> allMarkSheet=[];
+          for(var i=0;i<refmarksheet.length.toInt();i++)
+          {
+            setState(() {
+              allMarkSheet.add(refmarksheet[i.toInt()].toString());
+            });
+            
+          }
           print(childidList.length.toInt());
           for(var i=0;i<childidList.length.toInt();i++){
             var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
@@ -100,13 +109,13 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
               allcgpi.add(mdata['sgpi'].toString());
             });
           }
+          print('before');
           print(allcgpi);
+          print('after');
+          print('---------------');
+          print(allMarkSheet);
           Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,),
+                      builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,allMarkSheet),
                     ));
-
-
-
-
   }
 }

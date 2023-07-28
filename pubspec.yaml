@@ -32,6 +32,8 @@ dependencies:
   csv:
   flutter_native_splash: 
   flutter_inset_box_shadow: 
+  syncfusion_flutter_pdfviewer:
+  
 
 flutter_native_splash:
   image: "assets/icon/android.png"

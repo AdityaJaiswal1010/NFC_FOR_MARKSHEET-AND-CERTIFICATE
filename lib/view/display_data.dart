@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DisplayNfcData extends StatefulWidget {
   final Map<String, dynamic> m;
+  final List<String> allMarksheet;
   final String maildata;
   final List<String> allcgpi;
   final String fname;
   final String phonenum;
-  const DisplayNfcData(this.m, this.maildata, this.allcgpi, this.fname, this.phonenum, {Key? key}) : super(key: key);
+  const DisplayNfcData(this.m, this.maildata, this.allcgpi, this.fname, this.phonenum,this.allMarksheet, {Key? key}) : super(key: key);
 
   @override
   State<DisplayNfcData> createState() => _DisplayNfcDataState();
@@ -54,15 +57,54 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
                   
                 // ),
                 SizedBox(height: 12),
-                for(int i=0;i<widget.allcgpi.length;i++)
-                Row(
+                // DebugPrint(widget.allMarksheet);
+      //           if(widget.allMarksheet.length==1)
+      //           Row(
                   
-                  children: [
-                    Text('Sem ${i} Cgpa- '),
-                    Text(widget.allcgpi[i]),
-                  ],
+      //             children: [
+                    
+      //               ElevatedButton(onPressed: () {
+                     
+      // SfPdfViewer.network(widget.allMarksheet[0].toString());
+        
+      //               }, child: Text('Sem 1 marksheet')),
+      //             ],
                   
-                ),
+      //           ),
+      //           if(widget.allMarksheet.length==2)
+      //           Row(
+                  
+      //             children: [
+                    
+      //               ElevatedButton(onPressed: () {
+      //               SfPdfViewer.network(widget.allMarksheet[0].toString());
+      //               }, child: Text('Sem 1 marksheet')),
+      //               ElevatedButton(onPressed: () {
+      //                 SfPdfViewer.network(widget.allMarksheet[1].toString());
+      //               }, child: Text('Sem 2 marksheet'))
+      //             ],
+                  
+      //           ),
+
+
+
+
+
+
+
+
+
+
+      
+                // for(int i=0;i<widget.allMarksheet.length;i++)
+                // Row(
+                  
+                //   children: [
+                    
+                //     ElevatedButton(onPressed:launchPdf(widget.allMarksheet[i].toString()), child: Text('Sem ${i+1} marksheet'))
+                //   ],
+                  
+                // ),
                 // FloatingActionButton(
                 //   child: Text('Add to contact',style: TextStyle(fontSize: 10.0,),),
                 //         backgroundColor: Colors.blue,
@@ -91,4 +133,12 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
       ),
     );
   }
+  
+  // void _launchURL(String _url) async {
+  //   if (await canLaunch(_url)) {
+  //     await launch(_url, forceSafariVC: true, forceWebView: true, enableJavaScript: true);
+  //   } else {
+  //     throw 'Could not launch $_url';
+  //   }
+  // }
 }
