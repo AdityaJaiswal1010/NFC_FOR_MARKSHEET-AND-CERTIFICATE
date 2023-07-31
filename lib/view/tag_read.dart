@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app/utility/extensions.dart';
+import 'package:app/view/ViewAllMarksheet.dart';
 import 'package:app/view/common/form_row.dart';
 import 'package:app/view/common/nfc_session.dart';
 import 'package:app/view/ndef_record.dart';
@@ -621,6 +622,17 @@ class _TagInfoState extends State<_TagInfo> {
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(
                           builder: (context) => viewDetailRecord(maildata, fname, lname, phonenum)));
+            // linkToPage(maildata, fname, lname, phonenum);
+          },
+        ),
+        ElevatedButton(
+          child: Text('View All Marksheets'),
+          style: ElevatedButton.styleFrom(
+            // primary: Color(0xFF00E5FF),
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => ViewAllMarksheet(maildata, fname, lname, phonenum)));
             // linkToPage(maildata, fname, lname, phonenum);
           },
         ),

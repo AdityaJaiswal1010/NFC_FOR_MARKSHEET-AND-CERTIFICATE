@@ -33,7 +33,9 @@ dependencies:
   flutter_native_splash: 
   flutter_inset_box_shadow: 
   syncfusion_flutter_pdfviewer:
-  
+  flutter_pdfview:
+  # flutter_plugin_pdf_viewer: 
+  # flutter_pdf_viewer:
 
 flutter_native_splash:
   image: "assets/icon/android.png"

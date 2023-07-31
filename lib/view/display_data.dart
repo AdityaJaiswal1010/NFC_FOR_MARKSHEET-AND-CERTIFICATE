@@ -1,3 +1,4 @@
+import 'package:app/view/pdfview.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,117 +20,153 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
+      body: Column(
+          
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Text('Reg_No - '),
-                    
-                    Text(widget.fname),
-                  ],
+        children: [
+          ListView(
+            shrinkWrap: true,
+            children: [
+              Column(
+                children: [
+                  Text('Reg_No - '),
                   
-                ),
-                SizedBox(height: 12),
-               Row(
-                  children: [
-                    Text('Prn No- '),
-                    Text(widget.m['prn'].toString()),
-                  ],
-                  
-                ),
-                SizedBox(height: 12),
-                 Row(
-                  children: [
-                    Text('Seat_No- '),
-                    Text(widget.phonenum),
-                  ],
-                  
-                ),
-                // SizedBox(height: 12),
-                // Row(
-                //   children: [
-                //     Text('Sem- '),
-                //     Text(widget.maildata),
-                //   ],
-                  
-                // ),
-                SizedBox(height: 12),
-                // DebugPrint(widget.allMarksheet);
-      //           if(widget.allMarksheet.length==1)
-      //           Row(
-                  
-      //             children: [
-                    
-      //               ElevatedButton(onPressed: () {
-                     
-      // SfPdfViewer.network(widget.allMarksheet[0].toString());
+                  Text(widget.fname),
+                  // Text(widget.allMarksheet[0].toString()),
+
+              Text('Prn No- '),
+              Text(widget.m['prn'].toString()),
+
+              Text('Seat_No- '),
+              Text(widget.phonenum),
+              // ElevatedButton(onPressed:() {
+                
+              // }, child: Text('Sem 1'))
+                ],
+                
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+        //  Column(
+        //     children: [
+        //                   Text(widget.allMarksheet[0].toString()),
+
+        //       Text('Prn No- '),
+        //       Text(widget.m['prn'].toString()),
+        //     ],
+            
+        //   ),
+        //   SizedBox(height: 12),
+        //    Row(
+        //     children: [
+        //       Text('Seat_No- '),
+        //       Text(widget.phonenum),
+        //       ElevatedButton(onPressed:() {
+                
+        //       }, child: Text('Sem 1'))
+        //     ],
+            
+        //   ),
+
         
-      //               }, child: Text('Sem 1 marksheet')),
-      //             ],
+          // SizedBox(height: 12),
+          // Row(
+          //   children: [
+          //     Text('Sem- '),
+          //     Text(widget.maildata),
+          //   ],
+            
+          // ),
+          SizedBox(height: 12),
+        
+          // DebugPrint(widget.allMarksheet);
+          // if(widget.allMarksheet.length==1)
+          // ListView(
+          //   shrinkWrap: true,
+          //   children:<Widget> [
+          //     Row(
+                
+          //       children:<Widget> [
                   
-      //           ),
-      //           if(widget.allMarksheet.length==2)
-      //           Row(
-                  
-      //             children: [
-                    
-      //               ElevatedButton(onPressed: () {
-      //               SfPdfViewer.network(widget.allMarksheet[0].toString());
-      //               }, child: Text('Sem 1 marksheet')),
-      //               ElevatedButton(onPressed: () {
-      //                 SfPdfViewer.network(widget.allMarksheet[1].toString());
-      //               }, child: Text('Sem 2 marksheet'))
-      //             ],
-                  
-      //           ),
-
-
-
-
-
-
-
-
-
-
-      
-                // for(int i=0;i<widget.allMarksheet.length;i++)
-                // Row(
-                  
-                //   children: [
-                    
-                //     ElevatedButton(onPressed:launchPdf(widget.allMarksheet[i].toString()), child: Text('Sem ${i+1} marksheet'))
-                //   ],
-                  
-                // ),
-                // FloatingActionButton(
-                //   child: Text('Add to contact',style: TextStyle(fontSize: 10.0,),),
-                //         backgroundColor: Colors.blue,
-                //         foregroundColor: Colors.white,
-                  
-                //   onPressed: ()  {
-                //     // var newPerson=Contact();
-                //     // newPerson.givenName=fname+lname;
-                //     // newPerson.phones=[Item(label: 'mobile',value: phonenum)];
-                //     // newPerson.emails=[Item(label: 'work',value: maildata)];
-                    
-                //     //   await ContactsService.addContact(newPerson);
+          //         Container(
+          //           child: ElevatedButton(onPressed: () {
+                     
+          //             // Navigator.push(context,
+          //             //                     MaterialPageRoute(builder: (context) => PdfViewerPage(widget.allMarksheet[0].toString())));
                       
-                //     //   var contacts = await ContactsService.getContacts();
-                //     //     //  call all of contacts
-                //     //   setState(() {
-                //     //     var name = contacts;
-                //     //   });
-                //     saveContactInPhone(fname,lname,phonenum,maildata);
-                //   },
-                   
-                // )
-              ],
+          //           }, child: Text('Sem 1 marksheet')),
+          //         ),
+          //       ],
+                
+          //     ),
+          //   ],
+          // ),
+          // if(widget.allMarksheet.length==2)
+          // Row(
+            
+          //   children: <Widget>[
               
-            ),
+          //     Container(
+          //       child: ElevatedButton(onPressed: () {
+          //       // Navigator.push(context,
+          //       //                   MaterialPageRoute(builder: (context) => PdfViewerPage(widget.allMarksheet[0].toString())));
+          //       }, child: Text('Sem 1 marksheet')),
+          //     ),
+          //     Container(
+          //       child: ElevatedButton(onPressed: () {
+          //         // Navigator.push(context,
+          //         //                 MaterialPageRoute(builder: (context) => PdfViewerPage(widget.allMarksheet[1].toString())));
+          //       }, child: Text('Sem 2 marksheet')),
+          //     )
+          //   ],
+            
+          // ),
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          // for(int i=0;i<widget.allMarksheet.length;i++)
+          // Row(
+            
+          //   children: [
+              
+          //     ElevatedButton(onPressed:launchPdf(widget.allMarksheet[i].toString()), child: Text('Sem ${i+1} marksheet'))
+          //   ],
+            
+          // ),
+          // FloatingActionButton(
+          //   child: Text('Add to contact',style: TextStyle(fontSize: 10.0,),),
+          //         backgroundColor: Colors.blue,
+          //         foregroundColor: Colors.white,
+            
+          //   onPressed: ()  {
+          //     // var newPerson=Contact();
+          //     // newPerson.givenName=fname+lname;
+          //     // newPerson.phones=[Item(label: 'mobile',value: phonenum)];
+          //     // newPerson.emails=[Item(label: 'work',value: maildata)];
+              
+          //     //   await ContactsService.addContact(newPerson);
+                
+          //     //   var contacts = await ContactsService.getContacts();
+          //     //     //  call all of contacts
+          //     //   setState(() {
+          //     //     var name = contacts;
+          //     //   });
+          //     saveContactInPhone(fname,lname,phonenum,maildata);
+          //   },
+             
+          // )
+        ],
+        
       ),
     );
   }
