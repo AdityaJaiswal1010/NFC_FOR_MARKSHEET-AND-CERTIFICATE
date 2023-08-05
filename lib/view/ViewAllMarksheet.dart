@@ -26,6 +26,7 @@ class _ViewAllMarksheetState extends State<ViewAllMarksheet>{
   }
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Marksheets'),),
       body: Container(
         width: double.infinity,
         height: double.infinity,

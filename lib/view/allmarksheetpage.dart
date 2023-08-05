@@ -23,6 +23,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(title: Text('Marksheet'),),
       body: Column(
         children: [
           SizedBox(height: 30,),
@@ -140,7 +141,7 @@ class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(title: Text('Marksheet'),),
       body: Center(
         child: Container(
           height: 500,

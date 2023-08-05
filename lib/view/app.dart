@@ -59,7 +59,7 @@ class _HomeState extends State<_Home> {
     return Scaffold(
       
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         title: Center(
           child: Row(
             children: [
@@ -107,14 +107,16 @@ class _HomeState extends State<_Home> {
                         ));
                     },
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset("assets/animation_lkh7vorm_small.gif", 
-                        gaplessPlayback: true, 
-                        fit: BoxFit.fill,
-                        height: 300,
-                        width: 300,
-                        ),
-                        Text('Scan Smart Doc')
+                        // Image.asset("assets/animation_lkh7vorm_small.gif", 
+                        // gaplessPlayback: true, 
+                        // fit: BoxFit.fill,
+                        // height: 300,
+                        // width: 300,
+                        // ),
+                        Center(child: Text('Scan Smart Doc',style: TextStyle(fontSize: 50),textAlign: TextAlign.center,),)
                       ],
                     ),
                   )
@@ -164,14 +166,16 @@ class _HomeState extends State<_Home> {
                         ));
                     },
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset("assets/animation_lkh9buac_small.gif", 
-                        gaplessPlayback: true, 
-                        fit: BoxFit.fill,
-                        height: 300,
-                        width: 300,
-                        ),
-                        Text('Write Into Smart Doc')
+                        // Image.asset("assets/animation_lkh9buac_small.gif", 
+                        // gaplessPlayback: true, 
+                        // fit: BoxFit.fill,
+                        // height: 300,
+                        // width: 300,
+                        // ),
+                        Text('Write Into Smart Doc',style: TextStyle(fontSize: 50),textAlign: TextAlign.center,)
                       ],
                     ),
                   )

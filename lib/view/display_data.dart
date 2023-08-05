@@ -20,6 +20,7 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title:Text('Personal Detail') ,),
       body: Column(
           
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,24 +29,71 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
           ListView(
             shrinkWrap: true,
             children: [
-              Column(
+              Row(
                 children: [
-                  Text('Reg_No - '),
+                  Text('Reg_No - ',style: TextStyle(fontSize: 25),),
                   
-                  Text(widget.fname),
+                  Text(widget.fname,style: TextStyle(fontSize: 25),),
                   // Text(widget.allMarksheet[0].toString()),
 
-              Text('Prn No- '),
-              Text(widget.m['prn'].toString()),
-
-              Text('Seat_No- '),
-              Text(widget.phonenum),
+              
               // ElevatedButton(onPressed:() {
                 
               // }, child: Text('Sem 1'))
                 ],
                 
               ),
+              SizedBox(height: 20,),
+              Row(children: [
+                Text('Prn No- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['prn'].toString(),style: TextStyle(fontSize: 25),),
+
+              
+              ],),
+              SizedBox(height: 20,),
+              Row(children: [
+                
+
+              Text('Seat_No- ',style: TextStyle(fontSize: 25),),
+              Text(widget.phonenum,style: TextStyle(fontSize: 25),),
+              
+              ],),
+              SizedBox(height: 20,),
+              Row(children: [
+               
+              Text('Exam Year- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['exam_year'].toString(),style: TextStyle(fontSize: 25),),
+              
+              ],),
+              SizedBox(height: 20,),
+              Row(children: [
+                
+              Text('Exam Month- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['exam_month'].toString(),style: TextStyle(fontSize: 25),),
+              
+              ],),
+              SizedBox(height: 20,),
+              Row(children: [
+                
+              Text('Candidates Name- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['candidate_name'],style: TextStyle(fontSize: 25),),
+            
+              ],),
+              
+              SizedBox(height: 20,),
+              Row(children: [
+               
+              Text('Fathers Name- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['father_name'],style: TextStyle(fontSize: 25),),
+              ],),
+              SizedBox(height: 20,),
+              Row(children: [
+           
+              Text('Mothers Name- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['mother_name'],style: TextStyle(fontSize: 25),),
+              
+              ],),
+              SizedBox(height: 20,),
             ],
           ),
           SizedBox(height: 12),

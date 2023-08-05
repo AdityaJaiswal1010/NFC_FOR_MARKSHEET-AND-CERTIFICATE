@@ -64,7 +64,9 @@ class TagReadPage extends StatelessWidget {
         children: [
           FormSection(
             children: [
+
               FormRow(
+                
                 title: Text('Start Session', style: TextStyle(color: Theme.of(context).colorScheme.primary)),
                 onTap: () => startSession(
                   context: context,
@@ -493,9 +495,9 @@ class _TagInfoState extends State<_TagInfo> {
             children: [
               Row(
                 children: [
-                  Text('Reg_No - '),
+                  Text('Reg_No - ',style: TextStyle(fontSize: 25),),
                   
-                  Text(fname),
+                  Text(fname,style: TextStyle(fontSize: 25),),
                 ],
                 
               ),
@@ -510,20 +512,20 @@ class _TagInfoState extends State<_TagInfo> {
               SizedBox(height: 12),
                Row(
                 children: [
-                  Text('Seat_No- '),
-                  Text(phonenum),
+                  Text('Seat_No- ',style: TextStyle(fontSize: 25),),
+                  Text(phonenum,style: TextStyle(fontSize: 25),),
                 ],
                 
               ),
               SizedBox(height: 12),
-              Row(
-                children: [
-                  Text('Key- '),
-                  Text(maildata),
-                ],
+              // Row(
+              //   children: [
+              //     Text('Key- '),
+              //     Text(maildata),
+              //   ],
                 
-              ),
-              SizedBox(height: 12),
+              // ),
+              // SizedBox(height: 12),
               // for(int i=0;i<childidList.length;i++)
               // Row(
                 
@@ -615,9 +617,12 @@ class _TagInfoState extends State<_TagInfo> {
         // }
           ),
           ElevatedButton(
-          child: Text('View Detail Record'),
+            
+          child: Text('View Detail Record',style: TextStyle(fontSize: 50),),
           style: ElevatedButton.styleFrom(
             // primary: Color(0xFF00E5FF),
+            fixedSize: Size(250, 250)
+            
           ),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(
@@ -625,10 +630,12 @@ class _TagInfoState extends State<_TagInfo> {
             // linkToPage(maildata, fname, lname, phonenum);
           },
         ),
+        SizedBox(height: 50,),
         ElevatedButton(
-          child: Text('View All Marksheets'),
+          child: Text('View All Marksheets',style: TextStyle(fontSize: 50),),
           style: ElevatedButton.styleFrom(
             // primary: Color(0xFF00E5FF),
+            fixedSize: Size(250, 250)
           ),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(

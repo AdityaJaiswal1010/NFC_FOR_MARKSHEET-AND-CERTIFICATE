@@ -21,12 +21,12 @@ class FormRow extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: EdgeInsets.fromLTRB(14, 10, 8, 10),
-          constraints: BoxConstraints(minHeight: 100),
+          constraints: BoxConstraints(minHeight: 300),
           child: Row(
             children: [
               if (emoji != null)
                 DefaultTextStyle(
-                  style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+                  style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 40),
                   child: IconTheme(
                     data: IconThemeData(color: Theme.of(context).disabledColor, size: 22),
                     child: emoji!,
@@ -38,14 +38,14 @@ class FormRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultTextStyle(
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17),
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 40),
                       child: title,
                     ),
                     if (subtitle != null)
                       Padding(
                         padding: EdgeInsets.only(top: 2),
                         child: DefaultTextStyle(
-                          style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 15),
+                          style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 40),
                           child: subtitle!,
                         ),
                       ),
@@ -54,7 +54,7 @@ class FormRow extends StatelessWidget {
               ),
               if (trailing != null)
                 DefaultTextStyle(
-                  style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+                  style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 40),
                   child: IconTheme(
                     data: IconThemeData(color: Theme.of(context).disabledColor, size: 22),
                     child: trailing!,
