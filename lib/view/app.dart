@@ -53,6 +53,7 @@ class _Home extends StatefulWidget {
 
 class _HomeState extends State<_Home> {
   bool isPressed = true;
+  TextEditingController regnoController=TextEditingController();
   List <String> headers=[];
   @override
   Widget build(BuildContext context) {
@@ -137,63 +138,90 @@ class _HomeState extends State<_Home> {
               ),
               SizedBox(height: 50,),
               Center(
-                
-                child: Container(
-                  
-                  height: 350,
-                  width: 350,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Color(0xFFAA00FF),
-                    boxShadow: const[
-                      BoxShadow(
-                        blurRadius: 30,
-                        offset: Offset(-28, -28),
-                        color: Colors.white,
-                        
-                      ),
-                      BoxShadow(
-                        blurRadius: 30,
-                        offset: Offset(28, 28),
-                        color: Color(0xFFA7A9AF),
-                      )
-                    ]
+                child: Column(
+                  children: [
+                    Text('Admin Login'),
+                    TextField(
+                      controller: regnoController,
+                      decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Reg No',
                   ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
+                    ),
+                    ElevatedButton(onPressed:() async {
+                      var adminList=await FirebaseFirestore.instance.collection('admin').doc('F0BED80evF2AMUSso7mH').get();
+                      Map<String,dynamic> mdata=adminList.data()!;
+                      List<dynamic> alladmin=mdata['admins'];
+                      if(alladmin.contains(regnoController.text.toString())){
+                        Navigator.push(context, MaterialPageRoute(
                           builder: (context) => NdefWritePage.withDependency(),
                         ));
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Image.asset("assets/animation_lkh9buac_small.gif", 
-                        // gaplessPlayback: true, 
-                        // fit: BoxFit.fill,
-                        // height: 300,
-                        // width: 300,
-                        // ),
-                        Text('Write Into Smart Doc',style: TextStyle(fontSize: 50),textAlign: TextAlign.center,)
-                      ],
-                    ),
-                  )
-      //             child: FormRow(
+                      }
+                      else{
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid Admin'),));return null;
+                      }
+                    }, child: Text('Enter'))
+                  ],
+                )
+              )
+      //         Center(
+                
+      //           child: Container(
+                  
+      //             height: 350,
+      //             width: 350,
+      //             decoration: BoxDecoration(
+      //               borderRadius: BorderRadius.circular(30),
+      //               color: Color(0xFFAA00FF),
+      //               boxShadow: const[
+      //                 BoxShadow(
+      //                   blurRadius: 30,
+      //                   offset: Offset(-28, -28),
+      //                   color: Colors.white,
                         
-      //                   emoji: Icon(FontAwesomeIcons.eye),
-                        
-      //                   title: Image.asset("assets/animation_lkh7vorm_small.gif", 
-      // gaplessPlayback: true, 
-      // fit: BoxFit.fill
-      // ),
-      //                   trailing: Icon(Icons.chevron_right),
-      //                   onTap: () => Navigator.push(context, MaterialPageRoute(
-      //                     builder: (context) => TagReadPage.withDependency(),
-      //                   )),
       //                 ),
-                ),
-              ),
+      //                 BoxShadow(
+      //                   blurRadius: 30,
+      //                   offset: Offset(28, 28),
+      //                   color: Color(0xFFA7A9AF),
+      //                 )
+      //               ]
+      //             ),
+      //             child: ElevatedButton(
+      //               onPressed: () {
+      //                 Navigator.push(context, MaterialPageRoute(
+      //                     builder: (context) => NdefWritePage.withDependency(),
+      //                   ));
+      //               },
+      //               child: Column(
+      //                 mainAxisAlignment: MainAxisAlignment.center,
+      //                 crossAxisAlignment: CrossAxisAlignment.center,
+      //                 children: [
+      //                   // Image.asset("assets/animation_lkh9buac_small.gif", 
+      //                   // gaplessPlayback: true, 
+      //                   // fit: BoxFit.fill,
+      //                   // height: 300,
+      //                   // width: 300,
+      //                   // ),
+      //                   Text('Write Into Smart Doc',style: TextStyle(fontSize: 50),textAlign: TextAlign.center,)
+      //                 ],
+      //               ),
+      //             )
+      // //             child: FormRow(
+                        
+      // //                   emoji: Icon(FontAwesomeIcons.eye),
+                        
+      // //                   title: Image.asset("assets/animation_lkh7vorm_small.gif", 
+      // // gaplessPlayback: true, 
+      // // fit: BoxFit.fill
+      // // ),
+      // //                   trailing: Icon(Icons.chevron_right),
+      // //                   onTap: () => Navigator.push(context, MaterialPageRoute(
+      // //                     builder: (context) => TagReadPage.withDependency(),
+      // //                   )),
+      // //                 ),
+      //           ),
+      //         ),
             ],
           )
           // FormSection(children: [

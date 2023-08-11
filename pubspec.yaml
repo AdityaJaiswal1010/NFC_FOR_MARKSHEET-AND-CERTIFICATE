@@ -34,6 +34,7 @@ dependencies:
   flutter_inset_box_shadow: 
   syncfusion_flutter_pdfviewer:
   flutter_pdfview:
+  flutter_nfc_kit:
   # flutter_plugin_pdf_viewer: 
   # flutter_pdf_viewer:
 

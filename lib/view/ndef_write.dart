@@ -1,6 +1,7 @@
 import 'package:app/model/record.dart';
 import 'package:app/model/write_record.dart';
 import 'package:app/repository/repository.dart';
+import 'package:app/utility/extensions.dart';
 import 'package:app/view/common/form_row.dart';
 import 'package:app/view/common/nfc_session.dart';
 import 'package:app/view/edit_external.dart';
@@ -8,9 +9,12 @@ import 'package:app/view/edit_mime.dart';
 import 'package:app/view/edit_text.dart';
 import 'package:app/view/edit_uri.dart';
 import 'package:app/view/ndef_record.dart';
+import 'package:app/view/tag_read.dart';
+import 'package:app/view/verifyidentifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:nfc_manager/platform_tags.dart';
 import 'package:provider/provider.dart';
 
 class NdefWriteModel with ChangeNotifier {
@@ -63,6 +67,33 @@ class NdefWritePage extends StatelessWidget {
         builder: (context, ss) => ListView(
           padding: EdgeInsets.all(2),
           children: [
+            ElevatedButton(onPressed:(){
+              Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => Sensors(),
+                        ));
+              // startSession(
+              //     context: context,
+              //     handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
+              //   );
+            }, 
+            child: Text('Verify Tag')),
+    //         Consumer<TagReadModel>(builder: (context, model, _){
+    //         final tag = model.tag;
+    //         final additionalData = model.additionalData;
+    //         if (tag != null && additionalData != null)
+              
+    //               return Text('${NfcA.from(tag)?.identifier ??
+    //       NfcB.from(tag)?.identifier ??
+    //       NfcF.from(tag)?.identifier ??
+    //       NfcV.from(tag)?.identifier ??
+    //       Uint8List(0).toHexString()}'
+    // );
+
+    //               return SizedBox.shrink();
+                
+
+              
+    //       }),
             FormSection(children: [
               FormRow(
                 title: Text('Add Record'),
@@ -157,6 +188,31 @@ class NdefWritePage extends StatelessWidget {
     );
   }
 }
+
+// class _VerifyTag extends StatefulWidget {
+//    _VerifyTag(this.tag, this.additionalData, {Key? key}) : super(key: key);
+//   NfcTag tag;
+//    Map<String, dynamic> additionalData;
+//   @override
+//   State<_VerifyTag> createState() => __VerifyTagState();
+// }
+
+// class __VerifyTagState extends State<_VerifyTag> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+      
+//       body: Container(child: Center(child: Text('${
+//         NfcA.from(widget.tag)?.identifier ??
+//           NfcB.from(widget.tag)?.identifier ??
+//           NfcF.from(widget.tag)?.identifier ??
+//           NfcV.from(widget.tag)?.identifier ??
+//           Uint8List(0).toHexString()
+//       }'),
+//       ),),
+//     );
+//   }
+// }
 
 class _WriteRecordFormRow extends StatelessWidget {
   _WriteRecordFormRow(this.index, this.record);
