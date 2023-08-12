@@ -70,7 +70,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
             // NetworkImage(widget.allMarkSheet[0].toString());
             // PdfViewerPage(widget.allMarkSheet[0].toString());
             // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 5'))
+          },  child: Text('Sem 4'))
         ],
       ),
     );

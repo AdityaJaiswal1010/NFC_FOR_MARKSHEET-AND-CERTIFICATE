@@ -96,7 +96,7 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
           ),
         ],
           ):Column(
-            children: [Text('Scam')],
+            children: [Text('Invalid Card',style: TextStyle(fontSize: 50),)],
           )
                ],
              )
