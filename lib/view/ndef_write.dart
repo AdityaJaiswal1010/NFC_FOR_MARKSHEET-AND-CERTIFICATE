@@ -60,7 +60,13 @@ class NdefWritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ndef - Write'),
+        title: Center(child: Row(
+          children: [
+                    Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+
+            Text('    Ndef - Write'),
+          ],
+        )),
       ),
       body: StreamBuilder<Iterable<WriteRecord>>(
         stream: Provider.of<NdefWriteModel>(context, listen: false).subscribe(),

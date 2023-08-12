@@ -20,7 +20,13 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text('Personal Detail') ,),
+      appBar: AppBar(title:Center(child: Row(
+        children: [
+                                      Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+
+          Text('Personal Detail'),
+        ],
+      )) ,),
       body: Column(
           
           mainAxisAlignment: MainAxisAlignment.center,
@@ -94,6 +100,10 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               
               ],),
               SizedBox(height: 20,),
+               ElevatedButton(onPressed: (){
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          }, child: Text('Back'))
             ],
           ),
           SizedBox(height: 12),

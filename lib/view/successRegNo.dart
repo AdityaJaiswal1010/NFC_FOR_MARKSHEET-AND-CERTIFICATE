@@ -17,9 +17,11 @@ class _successRegNoState extends State<successRegNo> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 5), () {
-      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => NdefWritePage.withDependency(),
-                        ));
+      // Navigator.push(context, MaterialPageRoute(
+      //                     builder: (context) => NdefWritePage.withDependency(),
+      //                   ));
+      Navigator.pop(context);
+      Navigator.pop(context);
     });
   }
   Widget build(BuildContext context) {

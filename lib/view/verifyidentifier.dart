@@ -69,8 +69,17 @@ import 'package:firebase_core/firebase_core.dart';
       Widget build(BuildContext context) {
         return MaterialApp(
           home: Scaffold(
+            
             appBar: AppBar(
-              title: const Text('Verify'),
+              
+              
+              title:  Center(child: Row(
+                children: [
+                                      Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+
+                  Text('    Verify'),
+                ],
+              )),
             ),
             body: Scrollbar(
                 child: SingleChildScrollView(
@@ -150,6 +159,9 @@ import 'package:firebase_core/firebase_core.dart';
                           ? Text(
                               'ID: ${_tag!.id}')
                           : const Text('No tag polled yet.')),
+                          ElevatedButton(onPressed: (){
+                            Navigator.pop(context);
+                          }, child: Text('Back'))
                 ]
                 
                 )))),

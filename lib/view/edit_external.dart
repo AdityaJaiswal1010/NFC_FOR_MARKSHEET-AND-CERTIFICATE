@@ -91,7 +91,13 @@ class EditExternalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Info'),
+        title: Center(child: Row(
+          children: [
+                                                  Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+
+            Text('    Edit Info'),
+          ],
+        )),
       ),
       body: Form(
         key: Provider.of<EditExternalModel>(context, listen: false).formKey,

@@ -23,7 +23,15 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: Text('Marksheet'),),
+      appBar: AppBar(title: Center(
+        child: Row(
+          children: [
+                                        Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+
+            Text('    Marksheet'),
+          ],
+        ),
+      ),),
       body: Column(
         children: [
           SizedBox(height: 30,),
@@ -70,7 +78,11 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
             // NetworkImage(widget.allMarkSheet[0].toString());
             // PdfViewerPage(widget.allMarkSheet[0].toString());
             // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 4'))
+          },  child: Text('Sem 4')),
+           ElevatedButton(onPressed: (){
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          }, child: Text('Back'))
         ],
       ),
     );

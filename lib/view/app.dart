@@ -64,7 +64,8 @@ class _HomeState extends State<_Home> {
         title: Center(
           child: Row(
             children: [
-              Icon(FontAwesomeIcons.nfcSymbol),
+              // Icon(FontAwesomeIcons.nfcSymbol),
+              Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
               Text('  Smart Docs' ,textAlign: TextAlign.center,),
             ],
           ),

@@ -28,7 +28,9 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
         title: Center(
           child: Row(
             children: [
-              Icon(FontAwesomeIcons.nfcSymbol),
+              // Icon(FontAwesomeIcons.nfcSymbol),
+                            Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+
               Text('  Details' ,textAlign: TextAlign.center,),
             ],
           ),
