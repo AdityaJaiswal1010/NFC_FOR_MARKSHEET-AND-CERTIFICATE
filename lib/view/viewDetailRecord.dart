@@ -28,6 +28,16 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Row(
+            children: [
+              Icon(FontAwesomeIcons.nfcSymbol),
+              Text('  Details' ,textAlign: TextAlign.center,),
+            ],
+          ),
+        ),
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,

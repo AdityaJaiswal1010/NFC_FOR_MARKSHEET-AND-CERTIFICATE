@@ -5,6 +5,7 @@ import 'package:app/utility/extensions.dart';
 import 'package:app/view/ViewAllMarksheet.dart';
 import 'package:app/view/common/form_row.dart';
 import 'package:app/view/common/nfc_session.dart';
+import 'package:app/view/common/readDetailPage.dart';
 import 'package:app/view/ndef_record.dart';
 import 'package:app/view/viewDetailRecord.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -101,16 +102,19 @@ class _TagInfo extends StatefulWidget {
 }
 
 class _TagInfoState extends State<_TagInfo> {
+  int resultedvalue=0;
   @override
   Widget build(BuildContext context) {
     String maildata='';
       int callFlag=1;
       String fname='';
       String lname='';
+      int res=0;
       String phonenum='';
     final tagWidgets = <Widget>[];
     final ndefWidgets = <Widget>[];
-
+    String comparefromchip='';
+    String comparefromdb='';
     Object? tech;
 
     // if (Platform.isAndroid) {
@@ -396,6 +400,55 @@ class _TagInfoState extends State<_TagInfo> {
           //   )),
             
           // ));
+
+        //   var dbMap=await FirebaseFirestore.instance.collection('tagmap').doc('jYBWvFrpb1QjIwBHhql7').get();
+        //   Map<String,dynamic> m=dbMap.data()!;
+        //   Map<dynamic,dynamic> alldataofmap=m['Mapping'];
+          
+        //   String id='${(
+        //   NfcA.from(widget.tag)?.identifier ??
+        //   NfcB.from(widget.tag)?.identifier ??
+        //   NfcF.from(widget.tag)?.identifier ??
+        //   NfcV.from(widget.tag)?.identifier ??
+        //   Uint8List(0)
+        // ).toHexString()}'.toString();
+        // String perfectid='';
+        // int pointer=0;
+        // for(int i=1;i<id.length;i++)
+        // {
+          
+        //   if(id[i]=='x')
+        //   {
+
+        //   }
+          
+        //   else if(id[i]==' ')
+        //   {
+
+        //   }
+        //   else{
+        //     perfectid+=id[i];
+        //   }
+        // }
+        // print('perfecccccccccccccccccccccccct');
+        // print(perfectid);
+        // String actualid='';
+        // int counter=0;
+        // for(int i=0;i<perfectid.length;i++)
+        // {
+        //   counter=counter+1;
+        //   if(counter>2)
+        //   {
+        //     counter=0;
+        //   }
+        //   else{
+        //     actualid+=perfectid[i];
+        //   }
+        // }
+        // print(actualid);
+        // setState(() {
+        //   comparefromchip=actualid.toString();
+        // });
           String vari='${info.subtitle}';
           String namedata='';
           print(vari);
@@ -452,7 +505,10 @@ class _TagInfoState extends State<_TagInfo> {
                 maildata+=vari[i];
               }
           }
-          
+          print('heyyyyyyyyyyyyyyyyyyyy');
+          setState(() {
+            res=0;
+          });
           // List<String> regNoList=[];
           // print('-----------------------');
           // print(maildata.toString());
@@ -597,55 +653,163 @@ class _TagInfoState extends State<_TagInfo> {
 
         
     }
+    // res=(checkBothChipNDbId(widget.tag,fname)) as int ;
+    print('gotttttttttttttttttttttt');
+    // print(got);
+    print(res);
+    
 
-    return Column(
-      children: [
-        // FormSection(
-        //   header: Text('TAG'),
-        //   children: tagWidgets,
-        // ),
-        if (ndefWidgets.isNotEmpty)
-          FormSection(
-            header: Text('TAG'),
-            children: ndefWidgets,
-        //     if(callFlag==1){
-        //   linkToPage(maildata,fname,lname,phonenum);
-        //   setState(() {
-        //     callFlag=0;
-        //   });
+Future<int> rrrr=checkBothChipNDbId(widget.tag, fname);
+return Column(
+  children: [
+    ElevatedButton(
+      style: ElevatedButton.styleFrom(
+            // primary: Color(0xFF00E5FF),
+            fixedSize: Size(250, 250)
+          ),
+      onPressed:(){
+      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => ReadRecordDetail(ndefWidgets,maildata, fname, lname, phonenum,rrrr,resultedvalue),
+                        ));
+    } , child: Text('Details',style: TextStyle(fontSize: 50),))
+  ],
+);
+    
+    //   return Column(
+    //   children: [
+    //     // FormSection(
+    //     //   header: Text('TAG'),
+    //     //   children: tagWidgets,
+    //     // ),
+    //     if (ndefWidgets.isNotEmpty)
+    //       FormSection(
+    //         header: Text('TAG'),
+    //         children: ndefWidgets,
+    //     //     if(callFlag==1){
+    //     //   linkToPage(maildata,fname,lname,phonenum);
+    //     //   setState(() {
+    //     //     callFlag=0;
+    //     //   });
           
-        // }
-          ),
-          ElevatedButton(
+    //     // }
+    //       ),
+
+
+          
+
+    //       ElevatedButton(
             
-          child: Text('View Detail Record',style: TextStyle(fontSize: 50),),
-          style: ElevatedButton.styleFrom(
-            // primary: Color(0xFF00E5FF),
-            fixedSize: Size(250, 250)
+    //       child: Text('View Detail Record',style: TextStyle(fontSize: 50),),
+    //       style: ElevatedButton.styleFrom(
+    //         // primary: Color(0xFF00E5FF),
+    //         fixedSize: Size(250, 250)
             
-          ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => viewDetailRecord(maildata, fname, lname, phonenum)));
-            // linkToPage(maildata, fname, lname, phonenum);
-          },
-        ),
-        SizedBox(height: 50,),
-        ElevatedButton(
-          child: Text('View All Marksheets',style: TextStyle(fontSize: 50),),
-          style: ElevatedButton.styleFrom(
-            // primary: Color(0xFF00E5FF),
-            fixedSize: Size(250, 250)
-          ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => ViewAllMarksheet(maildata, fname, lname, phonenum)));
-            // linkToPage(maildata, fname, lname, phonenum);
-          },
-        ),
-      ],
-    );
+    //       ),
+    //       onPressed: () {
+    //         Navigator.push(context, MaterialPageRoute(
+    //                       builder: (context) => viewDetailRecord(maildata, fname, lname, phonenum)));
+    //         // linkToPage(maildata, fname, lname, phonenum);
+    //       },
+    //     ),
+    //     SizedBox(height: 50,),
+    //     ElevatedButton(
+    //       child: Text('View All Marksheets',style: TextStyle(fontSize: 50),),
+    //       style: ElevatedButton.styleFrom(
+    //         // primary: Color(0xFF00E5FF),
+    //         fixedSize: Size(250, 250)
+    //       ),
+    //       onPressed: () {
+    //         Navigator.push(context, MaterialPageRoute(
+    //                       builder: (context) => ViewAllMarksheet(maildata, fname, lname, phonenum)));
+    //         // linkToPage(maildata, fname, lname, phonenum);
+    //       },
+    //     ),
+    //   ],
+    // );
+    
+    //   return Column(
+    //     children: [
+    //       Text('Scam')
+    //     ],
+    //   );
   }
+  Future<int> checkBothChipNDbId(NfcTag tag, String fname) async {
+  String comparefromchip='';
+  String comparefromdb='';
+  var dbMap=await FirebaseFirestore.instance.collection('tagmap').doc('jYBWvFrpb1QjIwBHhql7').get();
+          Map<String,dynamic> m=dbMap.data()!;
+          Map<dynamic,dynamic> alldataofmap=m['Mapping'];
+          
+          String id='${(
+          NfcA.from(tag)?.identifier ??
+          NfcB.from(tag)?.identifier ??
+          NfcF.from(tag)?.identifier ??
+          NfcV.from(tag)?.identifier ??
+          Uint8List(0)
+        ).toHexString()}'.toString();
+        String perfectid='';
+        int pointer=0;
+        for(int i=1;i<id.length;i++)
+        {
+          
+          if(id[i]=='x')
+          {
+
+          }
+          
+          else if(id[i]==' ')
+          {
+
+          }
+          else{
+            perfectid+=id[i];
+          }
+        }
+        print('perfecccccccccccccccccccccccct');
+        print(perfectid);
+        String actualid='';
+        int counter=0;
+        for(int i=0;i<perfectid.length;i++)
+        {
+          counter=counter+1;
+          if(counter>2)
+          {
+            counter=0;
+          }
+          else{
+            actualid+=perfectid[i];
+          }
+        }
+        print(actualid);
+        
+          comparefromchip=actualid.toString();
+        
+        
+        print(alldataofmap[fname]);
+          
+            comparefromdb=alldataofmap[fname].toString();
+         
+          if(comparefromchip==comparefromdb)
+          {
+            print('yes chip matched');
+            setState(() {
+              resultedvalue=1;
+            });
+            return 1;
+          }
+          else{
+            print('chip unmatched');
+            setState(() {
+              resultedvalue=0;
+            });
+            return 0;
+
+          }
+          
+            
+          
+}
+
   
   Future<void> linkToPage(String maildata, String fname, String lname, String phonenum) async {
     print('-----------------------');
@@ -685,6 +849,7 @@ class _TagInfoState extends State<_TagInfo> {
                     ));
   }
 }
+
 
 Future<void> saveContactInPhone(String fname, String lname, String phonenum, String maildata) async {
   try {

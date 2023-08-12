@@ -139,7 +139,7 @@ import 'package:firebase_core/firebase_core.dart';
                         'Mapping':{regnoController.text.toString():_tag!.id}
                       });
                     },
-                    child: Text('Start polling'),
+                    child: Text('Click here to verify your tag'),
                     
                   ),
                   const SizedBox(height: 10),
