@@ -52,7 +52,7 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/animation_lkh9pgsk_small.gif", 
+              Image.asset("assets/tinkertech.jpg", 
                         gaplessPlayback: true, 
                         fit: BoxFit.fill,
                         height: 300,
