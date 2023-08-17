@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 // import 'package:flutter_pdf_viewer/flutter_pdf_viewer.dart';
 class AllMarksheetPage extends StatefulWidget {
@@ -151,6 +152,14 @@ class View extends StatefulWidget {
 }
 
 class _ViewState extends State<View> {
+  Future<void> secureScreen() async{
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+  }
+  @override 
+  void initState(){
+    secureScreen();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

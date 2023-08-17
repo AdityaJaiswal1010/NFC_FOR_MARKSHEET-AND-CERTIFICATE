@@ -35,6 +35,7 @@ dependencies:
   syncfusion_flutter_pdfviewer:
   flutter_pdfview:
   flutter_nfc_kit:
+  flutter_windowmanager:
   # flutter_plugin_pdf_viewer: 
   # flutter_pdf_viewer:
 
