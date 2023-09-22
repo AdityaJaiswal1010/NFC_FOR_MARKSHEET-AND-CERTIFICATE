@@ -1,4 +1,6 @@
-import 'dart:async';
+
+
+    import 'dart:async';
     import 'dart:io' show Platform, sleep;
 
     import 'package:flutter/foundation.dart';
@@ -144,8 +146,14 @@ import 'package:firebase_core/firebase_core.dart';
                       // Pretend that we are working
                       if (!kIsWeb) sleep(new Duration(seconds: 1));
                       await FlutterNfcKit.finish(iosAlertMessage: "Finished!");
+                      
+                       //map reg no to chip id
                       FirebaseFirestore.instance.collection('tagmap').doc('jYBWvFrpb1QjIwBHhql7').update({
                         'Mapping':{regnoController.text.toString():_tag!.id}
+                      });
+                      // map chip id to reg no
+                      FirebaseFirestore.instance.collection('tagid').doc('XV3TXph2MLT0cBzuWNr5').update({
+                        'Mappingidtoid':{_tag!.id:regnoController.text.toString()}
                       });
                     },
                     child: Text('Click here to verify your tag'),

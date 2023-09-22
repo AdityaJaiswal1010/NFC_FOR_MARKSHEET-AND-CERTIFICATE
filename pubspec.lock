@@ -302,6 +302,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: f185ac890306b5779ecbd611f52502d8d4d63d27703ef73161ca0407e815f02c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.16"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -416,6 +424,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  mifare_nfc_reader:
+    dependency: "direct main"
+    description:
+      name: mifare_nfc_reader
+      sha256: "3397a97b882a58fa3acbadbe06be5f65452990ee4e19ef96cba0d110f07c65e0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   ndef:
     dependency: transitive
     description:
@@ -440,6 +456,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  nfc_read_write_plugin:
+    dependency: "direct main"
+    description:
+      name: nfc_read_write_plugin
+      sha256: c80254fe5995c0f88bc1a5cb6072716fb5341f00307b1654ce2e3327569a51d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   open_file:
     dependency: "direct main"
     description:
