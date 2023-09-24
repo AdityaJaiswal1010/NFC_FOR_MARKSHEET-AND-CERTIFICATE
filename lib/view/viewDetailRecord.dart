@@ -107,7 +107,6 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
             setState(() {
               allMarkSheet.add(refmarksheet[i.toInt()].toString());
             });
-            
           }
           print(childidList.length.toInt());
           for(var i=0;i<childidList.length.toInt();i++){

@@ -123,6 +123,7 @@ import 'package:firebase_core/firebase_core.dart';
                           });
                         } else if (tag.type == NFCTagType.mifare_ultralight ||
                             tag.type == NFCTagType.mifare_classic ||
+                            tag.type == NFCTagType.mifare_plus ||
                             tag.type == NFCTagType.iso15693) {
                           var ndefRecords = await FlutterNfcKit.readNDEFRecords();
                           var ndefString = '';

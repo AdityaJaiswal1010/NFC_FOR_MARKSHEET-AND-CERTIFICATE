@@ -167,53 +167,62 @@ class _HomeState extends State<_Home> {
                 )
               ),
               SizedBox(height: 30,),
-              Center(
+              //scan mifare classic card
+
+            //   Center(
                 
-                child: Container(
-                  height: 350,
-                  width: 350,
-                  decoration: BoxDecoration(
+            //     child: Container(
+            //       height: 350,
+            //       width: 350,
+            //       decoration: BoxDecoration(
                     
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.amber,
-                    boxShadow: const[
-                      BoxShadow(
-                        blurRadius: 30,
-                        offset: Offset(-28, -28),
-                        color: Colors.white,
+            //         borderRadius: BorderRadius.circular(30),
+            //         color: Colors.amber,
+            //         boxShadow: const[
+            //           BoxShadow(
+            //             blurRadius: 30,
+            //             offset: Offset(-28, -28),
+            //             color: Colors.white,
                         
-                      ),
-                      BoxShadow(
-                        blurRadius: 30,
-                        offset: Offset(28, 28),
-                        color: Color(0xFFA7A9AF),
-                      )
-                    ]
-                  ),
-                  child: ElevatedButton(
+            //           ),
+            //           BoxShadow(
+            //             blurRadius: 30,
+            //             offset: Offset(28, 28),
+            //             color: Color(0xFFA7A9AF),
+            //           )
+            //         ]
+            //       ),
+            //       child: ElevatedButton(
                     
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-              builder: (context) => ScanMifareClassic(),
-            ));
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Image.asset("assets/animation_lkh7vorm_small.gif", 
-                        // gaplessPlayback: true, 
-                        // fit: BoxFit.fill,
-                        // height: 300,
-                        // width: 300,
-                        // ),
-                        Center(child: Text('Scan MiFare Tag',style: TextStyle(fontSize: 50,color: Colors.black),textAlign: TextAlign.center,),)
-                      ],
-                    ),
-                  )
+            //         onPressed: () {
+            //           Navigator.push(context, MaterialPageRoute(
+            //   builder: (context) => ScanMifareClassic(),
+            // ));
+            //         },
+            //         child: Column(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           crossAxisAlignment: CrossAxisAlignment.center,
+            //           children: [
+            //             // Image.asset("assets/animation_lkh7vorm_small.gif", 
+            //             // gaplessPlayback: true, 
+            //             // fit: BoxFit.fill,
+            //             // height: 300,
+            //             // width: 300,
+            //             // ),
+            //             Center(child: Text('Scan MiFare Tag',style: TextStyle(fontSize: 50,color: Colors.black),textAlign: TextAlign.center,),)
+            //           ],
+            //         ),
+            //       )
       
-                ),
-              ),
+            //     ),
+            //   ),
+
+
+
+
+
+
+
       //         Center(
                 
       //           child: Container(

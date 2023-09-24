@@ -34,6 +34,8 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
         children: [
           ListView(
             shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            
             children: [
               Row(
                 children: [
@@ -57,25 +59,25 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               
               ],),
               SizedBox(height: 20,),
-              Row(children: [
-                
-
-              Text('Seat_No- ',style: TextStyle(fontSize: 25),),
-              Text(widget.phonenum,style: TextStyle(fontSize: 25),),
               
-              ],),
-              SizedBox(height: 20,),
               Row(children: [
                
-              Text('Exam Year- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['exam_year'].toString(),style: TextStyle(fontSize: 25),),
+              Text('University - ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['university'].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
-              Text('Exam Month- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['exam_month'].toString(),style: TextStyle(fontSize: 25),),
+              Text('Institute- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['institute'].toString(),style: TextStyle(fontSize: 25),),
+              
+              ],),
+              SizedBox(height: 20,),
+              Row(children: [
+                
+              Text('Program- ',style: TextStyle(fontSize: 25),),
+              Text(widget.m['program'].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
