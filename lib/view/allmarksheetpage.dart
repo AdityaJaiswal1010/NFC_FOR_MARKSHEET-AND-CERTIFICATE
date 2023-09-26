@@ -86,7 +86,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
               print('00000000000000000000000000000000000000');
               // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
               Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => View(widget.allMarkSheet[4].toString().trim(),'4'),
+                        builder: (context) => View(widget.allMarkSheet[4].toString().trim(),'5'),
                       ));
               // NetworkImage(widget.allMarkSheet[0].toString());
               // PdfViewerPage(widget.allMarkSheet[0].toString());
@@ -97,7 +97,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
               print('00000000000000000000000000000000000000');
               // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
               Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => View(widget.allMarkSheet[5].toString().trim(),'4'),
+                        builder: (context) => View(widget.allMarkSheet[5].toString().trim(),'6'),
                       ));
               // NetworkImage(widget.allMarkSheet[0].toString());
               // PdfViewerPage(widget.allMarkSheet[0].toString());
