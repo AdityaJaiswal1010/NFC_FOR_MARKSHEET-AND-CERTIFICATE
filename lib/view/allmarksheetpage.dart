@@ -33,80 +33,83 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
           ],
         ),
       ),),
-      body: Column(
-        children: [
-          SizedBox(height: 30,),
-          ElevatedButton(onPressed:() async {
-            print(widget.allMarkSheet[0].toString());
-            print('00000000000000000000000000000000000000');
-            // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => View(widget.allMarkSheet[0].toString().trim(),'1'),
-                    ));
-            // NetworkImage(widget.allMarkSheet[0].toString());
-            // PdfViewerPage(widget.allMarkSheet[0].toString());
-            // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 1')),
-          ElevatedButton(onPressed:() async {
-            print(widget.allMarkSheet[1].toString());
-            print('00000000000000000000000000000000000000');
-            // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => View(widget.allMarkSheet[1].toString().trim(),'2'),
-                    ));
-            // NetworkImage(widget.allMarkSheet[0].toString());
-            // PdfViewerPage(widget.allMarkSheet[0].toString());
-            // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 2')),
-          ElevatedButton(onPressed:() async {
-            print(widget.allMarkSheet[0].toString());
-            print('00000000000000000000000000000000000000');
-            // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => View(widget.allMarkSheet[0].toString().trim(),'3'),
-                    ));
-            // NetworkImage(widget.allMarkSheet[0].toString());
-            // PdfViewerPage(widget.allMarkSheet[0].toString());
-            // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 3')),
-          ElevatedButton(onPressed:() async {
-            print(widget.allMarkSheet[1].toString());
-            print('00000000000000000000000000000000000000');
-            // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => View(widget.allMarkSheet[1].toString().trim(),'4'),
-                    ));
-            // NetworkImage(widget.allMarkSheet[0].toString());
-            // PdfViewerPage(widget.allMarkSheet[0].toString());
-            // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 4')),
-          ElevatedButton(onPressed:() async {
-            print(widget.allMarkSheet[1].toString());
-            print('00000000000000000000000000000000000000');
-            // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => View(widget.allMarkSheet[0].toString().trim(),'4'),
-                    ));
-            // NetworkImage(widget.allMarkSheet[0].toString());
-            // PdfViewerPage(widget.allMarkSheet[0].toString());
-            // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 5')),
-          ElevatedButton(onPressed:() async {
-            print(widget.allMarkSheet[1].toString());
-            print('00000000000000000000000000000000000000');
-            // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => View(widget.allMarkSheet[1].toString().trim(),'4'),
-                    ));
-            // NetworkImage(widget.allMarkSheet[0].toString());
-            // PdfViewerPage(widget.allMarkSheet[0].toString());
-            // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-          },  child: Text('Sem 6')),
-           ElevatedButton(onPressed: (){
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                          }, child: Text('Back'))
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 30,),
+            ElevatedButton(onPressed:() async {
+              print(widget.allMarkSheet[0].toString());
+              print('00000000000000000000000000000000000000');
+              // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => View(widget.allMarkSheet[0].toString().trim(),'1'),
+                      ));
+              // NetworkImage(widget.allMarkSheet[0].toString());
+              // PdfViewerPage(widget.allMarkSheet[0].toString());
+              // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+            },  child: Text('Sem 1')),
+            ElevatedButton(onPressed:() async {
+              print(widget.allMarkSheet[1].toString());
+              print('00000000000000000000000000000000000000');
+              // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => View(widget.allMarkSheet[1].toString().trim(),'2'),
+                      ));
+              // NetworkImage(widget.allMarkSheet[0].toString());
+              // PdfViewerPage(widget.allMarkSheet[0].toString());
+              // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+            },  child: Text('Sem 2')),
+            ElevatedButton(onPressed:() async {
+              print(widget.allMarkSheet[2].toString());
+              print('00000000000000000000000000000000000000');
+              // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => View(widget.allMarkSheet[2].toString().trim(),'3'),
+                      ));
+              // NetworkImage(widget.allMarkSheet[0].toString());
+              // PdfViewerPage(widget.allMarkSheet[0].toString());
+              // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+            },  child: Text('Sem 3')),
+            ElevatedButton(onPressed:() async {
+              print(widget.allMarkSheet[3].toString());
+              print('00000000000000000000000000000000000000');
+              // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => View(widget.allMarkSheet[3].toString().trim(),'4'),
+                      ));
+              // NetworkImage(widget.allMarkSheet[0].toString());
+              // PdfViewerPage(widget.allMarkSheet[0].toString());
+              // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+            },  child: Text('Sem 4')),
+            ElevatedButton(onPressed:() async {
+              print(widget.allMarkSheet[4].toString());
+              print('00000000000000000000000000000000000000');
+              // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => View(widget.allMarkSheet[4].toString().trim(),'4'),
+                      ));
+              // NetworkImage(widget.allMarkSheet[0].toString());
+              // PdfViewerPage(widget.allMarkSheet[0].toString());
+              // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+            },  child: Text('Sem 5')),
+            ElevatedButton(onPressed:() async {
+              print(widget.allMarkSheet[5].toString());
+              print('00000000000000000000000000000000000000');
+              // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => View(widget.allMarkSheet[5].toString().trim(),'4'),
+                      ));
+              // NetworkImage(widget.allMarkSheet[0].toString());
+              // PdfViewerPage(widget.allMarkSheet[0].toString());
+              // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+            },  child: Text('Sem 6')),
+            
+             ElevatedButton(onPressed: (){
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }, child: Text('Back'))
+          ],
+        ),
       ),
     );
   }
@@ -164,6 +167,46 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
 
 
 
+// class View extends StatefulWidget {
+//   final String url;
+//   final String sem_no;
+//   const View(this.url, this.sem_no, {Key? key}) : super(key: key);
+
+//   @override
+//   State<View> createState() => _ViewState();
+// }
+
+// class _ViewState extends State<View> {
+//   Future<void> secureScreen() async{
+//     await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+//   }
+//   @override 
+//   void initState(){
+//     secureScreen();
+//     super.initState();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Marksheet - ${widget.sem_no}'),),
+//       body: Center(
+//         child: InteractiveViewer(
+//           boundaryMargin: EdgeInsets.all(80),
+//       panEnabled: false,
+//       scaleEnabled: true,
+//       minScale: 1.0,
+//       maxScale: 2.2,
+          
+          
+//           child:Image.network(widget.url,fit: BoxFit.fitWidth,)
+//           // child:url_launcher(widget.url);
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 class View extends StatefulWidget {
   final String url;
   final String sem_no;
@@ -174,30 +217,41 @@ class View extends StatefulWidget {
 }
 
 class _ViewState extends State<View> {
-  Future<void> secureScreen() async{
+  Future<void> secureScreen() async {
     await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   }
-  @override 
-  void initState(){
+
+  @override
+  void initState() {
     secureScreen();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Marksheet - ${widget.sem_no}'),),
-      body: Center(
-        child: InteractiveViewer(
-          boundaryMargin: EdgeInsets.all(80),
-      panEnabled: false,
-      scaleEnabled: true,
-      minScale: 1.0,
-      maxScale: 2.2,
-          
-          
-          child:Image.network(widget.url,fit: BoxFit.fitWidth,)
-          // child:url_launcher(widget.url);
-        ),
+      appBar: AppBar(
+        title: Text('Marksheet - ${widget.sem_no}'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: InteractiveViewer(
+              boundaryMargin: EdgeInsets.all(80),
+              panEnabled: false,
+              scaleEnabled: true,
+              minScale: 1.0,
+              maxScale: 2.2,
+              child: Image.network(widget.url, fit: BoxFit.fitWidth),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Add this line to navigate back
+            },
+            child: Text('Back'),
+          ),
+        ],
       ),
     );
   }
