@@ -36,6 +36,7 @@ dependencies:
   flutter_pdfview:
   flutter_nfc_kit:
   flutter_windowmanager:
+  ndef: 
   mifare_nfc_reader: 
   nfc_read_write_plugin: ^1.0.5
   # flutter_plugin_pdf_viewer: 

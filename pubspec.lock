@@ -433,7 +433,7 @@ packages:
     source: hosted
     version: "0.0.9"
   ndef:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: ndef
       sha256: e40ece11d1cac52cba2b7d0211228c1b5c278032cce3f5bf3e2eefe3762fde6b
