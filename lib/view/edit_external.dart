@@ -106,7 +106,7 @@ class EditExternalPage extends StatelessWidget {
           children: [
             TextFormField(
               controller: Provider.of<EditExternalModel>(context, listen: false).emailController,
-              decoration: InputDecoration(labelText: 'Enter Admin Id',  helperText: ''),
+              decoration: InputDecoration(labelText: 'Enter Reg No',  helperText: ''),
               keyboardType: TextInputType.text,
               validator: (value) => value?.isNotEmpty != true ? 'Required' : null,
             ),

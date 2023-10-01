@@ -107,7 +107,12 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
              ElevatedButton(onPressed: (){
                               Navigator.pop(context);
                               Navigator.pop(context);
-                            }, child: Text('Back'))
+                            }, child: Text('Back')),
+                             Container(
+            padding: EdgeInsets.all(16.0), // Adjust padding as needed
+            child: Image.asset('assets/tinkertech.jpg'),
+          ),
+            
           ],
         ),
       ),

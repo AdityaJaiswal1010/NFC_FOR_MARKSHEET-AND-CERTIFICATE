@@ -211,7 +211,7 @@
 //             //             // ),
 //             //             Center(child: Text('Scan MiFare Tag',style: TextStyle(fontSize: 50,color: Colors.black),textAlign: TextAlign.center,),)
 //             //           ],
-//             //         ),
+//              //         ),
 //             //       )
       
 //             //     ),
@@ -556,6 +556,7 @@
 
 import 'dart:io';
 import 'package:app/repository/repository.dart';
+import 'package:app/view/ImgByteImg.dart';
 import 'package:app/view/ScanMifareClassic.dart';
 import 'package:app/view/about.dart';
 import 'package:app/view/common/form_row.dart';
@@ -705,7 +706,7 @@ class _HomeState extends State<_Home> {
                       controller: regnoController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Reg No',
+                        labelText: 'Enter Admin Id',
                       ),
                     ),
                     SizedBox(height: 20),
@@ -739,6 +740,53 @@ class _HomeState extends State<_Home> {
                   ],
                 ),
               ),
+              SizedBox(height: 30),
+              // Center(
+              //   child: Container(
+              //     height: 200,
+              //     width: 200,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(30),
+              //       color: Theme.of(context).hintColor,
+              //       boxShadow: [
+              //         BoxShadow(
+              //           blurRadius: 10,
+              //           offset: Offset(5, 5),
+              //           color: Colors.grey.withOpacity(0.5),
+              //         ),
+              //       ],
+              //     ),
+              //     child: ElevatedButton(
+              //       onPressed: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => BytecodeToImage(),
+              //           ),
+              //         );
+              //       },
+              //       child: Column(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         crossAxisAlignment: CrossAxisAlignment.center,
+              //         children: [
+              //           Icon(
+              //             FontAwesomeIcons.nfcSymbol,
+              //             size: 50,
+              //             color: Colors.white,
+              //           ),
+              //           SizedBox(height: 10),
+              //           Text(
+              //             'Img Byte Img',
+              //             style: TextStyle(
+              //               fontSize: 20,
+              //               color: Colors.white,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ],

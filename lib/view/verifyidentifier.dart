@@ -94,7 +94,7 @@ import 'package:firebase_core/firebase_core.dart';
                       controller: regnoController,
                       decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Reg No',
+                    labelText: 'Enter Reg No',
                   ),
                     ),
                   // Text('Running on: $_platformVersion\nNFC: $_availability'),
@@ -123,7 +123,8 @@ import 'package:firebase_core/firebase_core.dart';
                           });
                         } else if (tag.type == NFCTagType.mifare_ultralight ||
                             tag.type == NFCTagType.mifare_classic ||
-                            tag.type == NFCTagType.mifare_plus ||
+                            tag.type == NFCTagType.mifare_plus || 
+                            tag.type == NFCTagType.mifare_desfire||
                             tag.type == NFCTagType.iso15693) {
                           var ndefRecords = await FlutterNfcKit.readNDEFRecords();
                           var ndefString = '';
