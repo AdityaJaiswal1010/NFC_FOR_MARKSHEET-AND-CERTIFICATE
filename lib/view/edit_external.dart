@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'dart:typed_data';
 
+import 'package:app/constant/key.dart';
 import 'package:app/model/record.dart';
 import 'package:app/model/write_record.dart';
 import 'package:app/repository/repository.dart';
@@ -47,6 +48,52 @@ class EditExternalModel with ChangeNotifier {
   Map<String,dynamic> um=userresponse.data()!;
   int regNo=um['reg_no'];
   int seatNo=um['seat_no'];
+    String candidateDetails=um['candidate_name']+','+um['father_name']+','+um['mother_name']+','+um['university']+','+um['degree']+','+um['program'];
+    String degree=um['degree'];
+    String sub_name='';
+    String sub_code='';
+    String sub_grade='';
+    String sub_marks;
+    String finalString='';
+    String actualStringToBeStored='';
+  for(int i=0;i<um['childid'].length;i++)
+  {
+    String childid=um['childid'][i];
+  var childidDetailData= await FirebaseFirestore.instance.collection('forms').doc(childid.toString()).get();
+  Map<String,dynamic> childDetail= childidDetailData.data()!;
+  String course_1_name=childDetail['course_name_1'];
+  String course_2_name=childDetail['course_name_2'];
+  String course_3_name=childDetail['course_name_3'];
+  String course_4_name=childDetail['course_name_4'];
+  finalString+=BE_Comps[course_1_name]!+','+BE_Comps[course_2_name]!+','+BE_Comps[course_3_name]!+','+BE_Comps[course_4_name]!+',';
+  String course_1_code=childDetail['course_code_1'];
+  String course_2_code=childDetail['course_code_2'];
+  String course_3_code=childDetail['course_code_3'];
+  String course_4_code=childDetail['course_code_4'];
+  finalString+=course_1_code+','+course_2_code+','+course_3_code+','+course_4_code+',';
+  String course_1_grade=childDetail['grade_1'];
+  String course_2_grade=childDetail['grade_2'];
+  String course_3_grade=childDetail['grade_3'];
+  String course_4_grade=childDetail['grade_4'];
+  finalString+=course_1_grade+','+course_2_grade+','+course_3_grade+','+course_4_grade+',';
+  String course_1_marks=childDetail['marks_obtained_UA_1'].toString();
+  String course_2_marks=childDetail['marks_obtained_UA_2'].toString();
+  String course_3_marks=childDetail['marks_obtained_UA_3'].toString();
+  String course_4_marks=childDetail['marks_obtained_UA_4'].toString();
+  finalString+=course_1_marks+','+course_2_marks+','+course_3_marks+','+course_4_marks;
+  actualStringToBeStored+='['+finalString+']';
+  finalString='';
+  // String course_1_max_marks=childDetail['max_marks_CA_1'].toString();
+  // String course_2_max_marks=childDetail['max_marks_CA_2'].toString();
+  // String course_3_max_marks=childDetail['max_marks_CA_3'].toString();
+  // String course_4_max_marks=childDetail['max_marks_CA_4'].toString();
+  // String course_1_credit=childDetail['credit_grade_point_1'].toString();
+  // String course_2_credit=childDetail['credit_grade_point_2'].toString();
+  // String course_3_credit=childDetail['credit_grade_point_3'].toString();
+  // String course_4_credit=childDetail['credit_grade_point_4'].toString();
+  }
+  print(actualStringToBeStored);
+  // String actualData=course_1_name+','+course_2_name+','+course_1_code+','+course_2_code+','+course_1_grade+','+course_2_grade+','+course_1_marks+','+course_2_marks+','+course_1_max_marks+','+course_2_max_marks+','+course_1_credit+','+course_2_credit;
   Map<String,String> converted={};
 for (var item in m.keys)
   converted[item.toString()] = m[item].toString();
@@ -68,9 +115,9 @@ print(converted.runtimeType);
       // domain: ref.toString(),
       domain: regNo.toString(),
       // type: result['reg_no'].toString(),
-      type: seatNo.toString(),
+      type: candidateDetails.toString(),
       // number:numController.text,
-      data: Uint8List.fromList(utf8.encode(allres[emailController.text.toString()].toString())),
+      data: Uint8List.fromList(utf8.encode(actualStringToBeStored.toString())),
       
     );
 

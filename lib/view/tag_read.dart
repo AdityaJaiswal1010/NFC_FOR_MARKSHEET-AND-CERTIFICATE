@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:app/constant/key.dart';
 import 'package:app/utility/extensions.dart';
 import 'package:app/view/ViewAllMarksheet.dart';
 import 'package:app/view/common/form_row.dart';
@@ -111,6 +112,19 @@ class _TagInfoState extends State<_TagInfo> {
   int resultedvalue=0;
   @override
   Widget build(BuildContext context) {
+    List<String> subject=[];
+          List<String> subjectCode=[];
+          List<String> subjectGrade=[];
+          List<String> subjectMarks=[];
+          List<List<String>> allSubjects=[];
+          List<List<String>> allSubjectCode=[];
+          List<List<String>> allSubjectGrade=[];
+          List<List<String>> allSubjectMarks=[];
+          String uniqueRegNo='';
+          String personalDetails='';
+          int indexToMarksheetDetails=0;
+          String appender='';
+          int count=0;
     String maildata='';
       int callFlag=1;
       String fname='';
@@ -457,15 +471,98 @@ class _TagInfoState extends State<_TagInfo> {
         // });
           String vari='${info.subtitle}';
           String namedata='';
+          
           print(vari);
           
           for(int i=1;i<vari.length;i++)
           {
             if(vari[i]==':')
+            {
+              setState(() {
+                uniqueRegNo=namedata;
+                namedata='';
+              });
+              
+            }
+            if(vari[i]==')')
+            {
+              setState(() {
+                personalDetails=namedata;
+                namedata='';
+                for(int temp=i;temp<vari.length;temp++){
+                  if(vari[temp]!='[')
+                  {
+                    continue;
+                  }
+                  else{
+                    indexToMarksheetDetails=temp+1;
+                    break;
+                  }
+                }
+                
+
+              });
               break;
+            }
             namedata+=vari[i];
           }
           
+          for(int i=indexToMarksheetDetails;i<vari.length;i++)
+          {
+            if(vari[i]==','&&count<4)
+            {
+              subject.add(BE_Comps_data[appender]!.toString());
+              count++;
+              appender='';
+              continue;
+            }
+            if(vari[i]==','&&count<8&&count>=4)
+            {
+              subjectCode.add(appender);
+              appender='';
+              count++;
+              continue;
+            }
+            if(vari[i]==','&&count<12&&count>=8)
+            {
+              subjectGrade.add(appender);
+              appender='';
+              count++;
+              continue;
+            }
+            if(vari[i]==','&&count<16&&count>=12)
+            {
+              subjectMarks.add(appender);
+              appender='';
+              count++;
+              continue;
+            }
+            if(vari[i]==']')
+            {
+              i++;
+              count=0;
+              if(appender!='')
+                subjectMarks.add(appender);
+              appender='';
+              allSubjects.add(subject);
+              allSubjectMarks.add(subjectMarks);
+              allSubjectCode.add(subjectCode);
+              allSubjectGrade.add(subjectGrade);
+              subject=[];
+              subjectCode=[];
+              subjectGrade=[];
+              subjectMarks=[];
+              continue;
+            }
+            appender+=vari[i];
+          }
+          print('all the detail data');
+          print(allSubjects);
+          print(allSubjectCode);
+          print(allSubjectGrade);
+          print(allSubjectMarks);
+          print(personalDetails);
+          print(uniqueRegNo);
           int j=0;
           for(j=0;j<namedata.length;j++)
           {
@@ -559,7 +656,7 @@ class _TagInfoState extends State<_TagInfo> {
                 children: [
                   Text('Reg_No - ',style: TextStyle(fontSize: 25),),
                   
-                  Text(fname,style: TextStyle(fontSize: 25),),
+                  Text(uniqueRegNo,style: TextStyle(fontSize: 25),),
                 ],
                 
               ),
@@ -571,14 +668,14 @@ class _TagInfoState extends State<_TagInfo> {
             //     ],
                 
             //   ),
-              SizedBox(height: 12),
-               Row(
-                children: [
-                  Text('Seat_No- ',style: TextStyle(fontSize: 25),),
-                  Text(phonenum,style: TextStyle(fontSize: 25),),
-                ],
+              // SizedBox(height: 12),
+              //  Row(
+              //   children: [
+              //     Text('Seat_No- ',style: TextStyle(fontSize: 25),),
+              //     Text(phonenum,style: TextStyle(fontSize: 25),),
+              //   ],
                 
-              ),
+              // ),
               SizedBox(height: 12),
               // Row(
               //   children: [
@@ -665,7 +762,7 @@ class _TagInfoState extends State<_TagInfo> {
     print(res);
     
 
-Future<int> rrrr=checkBothChipNDbId(widget.tag, fname);
+Future<int> rrrr=checkBothChipNDbId(widget.tag,uniqueRegNo );
 return Column(
   children: [
     ElevatedButton(
@@ -786,15 +883,17 @@ return Column(
             actualid+=perfectid[i];
           }
         }
+        print('below is actual id interpretes from chip');
         print(actualid);
         
           comparefromchip=actualid.toString();
         
-        
+        print(fname);
         print(alldataofmap[fname]);
           
             comparefromdb=alldataofmap[fname].toString();
-         
+            print('db id');
+         print(comparefromdb);
           if(comparefromchip==comparefromdb)
           {
             print('yes chip matched');
