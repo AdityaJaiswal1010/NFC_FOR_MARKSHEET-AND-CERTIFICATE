@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ViewAllMarksheet extends StatefulWidget {
-  final String maildata;
-  final String fname;
-  final String lname;
-  final String phonenum;
-  const ViewAllMarksheet(this.maildata, this.fname, this.lname, this.phonenum,
+  final List<List<String>> allSubjects;
+  final List<List<String>> allSubjectCode;
+  final List<List<String>> allSubjectMarks;
+  final List<List<String>> allSubjectGrade;
+  const ViewAllMarksheet(this.allSubjects, this.allSubjectCode, this.allSubjectMarks, this.allSubjectGrade, 
       {Key? key})
       : super(key: key);
 
@@ -23,7 +23,7 @@ class _ViewAllMarksheetState extends State<ViewAllMarksheet> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 5), () {
-      linkToPage(widget.maildata, widget.fname, widget.lname, widget.phonenum);
+      linkToPage();
     });
   }
 
@@ -93,45 +93,44 @@ class _ViewAllMarksheetState extends State<ViewAllMarksheet> {
     );
   }
 
-  Future<void> linkToPage(
-      String maildata, String fname, String lname, String phonenum) async {
-    print('-----------------------');
-    print(maildata.toString());
-    String refid = maildata.toString().trim();
-    var resultData =
-        await FirebaseFirestore.instance.collection('users').doc(refid).get();
-    Map<String, dynamic> m = resultData.data()!;
-    List<dynamic> childidList = m['childid'];
-    print(childidList);
-    List<String> allcgpi = [];
-    List<dynamic> refmarksheet = m['allmarksheet'];
-    List<String> allMarkSheet = [];
-    for (var i = 0; i < refmarksheet.length.toInt(); i++) {
-      setState(() {
-        allMarkSheet.add(refmarksheet[i.toInt()].toString());
-      });
-    }
-    print(childidList.length.toInt());
-    for (var i = 0; i < childidList.length.toInt(); i++) {
-      var r = await FirebaseFirestore.instance
-          .collection('forms')
-          .doc(childidList[i].toString().trim())
-          .get();
-      Map<String, dynamic> mdata = r.data()!;
-      if (allcgpi.length == childidList.length.toInt()) break;
-      setState(() {
-        allcgpi.add(mdata['sgpi'].toString());
-      });
-    }
-    print('before');
-    print(allcgpi);
-    print('after');
-    print('---------------');
-    print(allMarkSheet);
+  Future<void> linkToPage() async {
+    // print('-----------------------');
+    // print(maildata.toString());
+    // String refid = maildata.toString().trim();
+    // var resultData =
+    //     await FirebaseFirestore.instance.collection('users').doc(refid).get();
+    // Map<String, dynamic> m = resultData.data()!;
+    // List<dynamic> childidList = m['childid'];
+    // print(childidList);
+    // List<String> allcgpi = [];
+    // List<dynamic> refmarksheet = m['allmarksheet'];
+    // List<String> allMarkSheet = [];
+    // for (var i = 0; i < refmarksheet.length.toInt(); i++) {
+    //   setState(() {
+    //     allMarkSheet.add(refmarksheet[i.toInt()].toString());
+    //   });
+    // }
+    // print(childidList.length.toInt());
+    // for (var i = 0; i < childidList.length.toInt(); i++) {
+    //   var r = await FirebaseFirestore.instance
+    //       .collection('forms')
+    //       .doc(childidList[i].toString().trim())
+    //       .get();
+    //   Map<String, dynamic> mdata = r.data()!;
+    //   if (allcgpi.length == childidList.length.toInt()) break;
+    //   setState(() {
+    //     allcgpi.add(mdata['sgpi'].toString());
+    //   });
+    // }
+    // print('before');
+    // print(allcgpi);
+    // print('after');
+    // print('---------------');
+    // print(allMarkSheet);
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AllMarksheetPage(allMarkSheet),
+          builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade),
         ));
   }
 }

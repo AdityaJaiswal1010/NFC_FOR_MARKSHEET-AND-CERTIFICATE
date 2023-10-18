@@ -12,7 +12,9 @@ class viewDetailRecord extends StatefulWidget {
   final String fname;
   final String lname;
   final String phonenum;
-  const viewDetailRecord(this.maildata, this.fname, this.lname, this.phonenum, {Key? key}) : super(key: key);
+  final List<String> detailInfo;
+  final String uniqueRegNo;
+  const viewDetailRecord(this.maildata, this.fname, this.lname, this.phonenum, this.detailInfo,this.uniqueRegNo, {Key? key}) : super(key: key);
 
   @override
   State<viewDetailRecord> createState() => _viewDetailRecordState();
@@ -92,39 +94,40 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
     );
   }
   Future<void> linkToPage(String maildata, String fname, String lname, String phonenum) async {
-    print('-----------------------');
-          print(maildata.toString());
-          String refid=maildata.toString().trim();
-          var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
-          Map<String, dynamic> m=resultData.data()!;
-          List<dynamic> childidList=m['childid'];
-          print(childidList);
-          List<String> allcgpi=[];
-          List<dynamic> refmarksheet=m['allmarksheet'];
-          List<String> allMarkSheet=[];
-          for(var i=0;i<refmarksheet.length.toInt();i++)
-          {
-            setState(() {
-              allMarkSheet.add(refmarksheet[i.toInt()].toString());
-            });
-          }
-          print(childidList.length.toInt());
-          for(var i=0;i<childidList.length.toInt();i++){
-            var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
-            Map<String,dynamic> mdata=r.data()!;
-            if(allcgpi.length==childidList.length.toInt())
-              break;
-            setState(() {
-              allcgpi.add(mdata['sgpi'].toString());
-            });
-          }
-          print('before');
-          print(allcgpi);
-          print('after');
-          print('---------------');
-          print(allMarkSheet);
+    // print('-----------------------');
+    //       print(maildata.toString());
+    //       String refid=maildata.toString().trim();
+    //       var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
+    //       Map<String, dynamic> m=resultData.data()!;
+    //       List<dynamic> childidList=m['childid'];
+    //       print(childidList);
+    //       List<String> allcgpi=[];
+    //       List<dynamic> refmarksheet=m['allmarksheet'];
+    //       List<String> allMarkSheet=[];
+    //       for(var i=0;i<refmarksheet.length.toInt();i++)
+    //       {
+    //         setState(() {
+    //           allMarkSheet.add(refmarksheet[i.toInt()].toString());
+    //         });
+    //       }
+    //       print(childidList.length.toInt());
+    //       for(var i=0;i<childidList.length.toInt();i++){
+    //         var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
+    //         Map<String,dynamic> mdata=r.data()!;
+    //         if(allcgpi.length==childidList.length.toInt())
+    //           break;
+    //         setState(() {
+    //           allcgpi.add(mdata['sgpi'].toString());
+    //         });
+    //       }
+    //       print('before');
+    //       print(allcgpi);
+    //       print('after');
+    //       print('---------------');
+    //       print(allMarkSheet);
+
           Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,allMarkSheet),
+                      builder: (context) => DisplayNfcData(widget.detailInfo,widget.uniqueRegNo),
                     ));
   }
 }

@@ -4,13 +4,9 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DisplayNfcData extends StatefulWidget {
-  final Map<String, dynamic> m;
-  final List<String> allMarksheet;
-  final String maildata;
-  final List<String> allcgpi;
-  final String fname;
-  final String phonenum;
-  const DisplayNfcData(this.m, this.maildata, this.allcgpi, this.fname, this.phonenum,this.allMarksheet, {Key? key}) : super(key: key);
+  final List<String> detailInfo;
+  final String uniqueRegNo;
+  const DisplayNfcData(this.detailInfo, this.uniqueRegNo, {Key? key}) : super(key: key);
 
   @override
   State<DisplayNfcData> createState() => _DisplayNfcDataState();
@@ -41,7 +37,7 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
                 children: [
                   Text('Reg_No - ',style: TextStyle(fontSize: 25),),
                   
-                  Text(widget.fname,style: TextStyle(fontSize: 25),),
+                  Text(widget.uniqueRegNo,style: TextStyle(fontSize: 25),),
                   // Text(widget.allMarksheet[0].toString()),
 
               
@@ -53,8 +49,8 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               ),
               SizedBox(height: 20,),
               Row(children: [
-                Text('Prn No- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['prn'].toString(),style: TextStyle(fontSize: 25),),
+                Text('Name',style: TextStyle(fontSize: 25),),
+              Text(widget.detailInfo[0].toString(),style: TextStyle(fontSize: 25),),
 
               
               ],),
@@ -62,46 +58,46 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               
               Row(children: [
                
-              Text('University - ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['university'].toString(),style: TextStyle(fontSize: 25),),
+              Text('Father Name - ',style: TextStyle(fontSize: 25),),
+              Text(widget.detailInfo[1].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
-              Text('Institute- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['institute'].toString(),style: TextStyle(fontSize: 25),),
+              Text('Mother Name',style: TextStyle(fontSize: 25),),
+              Text(widget.detailInfo[2].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
               Text('Program- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['program'].toString(),style: TextStyle(fontSize: 25),),
+              Text(widget.detailInfo[3].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
-              Text('Candidates Name- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['candidate_name'],style: TextStyle(fontSize: 25),),
+              Text('degree',style: TextStyle(fontSize: 25),),
+              Text(widget.detailInfo[4].toString(),style: TextStyle(fontSize: 25),),
             
               ],),
               
               SizedBox(height: 20,),
               Row(children: [
                
-              Text('Fathers Name- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['father_name'],style: TextStyle(fontSize: 25),),
+              Text('university',style: TextStyle(fontSize: 25),),
+              Text(widget.detailInfo[5].toString(),style: TextStyle(fontSize: 25),),
               ],),
               SizedBox(height: 20,),
-              Row(children: [
+              // Row(children: [
            
-              Text('Mothers Name- ',style: TextStyle(fontSize: 25),),
-              Text(widget.m['mother_name'],style: TextStyle(fontSize: 25),),
+              // Text('Mothers Name- ',style: TextStyle(fontSize: 25),),
+              // Text(widget.m['mother_name'],style: TextStyle(fontSize: 25),),
               
-              ],),
-              SizedBox(height: 20,),
+              // ],),
+              // SizedBox(height: 20,),
                ElevatedButton(onPressed: (){
                             Navigator.pop(context);
                             Navigator.pop(context);

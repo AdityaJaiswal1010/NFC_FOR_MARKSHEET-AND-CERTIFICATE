@@ -660,14 +660,38 @@ class _TagInfoState extends State<_TagInfo> {
                 ],
                 
               ),
-            //   SizedBox(height: 12),
+              SizedBox(height: 12),
             //  Row(
             //     children: [
-            //       Text('Prn No- '),
-            //       Text(lname),
+            //       Text('Personal Details '),
+            //       Text(personalDetails),
             //     ],
                 
             //   ),
+            //   SizedBox(height: 12),
+            //  Row(
+            //     children: [
+            //       Text('Code'),
+            //       Text(allSubjectCode.toString()),
+            //     ],
+                
+            //   ),
+            //    SizedBox(height: 12),
+            //  Row(
+            //     children: [
+            //       Text('Marks'),
+            //       Text(allSubjectMarks.toString()),
+            //     ],
+                
+            //   ),
+            //    SizedBox(height: 12),
+            //  Row(
+            //     children: [
+            //       Text('Code'),
+            //       Text(allSubjectGrade.toString()),
+            //     ],
+                
+              // ),
               // SizedBox(height: 12),
               //  Row(
               //   children: [
@@ -772,7 +796,7 @@ return Column(
           ),
       onPressed:(){
       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => ReadRecordDetail(ndefWidgets,maildata, fname, lname, phonenum,rrrr,resultedvalue),
+                          builder: (context) => ReadRecordDetail(ndefWidgets,maildata, fname, lname, phonenum,rrrr,resultedvalue,uniqueRegNo,allSubjects,allSubjectCode,allSubjectMarks,allSubjectGrade,personalDetails),
                         ));
     } , child: Text('Details',style: TextStyle(fontSize: 50),))
   ],
@@ -854,16 +878,10 @@ return Column(
         int pointer=0;
         for(int i=1;i<id.length;i++)
         {
-          
           if(id[i]=='x')
-          {
-
-          }
-          
+          {}
           else if(id[i]==' ')
-          {
-
-          }
+          {}
           else{
             perfectid+=id[i];
           }
@@ -916,43 +934,67 @@ return Column(
 }
 
   
-  Future<void> linkToPage(String maildata, String fname, String lname, String phonenum) async {
-    print('-----------------------');
-          print(maildata.toString());
-          String refid=maildata.toString().trim();
-          var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
-          Map<String, dynamic> m=resultData.data()!;
-          List<dynamic> childidList=m['childid'];
-          print(childidList);
-          List<String> allcgpi=[];
-          List<dynamic> refmarksheet=m['allmarksheet'];
-          List<String> allMarkSheet=[];
-          for(var i=0;i<refmarksheet.length.toInt();i++)
-          {
-            setState(() {
-              allMarkSheet.add(refmarksheet[i.toInt()].toString());
-            });
+  // Future<void> linkToPage(String maildata, String fname, String lname, String phonenum) async {
+  //   // print('-----------------------');
+  //   //       print(maildata.toString());
+  //   //       String refid=maildata.toString().trim();
+  //   //       var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
+  //   //       Map<String, dynamic> m=resultData.data()!;
+  //   //       List<dynamic> childidList=m['childid'];
+  //   //       print(childidList);
+  //   //       List<String> allcgpi=[];
+  //   //       List<dynamic> refmarksheet=m['allmarksheet'];
+  //   //       List<String> allMarkSheet=[];
+  //   //       for(var i=0;i<refmarksheet.length.toInt();i++)
+  //   //       {
+  //   //         setState(() {
+  //   //           allMarkSheet.add(refmarksheet[i.toInt()].toString());
+  //   //         });
             
-          }
-          print(childidList.length.toInt());
-          for(var i=0;i<childidList.length.toInt();i++){
-            var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
-            Map<String,dynamic> mdata=r.data()!;
-            if(allcgpi.length==childidList.length.toInt())
-              break;
-            setState(() {
-              allcgpi.add(mdata['sgpi'].toString());
-            });
-          }
-          print('before');
-          print(allcgpi);
-          print('after');
-          print('---------------');
-          print(allMarkSheet);
-          Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,allMarkSheet),
-                    ));
-  }
+  //   //       }
+  //   //       print(childidList.length.toInt());
+  //   //       for(var i=0;i<childidList.length.toInt();i++){
+  //   //         var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
+  //   //         Map<String,dynamic> mdata=r.data()!;
+  //   //         if(allcgpi.length==childidList.length.toInt())
+  //   //           break;
+  //   //         setState(() {
+  //   //           allcgpi.add(mdata['sgpi'].toString());
+  //   //         });
+  //   //       }
+  //   //       print('before');
+  //   //       print(allcgpi);
+  //   //       print('after');
+  //   //       print('---------------');
+  //   //       print(allMarkSheet);
+  //   List<String> detailInfo=[];
+  //             String tempInfo='';
+  //             int count=0;
+  //             for(int i=0;i<widget.personalDetails.length;i++)
+  //             {
+  //               if(widget.personalDetails[i]==' '&& count>=1)
+  //               {
+  //                 detailInfo.add(tempInfo);
+  //                 count=0;
+  //                 tempInfo='';
+  //                 continue;
+  //               }
+  //               if(widget.personalDetails[i]==' ')
+  //               {
+  //                 count++;
+  //               }
+  //               tempInfo+=widget.personalDetails[i];
+                
+  //             }
+  //             if(tempInfo!='')
+  //             {
+  //               detailInfo.add(tempInfo);
+                
+  //             }
+  //         Navigator.push(context, MaterialPageRoute(
+  //                     builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,allMarkSheet),
+  //                   ));
+  // }
 }
 
 

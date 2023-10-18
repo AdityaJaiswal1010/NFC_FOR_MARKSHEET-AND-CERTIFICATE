@@ -6,7 +6,13 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReadRecordDetail extends StatefulWidget {
-  ReadRecordDetail(this.ndefWidgets, this.maildata, this.fname, this.lname, this.phonenum, this.rrrr, this.resultedvalue, {Key? key}) : super(key: key);
+  ReadRecordDetail(this.ndefWidgets, this.maildata, this.fname, this.lname, this.phonenum, this.rrrr, this.resultedvalue,this.uniqueRegNo,this.allSubjects,this.allSubjectCode,this.allSubjectMarks,this.allSubjectGrade, this.personalDetails, {Key? key}) : super(key: key);
+  String uniqueRegNo;
+  String personalDetails;
+  List<List<String>> allSubjects;
+  List<List<String>> allSubjectCode;
+  List<List<String>> allSubjectMarks; 
+  List<List<String>> allSubjectGrade;
   List<Widget> ndefWidgets;
   String maildata;
   int resultedvalue;
@@ -78,8 +84,29 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
                   
             ),
             onPressed: () {
+              List<String> detailInfo=[];
+              String tempInfo='';
+              int count=0;
+              for(int i=0;i<widget.personalDetails.length;i++)
+              {
+                if(widget.personalDetails[i]==',')
+                {
+                  detailInfo.add(tempInfo);
+                  
+                  tempInfo='';
+                  continue;
+                }
+                
+                tempInfo+=widget.personalDetails[i];
+                
+              }
+              if(tempInfo!='')
+              {
+                detailInfo.add(tempInfo);
+                
+              }
                   Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum)));
+                                builder: (context) => viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
                   // linkToPage(maildata, fname, lname, phonenum);
             },
           ),
@@ -92,7 +119,7 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
             ),
             onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => ViewAllMarksheet(widget.maildata, widget.fname, widget.lname, widget.phonenum)));
+                                builder: (context) => ViewAllMarksheet(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
                   // linkToPage(maildata, fname, lname, phonenum);
             },
           ),

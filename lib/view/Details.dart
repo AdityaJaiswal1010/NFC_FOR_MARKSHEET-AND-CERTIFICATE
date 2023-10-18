@@ -62,8 +62,8 @@ class _DetailsState extends State<Details> {
                   
             ),
             onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum)));
+                  // Navigator.push(context, MaterialPageRoute(
+                  //               builder: (context) => viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum)));
                   // linkToPage(maildata, fname, lname, phonenum);
             },
           ),
@@ -75,8 +75,8 @@ class _DetailsState extends State<Details> {
                   fixedSize: Size(250, 250)
             ),
             onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => ViewAllMarksheet(widget.maildata, widget.fname, widget.lname, widget.phonenum)));
+                  // Navigator.push(context, MaterialPageRoute(
+                  //               builder: (context) => ViewAllMarksheet(widget.maildata, widget.fname, widget.lname, widget.phonenum)));
                   // linkToPage(maildata, fname, lname, phonenum);
             },
           ),
