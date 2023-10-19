@@ -26,7 +26,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
   @override
   Widget build(BuildContext context) {
     int count=widget.allSubjects.length;
-    int ticker=0;
+    int ticker=-1;
     int index=0;
     return Scaffold(
       appBar: AppBar(title: Center(
@@ -38,117 +38,363 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
           ],
         ),
       ),),
-      body: Center(
-        child: Column(
-          children: [
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 30,),
+              // ElevatedButton(onPressed:() async {
+              //   print(widget.allMarkSheet[0].toString());
+              //   print('00000000000000000000000000000000000000');
+              //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => View(widget.allMarkSheet[0].toString().trim(),'1'),
+              //           ));
+              //   // NetworkImage(widget.allMarkSheet[0].toString());
+              //   // PdfViewerPage(widget.allMarkSheet[0].toString());
+              //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+              // },  child: Text('Sem 1')),
+              // ElevatedButton(onPressed:() async {
+              //   print(widget.allMarkSheet[1].toString());
+              //   print('00000000000000000000000000000000000000');
+              //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => View(widget.allMarkSheet[1].toString().trim(),'2'),
+              //           ));
+              //   // NetworkImage(widget.allMarkSheet[0].toString());
+              //   // PdfViewerPage(widget.allMarkSheet[0].toString());
+              //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+              // },  child: Text('Sem 2')),
+              // ElevatedButton(onPressed:() async {
+              //   print(widget.allMarkSheet[2].toString());
+              //   print('00000000000000000000000000000000000000');
+              //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => View(widget.allMarkSheet[2].toString().trim(),'3'),
+              //           ));
+              //   // NetworkImage(widget.allMarkSheet[0].toString());
+              //   // PdfViewerPage(widget.allMarkSheet[0].toString());
+              //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+              // },  child: Text('Sem 3')),
+              // ElevatedButton(onPressed:() async {
+              //   print(widget.allMarkSheet[3].toString());
+              //   print('00000000000000000000000000000000000000');
+              //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => View(widget.allMarkSheet[3].toString().trim(),'4'),
+              //           ));
+              //   // NetworkImage(widget.allMarkSheet[0].toString());
+              //   // PdfViewerPage(widget.allMarkSheet[0].toString());
+              //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+              // },  child: Text('Sem 4')),
+              // ElevatedButton(onPressed:() async {
+              //   print(widget.allMarkSheet[4].toString());
+              //   print('00000000000000000000000000000000000000');
+              //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => View(widget.allMarkSheet[4].toString().trim(),'5'),
+              //           ));
+              //   // NetworkImage(widget.allMarkSheet[0].toString());
+              //   // PdfViewerPage(widget.allMarkSheet[0].toString());
+              //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+              // },  child: Text('Sem 5')),
+              // ElevatedButton(onPressed:() async {
+              //   print(widget.allMarkSheet[5].toString());
+              //   print('00000000000000000000000000000000000000');
+              //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => View(widget.allMarkSheet[5].toString().trim(),'6'),
+              //           ));
+              //   // NetworkImage(widget.allMarkSheet[0].toString());
+              //   // PdfViewerPage(widget.allMarkSheet[0].toString());
+              //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
+              // },  child: Text('Sem 6')),
+              
+              SizedBox(height: 30,),
+              Container(
+              padding: EdgeInsets.all(16.0), // Adjust padding as needed
+              child: Image.asset('assets/xyz.jpg'),
+            ),
             SizedBox(height: 30,),
-            // ElevatedButton(onPressed:() async {
-            //   print(widget.allMarkSheet[0].toString());
-            //   print('00000000000000000000000000000000000000');
-            //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            //   Navigator.push(context, MaterialPageRoute(
-            //             builder: (context) => View(widget.allMarkSheet[0].toString().trim(),'1'),
-            //           ));
-            //   // NetworkImage(widget.allMarkSheet[0].toString());
-            //   // PdfViewerPage(widget.allMarkSheet[0].toString());
-            //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-            // },  child: Text('Sem 1')),
-            // ElevatedButton(onPressed:() async {
-            //   print(widget.allMarkSheet[1].toString());
-            //   print('00000000000000000000000000000000000000');
-            //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            //   Navigator.push(context, MaterialPageRoute(
-            //             builder: (context) => View(widget.allMarkSheet[1].toString().trim(),'2'),
-            //           ));
-            //   // NetworkImage(widget.allMarkSheet[0].toString());
-            //   // PdfViewerPage(widget.allMarkSheet[0].toString());
-            //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-            // },  child: Text('Sem 2')),
-            // ElevatedButton(onPressed:() async {
-            //   print(widget.allMarkSheet[2].toString());
-            //   print('00000000000000000000000000000000000000');
-            //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            //   Navigator.push(context, MaterialPageRoute(
-            //             builder: (context) => View(widget.allMarkSheet[2].toString().trim(),'3'),
-            //           ));
-            //   // NetworkImage(widget.allMarkSheet[0].toString());
-            //   // PdfViewerPage(widget.allMarkSheet[0].toString());
-            //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-            // },  child: Text('Sem 3')),
-            // ElevatedButton(onPressed:() async {
-            //   print(widget.allMarkSheet[3].toString());
-            //   print('00000000000000000000000000000000000000');
-            //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            //   Navigator.push(context, MaterialPageRoute(
-            //             builder: (context) => View(widget.allMarkSheet[3].toString().trim(),'4'),
-            //           ));
-            //   // NetworkImage(widget.allMarkSheet[0].toString());
-            //   // PdfViewerPage(widget.allMarkSheet[0].toString());
-            //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-            // },  child: Text('Sem 4')),
-            // ElevatedButton(onPressed:() async {
-            //   print(widget.allMarkSheet[4].toString());
-            //   print('00000000000000000000000000000000000000');
-            //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            //   Navigator.push(context, MaterialPageRoute(
-            //             builder: (context) => View(widget.allMarkSheet[4].toString().trim(),'5'),
-            //           ));
-            //   // NetworkImage(widget.allMarkSheet[0].toString());
-            //   // PdfViewerPage(widget.allMarkSheet[0].toString());
-            //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-            // },  child: Text('Sem 5')),
-            // ElevatedButton(onPressed:() async {
-            //   print(widget.allMarkSheet[5].toString());
-            //   print('00000000000000000000000000000000000000');
-            //   // PDFDocument doc=await PDFDocument.fromURL(widget.allMarkSheet[0].toString()); 
-            //   Navigator.push(context, MaterialPageRoute(
-            //             builder: (context) => View(widget.allMarkSheet[5].toString().trim(),'6'),
-            //           ));
-            //   // NetworkImage(widget.allMarkSheet[0].toString());
-            //   // PdfViewerPage(widget.allMarkSheet[0].toString());
-            //   // SfPdfViewer.network(widget.allMarkSheet[0].toString(),controller: _pdfViewerController,);
-            // },  child: Text('Sem 6')),
             Text('Result'),
-            (ticker++<count)?
-            
-              Table(
-                
-          border: TableBorder.all(),
-          children: [
-            TableRow(children: [
-              TableCell(child: Text(widget.allSubjects[ticker][0])),
-              TableCell(child: Text(widget.allSubjectCode[ticker][0])),
-              TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
-              TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
-            ]),
-            TableRow(children: [
-              TableCell(child: Text(widget.allSubjects[ticker][1])),
-              TableCell(child: Text(widget.allSubjectCode[ticker][1])),
-              TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
-              TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
-
-            ]),
-            TableRow(children: [
-              TableCell(child: Text(widget.allSubjects[ticker][2])),    
-              TableCell(child: Text(widget.allSubjectCode[ticker][2])),
-              TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
-              TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
-            ]),
-          ],
-        ):Text('No result'),
-            
-            
-            // Text(widget.allSubjects.toString()+widget.allSubjectCode.toString()),
-             ElevatedButton(onPressed: (){
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            }, child: Text('Back')),
-                             Container(
-            padding: EdgeInsets.all(16.0), // Adjust padding as needed
-            child: Image.asset('assets/tinkertech.jpg'),
+            SizedBox(height: 30,),
+              Text('Sem 1'),
+              (ticker++<count)?
+              
+                Table(
+                  
+            border: TableBorder.all(),
+            children: [
+              TableRow(children: [
+                TableCell(child: Text('Subject')),
+                TableCell(child: Text('Code')),
+                TableCell(child: Text('Marks')),
+                TableCell(child: Text('Grade')),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][0])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][1])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][2])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][3])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+              ]),
+            ],
+          ):Text('No result'),
+          SizedBox(height: 30,),
+              Text('Sem 2'),
+              SizedBox(height: 30,),
+          (ticker++<count)?
+              
+                Table(
+                  
+            border: TableBorder.all(),
+            children: [
+              TableRow(children: [
+                TableCell(child: Text('Subject')),
+                TableCell(child: Text('Code')),
+                TableCell(child: Text('Marks')),
+                TableCell(child: Text('Grade')),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][0])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][1])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][2])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][3])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+              ]),
+            ],
+          ):Text('No result'),
+          SizedBox(height: 30,),
+              Text('Sem 3'),
+              (ticker++<count)?
+              
+                Table(
+                  
+            border: TableBorder.all(),
+            children: [
+              TableRow(children: [
+                TableCell(child: Text('Subject')),
+                TableCell(child: Text('Code')),
+                TableCell(child: Text('Marks')),
+                TableCell(child: Text('Grade')),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][0])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][1])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][2])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][3])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+              ]),
+            ],
+          ):Text('No result'),
+          SizedBox(height: 30,),
+              Text('Sem 4'),
+              (ticker++<count)?
+              
+                Table(
+                  
+            border: TableBorder.all(),
+            children: [
+              TableRow(children: [
+                TableCell(child: Text('Subject')),
+                TableCell(child: Text('Code')),
+                TableCell(child: Text('Marks')),
+                TableCell(child: Text('Grade')),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][0])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][1])),
+                TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][2])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+              ]),
+              TableRow(children: [
+                TableCell(child: Text(widget.allSubjects[ticker][3])),    
+                TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+                TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+                TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+              ]),
+            ],
+          ):Text('No result'),
+          // (ticker++<count)?
+              
+          //       Table(
+                  
+          //   border: TableBorder.all(),
+          //   children: [
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][2])),    
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][3])),    
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+          //     ]),
+          //   ],
+          // ):Text('No result'),
+          // (ticker++<count)?
+              
+          //       Table(
+                  
+          //   border: TableBorder.all(),
+          //   children: [
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][2])),    
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][3])),    
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+          //     ]),
+          //   ],
+          // ):Text('No result'),
+          // (ticker++<count)?
+              
+          //       Table(
+                  
+          //   border: TableBorder.all(),
+          //   children: [
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][0])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][0])),
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][1])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][1])),
+      
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][2])),    
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][2])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][2])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][2])),
+          //     ]),
+          //     TableRow(children: [
+          //       TableCell(child: Text(widget.allSubjects[ticker][3])),    
+          //       TableCell(child: Text(widget.allSubjectCode[ticker][3])),
+          //       TableCell(child: Text(widget.allSubjectMarks[ticker][3])),
+          //       TableCell(child: Text(widget.allSubjectGrade[ticker][3])),
+          //     ]),
+          //   ],
+          // ):Text('No result'),
+              
+              
+              // Text(widget.allSubjects.toString()+widget.allSubjectCode.toString()),
+               ElevatedButton(onPressed: (){
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }, child: Text('Back')),
+                               Container(
+              padding: EdgeInsets.all(16.0), // Adjust padding as needed
+              child: Image.asset('assets/tinkertech.jpg'),
+            ),
+              
+            ],
           ),
-            
-          ],
         ),
       ),
     );
