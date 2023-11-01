@@ -1,15 +1,18 @@
 import 'dart:convert';
 
-
-
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+import 'package:encryptor/encryptor.dart';
 import 'dart:typed_data';
-
+import 'package:crypto/crypto.dart';
 import 'package:app/constant/key.dart';
 import 'package:app/model/record.dart';
 import 'package:app/model/write_record.dart';
 import 'package:app/repository/repository.dart';
 import 'package:app/view/successRegNo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:encrypt/encrypt.dart'  as encrypt;
+import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +38,8 @@ class EditExternalModel with ChangeNotifier {
   
 
   Future<Object> save() async {
-    
+     
+
     var response = await FirebaseFirestore.instance.collection('entry').doc('l1nqyFzkPCKoUqhU1eML').get(); 
     
     Map<String, dynamic> m=response.data()!;
@@ -48,12 +52,12 @@ class EditExternalModel with ChangeNotifier {
   Map<String,dynamic> um=userresponse.data()!;
   int regNo=um['reg_no'];
   int seatNo=um['seat_no'];
-    String candidateDetails=um['candidate_name']+','+um['father_name']+','+um['mother_name']+','+um['university']+','+um['degree']+','+um['program'];
-    String degree=um['degree'];
-    String sub_name='';
-    String sub_code='';
-    String sub_grade='';
-    String sub_marks;
+  String candidateDetails=um['candidate_name']+','+um['father_name']+','+um['mother_name']+','+um['university']+','+um['degree']+','+um['program'];
+  String degree=um['degree'];
+  String sub_name='';
+  String sub_code='';
+  String sub_grade='';
+  String sub_marks;
     String finalString='';
     String actualStringToBeStored='';
   for(int i=0;i<um['childid'].length;i++)
@@ -65,7 +69,8 @@ class EditExternalModel with ChangeNotifier {
   String course_2_name=childDetail['course_name_2'];
   String course_3_name=childDetail['course_name_3'];
   String course_4_name=childDetail['course_name_4'];
-  finalString+=BE_Comps[course_1_name]!+','+BE_Comps[course_2_name]!+','+BE_Comps[course_3_name]!+','+BE_Comps[course_4_name]!+',';
+  finalString+=course_1_name+','+course_2_name+','+course_3_name+','+course_4_name+',';
+  // finalString+='00000000000000'+BE_Comps[course_1_name]!.toString()+','+BE_Comps[course_2_name]!.toString()+','+BE_Comps[course_3_name]!.toString()+','+BE_Comps[course_4_name]!.toString()+',';
   String course_1_code=childDetail['course_code_1'];
   String course_2_code=childDetail['course_code_2'];
   String course_3_code=childDetail['course_code_3'];
@@ -80,8 +85,8 @@ class EditExternalModel with ChangeNotifier {
   String course_2_marks=childDetail['marks_obtained_UA_2'].toString();
   String course_3_marks=childDetail['marks_obtained_UA_3'].toString();
   String course_4_marks=childDetail['marks_obtained_UA_4'].toString();
-  finalString+=course_1_marks+','+course_2_marks+','+course_3_marks+','+course_4_marks;
-  actualStringToBeStored+='['+finalString+']';
+  finalString+=course_1_marks+','+course_2_marks+','+course_3_marks+','+course_4_marks+',';
+  actualStringToBeStored+=finalString;
   finalString='';
   // String course_1_max_marks=childDetail['max_marks_CA_1'].toString();
   // String course_2_max_marks=childDetail['max_marks_CA_2'].toString();
@@ -92,6 +97,29 @@ class EditExternalModel with ChangeNotifier {
   // String course_3_credit=childDetail['credit_grade_point_3'].toString();
   // String course_4_credit=childDetail['credit_grade_point_4'].toString();
   }
+  print(actualStringToBeStored);
+  // final String encryptionKey = 'my 32 length key................';
+  // final key = encrypt.Key.fromUtf8(encryptionKey);
+  // final iv = encrypt.IV.fromLength(16);
+  // final encrypter = encrypt.Encrypter(encrypt.AES(key));
+  // final encrypted = encrypter.encrypt(actualStringToBeStored, iv: iv);
+
+  // print(decrypted); 
+  // print(encrypted.base64);
+  // actualStringToBeStored=encrypted.base64.toString();
+
+
+
+
+
+
+  //newest semi errored enc code
+  print('here is the actual data');
+  print(actualStringToBeStored.substring(0,actualStringToBeStored.length-1));
+    var key = 'Key to encrypt and decrpyt the plain text';
+  var encrypted = Encryptor.encrypt(key, actualStringToBeStored.substring(0,actualStringToBeStored.length-1));
+  actualStringToBeStored='['+encrypted.toString().trim()+']';
+  print('after encryption');
   print(actualStringToBeStored);
   // String actualData=course_1_name+','+course_2_name+','+course_1_code+','+course_2_code+','+course_1_grade+','+course_2_grade+','+course_1_marks+','+course_2_marks+','+course_1_max_marks+','+course_2_max_marks+','+course_1_credit+','+course_2_credit;
   Map<String,String> converted={};

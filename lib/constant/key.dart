@@ -19,3 +19,5 @@ Map<String,String> BE_Comps_data={
   '007':'DSA',
   '008':'ENGINEERING GRAPHICS',
 };
+
+String enc_key='AMXYZ';

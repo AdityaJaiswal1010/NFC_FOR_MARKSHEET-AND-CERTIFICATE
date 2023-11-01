@@ -1,5 +1,7 @@
 import 'package:app/view/ViewAllMarksheet.dart';
+import 'package:app/view/allmarksheetpage.dart';
 import 'package:app/view/common/form_row.dart';
+import 'package:app/view/display_data.dart';
 import 'package:app/view/viewDetailRecord.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -48,7 +50,11 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
              Column(
                children: [
                 // getData(widget.rrrr),
-                (widget.resultedvalue==1)?
+
+
+
+                // Authentication step
+                // (widget.resultedvalue==1)?
                  Column(
         children: [
           
@@ -105,8 +111,18 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
                 detailInfo.add(tempInfo);
                 
               }
+
+              
                   Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
+                                builder: (context) => DisplayNfcData(detailInfo,widget.uniqueRegNo)));
+                                //splash page 5 sec link
+                                // viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
+                  
+                  
+                  
+                  
+                  
+                  
                   // linkToPage(maildata, fname, lname, phonenum);
             },
           ),
@@ -119,14 +135,18 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
             ),
             onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => ViewAllMarksheet(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
+                                builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
+                                
+                                // link to 5 sec splash
+                                // ViewAllMarksheet(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
                   // linkToPage(maildata, fname, lname, phonenum);
             },
           ),
         ],
-          ):Column(
-            children: [Text('Invalid Card',style: TextStyle(fontSize: 50),)],
           )
+          // :Column(
+          //   children: [Text('Invalid Card',style: TextStyle(fontSize: 50),)],
+          // )
                ],
              )
           

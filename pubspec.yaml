@@ -40,6 +40,8 @@ dependencies:
   mifare_nfc_reader: 
   nfc_read_write_plugin: ^1.0.5
   flutter_image_compress: 
+  encrypt:
+  encryptor: ^0.0.1
   # flutter_plugin_pdf_viewer: 
   # flutter_pdf_viewer:
 
