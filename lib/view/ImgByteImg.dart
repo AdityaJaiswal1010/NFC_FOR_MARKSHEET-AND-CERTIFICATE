@@ -36,6 +36,7 @@ class _BytecodeToImageState extends State<BytecodeToImage> {
         counter++;
       }
     }
+    // String temp=Image.asset('assets/My_Gallery.jpg').toString as String;
     print(_bytecode.toString());
     print(_bytecode.length);
     print(_bytecode.lengthInBytes);
