@@ -767,7 +767,7 @@ class _TagInfoState extends State<_TagInfo> {
                 Row(
                   children: [
                     Text(
-                      'Reg_No - ',
+                      'Registration Number - ',
                       style: TextStyle(fontSize: 25),
                     ),
                     Text(
@@ -890,39 +890,50 @@ class _TagInfoState extends State<_TagInfo> {
     print(res);
 
     Future<int> rrrr = checkBothChipNDbId(widget.tag, uniqueRegNo);
-    return Column(
-      children: [
-        SizedBox(height: 50,),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber,
-                // primary: Color(0xFF00E5FF),
-                fixedSize: Size(250, 250)),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ReadRecordDetail(
-                        ndefWidgets,
-                        maildata,
-                        fname,
-                        lname,
-                        phonenum,
-                        rrrr,
-                        resultedvalue,
-                        uniqueRegNo,
-                        allSubjects,
-                        allSubjectCode,
-                        allSubjectMarks,
-                        allSubjectGrade,
-                        personalDetails),
-                  ));
-            },
-            child: Text(
-              'Details',
-              style: TextStyle(fontSize: 50,color: Colors.black),
-            ))
-      ],
+    return Container(
+      decoration: BoxDecoration(
+                    borderRadius:BorderRadius.only(
+       topLeft:Radius.circular(500),
+       topRight :Radius.circular(500),
+       bottomLeft :Radius.circular(500),
+       bottomRight :Radius.circular(500),
+
+      )),
+      child: Column(
+        
+        children: [
+          SizedBox(height: 50,),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                  // primary: Color(0xFF00E5FF),
+                  fixedSize: Size(250, 250)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReadRecordDetail(
+                          ndefWidgets,
+                          maildata,
+                          fname,
+                          lname,
+                          phonenum,
+                          rrrr,
+                          resultedvalue,
+                          uniqueRegNo,
+                          allSubjects,
+                          allSubjectCode,
+                          allSubjectMarks,
+                          allSubjectGrade,
+                          personalDetails),
+                    ));
+              },
+              child: Text(
+                'Details',
+                style: TextStyle(fontSize: 50,color: Colors.black),
+              ))
+        ],
+      ),
     );
 
     //   return Column(

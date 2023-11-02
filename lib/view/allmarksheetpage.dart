@@ -34,7 +34,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
           children: [
                                         // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
-            Text('    Marksheet'),
+            Text('    Transcripts'),
           ],
         ),
       ),),
@@ -116,172 +116,188 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
               child: Image.asset('assets/xyz.jpg'),
             ),
             SizedBox(height: 30,),
-            Text('Result'),
+            Text('Result',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             SizedBox(height: 30,),
-              Text('Sem 1'),
+              Text('Semester 1',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
+              SizedBox(height: 30,),
               (ticker++<count)?
               
-                Table(
-                  
-            border: TableBorder.all(),
-            children: [
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Subject'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Code'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Marks'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Grade'))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
-      
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
-              ]),
-            ],
-          ):Text('No result'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Table(
+                    
+                            border: TableBorder.all(),
+                            children: [
+                              
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400, child: Center( child: Text('Subject',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Code',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Marks',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Grade',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
+                      
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
+                              ]),
+                            ],
+                          ),
+                ):Text('No result'),
           SizedBox(height: 30,),
-              Text('Sem 2'),
+              Text('Semester 2',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
               SizedBox(height: 30,),
           (ticker++<count)?
               
-                Table(
-                  
-            border: TableBorder.all(),
-            children: [
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Subject'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Code'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Marks'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Grade'))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
-      
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
-              ]),
-            ],
-          ):Text('No result'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Table(
+                    
+                            border: TableBorder.all(),
+                            children: [
+                              TableRow(children: [
+TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400, child: Center( child: Text('Subject',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Code',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Marks',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Grade',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
+                      
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
+                              ]),
+                            ],
+                          ),
+                ):Text('No result'),
           SizedBox(height: 30,),
-              Text('Sem 3'),
+              Text('Semester 3',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18)),
+              SizedBox(height: 30,),
               (ticker++<count)?
               
-                Table(
-                  
-            border: TableBorder.all(),
-            children: [
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Subject'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Code'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Marks'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Grade'))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
-      
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
-              ]),
-            ],
-          ):Text('No result'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Table(
+                    
+                            border: TableBorder.all(),
+                            children: [
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400, child: Center( child: Text('Subject',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Code',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Marks',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Grade',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
+                      
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
+                              ]),
+                            ],
+                          ),
+                ):Text('No result'),
           SizedBox(height: 30,),
-              Text('Sem 4'),
+              Text('Semester 4',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+              SizedBox(height: 30,),
               (ticker++<count)?
               
-                Table(
-                  
-            border: TableBorder.all(),
-            children: [
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Subject'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Code'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Marks'))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text('Grade'))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
-      
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
-              ]),
-              TableRow(children: [
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
-                TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
-              ]),
-            ],
-          ):Text('No result'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Table(
+                    
+                            border: TableBorder.all(),
+                            children: [
+                              TableRow(children: [
+TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400, child: Center( child: Text('Subject',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Code',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Marks',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Container(color: Colors.grey.shade400,child: Center(child: Text('Grade',style: TextStyle(fontWeight: FontWeight.bold),)))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][0]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][0]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][1]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][1]))),
+                      
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][2]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][2]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][2]))),
+                              ]),
+                              TableRow(children: [
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjects[ticker][3]))),    
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectCode[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectMarks[ticker][3]))),
+                  TableCell(verticalAlignment: TableCellVerticalAlignment.middle,child: Center(child: Text(widget.allSubjectGrade[ticker][3]))),
+                              ]),
+                            ],
+                          ),
+                ):Text('No result'),
           // (ticker++<count)?
               
           //       Table(

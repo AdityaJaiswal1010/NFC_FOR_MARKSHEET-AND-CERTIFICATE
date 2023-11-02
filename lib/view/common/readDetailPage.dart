@@ -81,66 +81,85 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
       
             
       
-            ElevatedButton(
+            Container(
+              width: 500,
+            height: 300,
+              child: ElevatedButton(
                   
-            child: Text('View Detail Record',style: TextStyle(fontSize: 50),),
-            style: ElevatedButton.styleFrom(
-                  // primary: Color(0xFF00E5FF),
-                  fixedSize: Size(250, 250)
+              child: Text('Student\'s Personal Details',style: TextStyle(fontSize: 50,color: Colors.black,),textAlign: TextAlign.center,),
+              style: ElevatedButton.styleFrom(
+                    // primary: Color(0xFF00E5FF),
+                    backgroundColor: Colors.amber,
+                    fixedSize: Size(250, 250)
+                    
+              ),
+              onPressed: () {
+                List<String> detailInfo=[];
+                String tempInfo='';
+                int count=0;
+                for(int i=0;i<widget.personalDetails.length;i++)
+                {
+                  if(widget.personalDetails[i]==',')
+                  {
+                    detailInfo.add(tempInfo);
+                    
+                    tempInfo='';
+                    continue;
+                  }
                   
-            ),
-            onPressed: () {
-              List<String> detailInfo=[];
-              String tempInfo='';
-              int count=0;
-              for(int i=0;i<widget.personalDetails.length;i++)
-              {
-                if(widget.personalDetails[i]==',')
+                  tempInfo+=widget.personalDetails[i];
+                  
+                }
+                if(tempInfo!='')
                 {
                   detailInfo.add(tempInfo);
                   
-                  tempInfo='';
-                  continue;
                 }
+            
                 
-                tempInfo+=widget.personalDetails[i];
-                
-              }
-              if(tempInfo!='')
-              {
-                detailInfo.add(tempInfo);
-                
-              }
-
-              
-                  Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => DisplayNfcData(detailInfo,widget.uniqueRegNo)));
-                                //splash page 5 sec link
-                                // viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
-                  
-                  
-                  
-                  
-                  
-                  
-                  // linkToPage(maildata, fname, lname, phonenum);
-            },
-          ),
-          SizedBox(height: 50,),
-          ElevatedButton(
-            child: Text('View All Marksheets',style: TextStyle(fontSize: 50),),
-            style: ElevatedButton.styleFrom(
-                  // primary: Color(0xFF00E5FF),
-                  fixedSize: Size(250, 250)
+                    Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => DisplayNfcData(detailInfo,widget.uniqueRegNo)));
+                                  //splash page 5 sec link
+                                  // viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
+                    
+                    
+                    
+                    
+                    
+                    
+                    // linkToPage(maildata, fname, lname, phonenum);
+              },
+                      ),
             ),
-            onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
-                                
-                                // link to 5 sec splash
-                                // ViewAllMarksheet(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
-                  // linkToPage(maildata, fname, lname, phonenum);
-            },
+          SizedBox(height: 50,),
+          Container(
+            width: 500,
+            height: 300,
+            child: ElevatedButton(
+              
+              child: Column(
+                
+                children: [
+                  SizedBox(height: 100,),
+                  Text('Transcripts',style: TextStyle(fontSize: 50,color: Colors.black),textAlign: TextAlign.center,),
+                                  Text('(All Semesters)',style: TextStyle(fontSize: 40,color: Colors.black),textAlign: TextAlign.center,),
+          
+                ],
+              ),
+              style: ElevatedButton.styleFrom(
+                    // primary: Color(0xFF00E5FF),
+                    backgroundColor: Colors.amber,
+                    fixedSize: Size(250, 250)
+              ),
+              onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
+                                  
+                                  // link to 5 sec splash
+                                  // ViewAllMarksheet(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
+                    // linkToPage(maildata, fname, lname, phonenum);
+              },
+            ),
           ),
         ],
           )

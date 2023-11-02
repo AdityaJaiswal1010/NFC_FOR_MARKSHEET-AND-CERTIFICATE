@@ -78,10 +78,10 @@ import 'package:firebase_core/firebase_core.dart';
               title:  Center(child: Row(
                 children: [
                                       // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
-
                   Text('    Verify'),
                 ],
-              )),
+              )
+             ),
             ),
             body: Scrollbar(
                 child: SingleChildScrollView(
@@ -115,13 +115,15 @@ import 'package:firebase_core/firebase_core.dart';
                           setState(() {
                             _result = '1: $result1\n2: $result2\n';
                           });
-                        } else if (tag.type == NFCTagType.iso18092) {
+                        }
+                        else if (tag.type == NFCTagType.iso18092) {
                           String result1 =
                               await FlutterNfcKit.transceive("060080080100");
                           setState(() {
                             _result = '1: $result1\n';
                           });
-                        } else if (tag.type == NFCTagType.mifare_ultralight ||
+                        } 
+                        else if (tag.type == NFCTagType.mifare_ultralight ||
                             tag.type == NFCTagType.mifare_classic ||
                             tag.type == NFCTagType.mifare_plus || 
                             tag.type == NFCTagType.mifare_desfire||
@@ -153,11 +155,13 @@ import 'package:firebase_core/firebase_core.dart';
                       FirebaseFirestore.instance.collection('tagmap').doc('jYBWvFrpb1QjIwBHhql7').update({
                         'Mapping':{regnoController.text.toString():_tag!.id}
                       });
+
                       // map chip id to reg no
                       FirebaseFirestore.instance.collection('tagid').doc('XV3TXph2MLT0cBzuWNr5').update({
                         'Mappingidtoid':{_tag!.id:regnoController.text.toString()}
                       });
                     },
+                    
                     child: Text('Click here to verify your tag'),
                     
                   ),

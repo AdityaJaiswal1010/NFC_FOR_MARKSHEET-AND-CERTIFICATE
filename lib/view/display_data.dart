@@ -28,81 +28,86 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            
-            children: [
-              Row(
-                children: [
-                  Text(' Reg_No - ',style: TextStyle(fontSize: 25),),
+           Image.asset('assets/xyz.jpg'),
+           SizedBox(height: 30,),
+          Container(
+            color: Colors.amber,
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              
+              children: [
+                Row(
+                  children: [
+                    Text(' Registration Number - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                    
+                    Text(widget.uniqueRegNo,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                    // Text(widget.allMarksheet[0].toString()),
+          
+                
+                // ElevatedButton(onPressed:() {
                   
-                  Text(widget.uniqueRegNo,style: TextStyle(fontSize: 25),),
-                  // Text(widget.allMarksheet[0].toString()),
-
-              
-              // ElevatedButton(onPressed:() {
+                // }, child: Text('Sem 1'))
+                  ],
+                  
+                ),
+                SizedBox(height: 20,),
+                Row(children: [
+                  Text(' Name - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                Text(widget.detailInfo[0].toString(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+          
                 
-              // }, child: Text('Sem 1'))
-                ],
+                ],),
+                SizedBox(height: 20,),
                 
-              ),
-              SizedBox(height: 20,),
-              Row(children: [
-                Text(' Name - ',style: TextStyle(fontSize: 25),),
-              Text(widget.detailInfo[0].toString(),style: TextStyle(fontSize: 25),),
-
-              
-              ],),
-              SizedBox(height: 20,),
-              
-              Row(children: [
-               
-              Text(' Father Name - ',style: TextStyle(fontSize: 25),),
-              Text(widget.detailInfo[1].toString(),style: TextStyle(fontSize: 25),),
-              
-              ],),
-              SizedBox(height: 20,),
-              Row(children: [
+                Row(children: [
+                 
+                Text(' Father Name - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                Text(widget.detailInfo[1].toString(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                 
-              Text(' Mother Name - ',style: TextStyle(fontSize: 25),),
-              Text(widget.detailInfo[2].toString(),style: TextStyle(fontSize: 25),),
-              
-              ],),
-              SizedBox(height: 20,),
-              Row(children: [
+                ],),
+                SizedBox(height: 20,),
+                Row(children: [
+                  
+                Text(' Mother Name - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                Text(widget.detailInfo[2].toString(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                 
-              Text(' University - ',style: TextStyle(fontSize: 25),),
-              Text(widget.detailInfo[3].toString(),style: TextStyle(fontSize: 25),),
-              
-              ],),
-              SizedBox(height: 20,),
-              Row(children: [
+                ],),
+                SizedBox(height: 20,),
+                Row(children: [
+                  
+                Text(' University - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                Text(widget.detailInfo[3].toString(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                 
-              Text(' Program - ',style: TextStyle(fontSize: 25),),
-              Text(widget.detailInfo[4].toString(),style: TextStyle(fontSize: 25),),
-            
-              ],),
+                ],),
+                SizedBox(height: 20,),
+                Row(children: [
+                  
+                Text(' Program - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                Text(widget.detailInfo[4].toString(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
               
-              SizedBox(height: 20,),
-              Row(children: [
-               
-              Text(' Degree - ',style: TextStyle(fontSize: 25),),
-              Text(widget.detailInfo[5].toString(),style: TextStyle(fontSize: 25),),
-              ],),
-              SizedBox(height: 20,),
-              // Row(children: [
-           
-              // Text('Mothers Name- ',style: TextStyle(fontSize: 25),),
-              // Text(widget.m['mother_name'],style: TextStyle(fontSize: 25),),
-              
-              // ],),
-              // SizedBox(height: 20,),
-               ElevatedButton(onPressed: (){
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                          }, child: Text('Back'))
-            ],
+                ],),
+                
+                SizedBox(height: 20,),
+                Row(children: [
+                 
+                Text(' Degree - ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                Text(widget.detailInfo[5].toString(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                ],),
+                SizedBox(height: 20,),
+                // Row(children: [
+             
+                // Text('Mothers Name- ',style: TextStyle(fontSize: 25),),
+                // Text(widget.m['mother_name'],style: TextStyle(fontSize: 25),),
+                
+                // ],),
+                // SizedBox(height: 20,),
+                 ElevatedButton(onPressed: (){
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }, child: Text('Back'))
+              ],
+            ),
           ),
           SizedBox(height: 12),
         //  Column(
