@@ -168,7 +168,7 @@ class EditExternalPage extends StatelessWidget {
       appBar: AppBar(
         title: Center(child: Row(
           children: [
-                                                  Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                                                  // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
             Text('    Edit Info'),
           ],

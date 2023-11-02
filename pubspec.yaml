@@ -46,8 +46,8 @@ dependencies:
   # flutter_pdf_viewer:
 
 flutter_native_splash:
-  image: "assets/tinkertech.jpg"
-  color: "#f9f9f9"
+  # image: "assets/tinkertech.jpg"
+  # color: "#000000"
   text: "Welcome to Smart Docs"
   
   # cloud_firestore_platform_interface:

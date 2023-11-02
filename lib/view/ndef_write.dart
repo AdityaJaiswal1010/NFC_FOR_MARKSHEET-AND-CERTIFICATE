@@ -62,9 +62,9 @@ class NdefWritePage extends StatelessWidget {
       appBar: AppBar(
         title: Center(child: Row(
           children: [
-                    Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                    // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
-            Text('    Ndef - Write'),
+            Text('    Write Data to Smart Doc'),
           ],
         )),
       ),
@@ -73,16 +73,22 @@ class NdefWritePage extends StatelessWidget {
         builder: (context, ss) => ListView(
           padding: EdgeInsets.all(2),
           children: [
-            ElevatedButton(onPressed:(){
-              Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Sensors(),
-                        ));
-              // startSession(
-              //     context: context,
-              //     handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
-              //   );
-            }, 
-            child: Text('Verify Tag')),
+            // ElevatedButton(onPressed:(){
+            //   Navigator.push(context, MaterialPageRoute(
+            //               builder: (context) => Sensors(),
+            //             ));
+            //   // startSession(
+            //   //     context: context,
+            //   //     handleTag: Provider.of<TagReadModel>(context, listen: false).handleTag,
+            //   //   );
+            // }, 
+            // child: Text('Verify Tag')),
+
+
+
+
+
+
     //         Consumer<TagReadModel>(builder: (context, model, _){
     //         final tag = model.tag;
     //         final additionalData = model.additionalData;
@@ -161,6 +167,7 @@ class NdefWritePage extends StatelessWidget {
                   }
                 },
               ),
+              
               FormRow(
                 title: Text('Start Session', style: TextStyle(color: ss.data?.isNotEmpty != true
                   ? Theme.of(context).disabledColor

@@ -33,7 +33,7 @@ class _ViewAllMarksheetState extends State<ViewAllMarksheet> {
         title: Center(
             child: Row(
           children: [
-            Image.asset('assets/tinkertech.jpg', fit: BoxFit.cover, height: 32),
+            // Image.asset('assets/tinkertech.jpg', fit: BoxFit.cover, height: 32),
             Text('Marksheets'),
           ],
         )),
@@ -52,13 +52,13 @@ class _ViewAllMarksheetState extends State<ViewAllMarksheet> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/tinkertech.jpg",
-                gaplessPlayback: true,
-                fit: BoxFit.fill,
-                height: 300,
-                width: 300,
-              ),
+              // Image.asset(
+              //   "assets/tinkertech.jpg",
+              //   gaplessPlayback: true,
+              //   fit: BoxFit.fill,
+              //   height: 300,
+              //   width: 300,
+              // ),
               // Icon(FontAwesomeIcons.tasks),
               SizedBox(
                 width: 20,

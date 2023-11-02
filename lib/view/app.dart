@@ -596,7 +596,7 @@ class _AppState extends State<App> {
       home: _Home(),
       theme: ThemeData(
         primaryColor: Color(0xFF4D8CFE),
-        hintColor: Color(0xFFAA00FF),
+        hintColor: Colors.black,
         scaffoldBackgroundColor: Color(0xFFEAF1FF),
         appBarTheme: AppBarTheme(
           color: Color(0xFF4D8CFE),
@@ -624,11 +624,11 @@ class _HomeState extends State<_Home> {
         title: Center(
           child: Row(
             children: [
-              Image.asset(
-                'assets/tinkertech.jpg',
-                fit: BoxFit.cover,
-                height: 32,
-              ),
+              // Image.asset(
+              //   'assets/tinkertech.jpg',
+              //   fit: BoxFit.cover,
+              //   height: 32,
+              // ),
               Text(
                 'Smart Docs',
                 textAlign: TextAlign.center,
@@ -707,6 +707,7 @@ class _HomeState extends State<_Home> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter Admin Id',
+                        
                       ),
                     ),
                     SizedBox(height: 20),

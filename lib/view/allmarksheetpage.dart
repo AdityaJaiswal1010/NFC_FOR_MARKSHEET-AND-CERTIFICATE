@@ -32,7 +32,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
       appBar: AppBar(title: Center(
         child: Row(
           children: [
-                                        Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                                        // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
             Text('    Marksheet'),
           ],
@@ -390,7 +390,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
                               }, child: Text('Back')),
                                Container(
               padding: EdgeInsets.all(16.0), // Adjust padding as needed
-              child: Image.asset('assets/tinkertech.jpg'),
+              // child: Image.asset('assets/tinkertech.jpg'),
             ),
               
             ],

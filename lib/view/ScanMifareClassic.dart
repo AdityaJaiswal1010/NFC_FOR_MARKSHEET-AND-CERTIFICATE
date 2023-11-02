@@ -84,7 +84,7 @@ class _ScanMifareClassicState extends State<ScanMifareClassic> with SingleTicker
               
               title:  Center(child: Row(
                 children: [
-                                      Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                                      // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
                   Text('    Verify'),
                 ],

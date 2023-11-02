@@ -18,7 +18,7 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
     return Scaffold(
       appBar: AppBar(title:Center(child: Row(
         children: [
-                                      Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                                      // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
           Text('Personal Detail'),
         ],
@@ -35,7 +35,7 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
             children: [
               Row(
                 children: [
-                  Text('Reg_No - ',style: TextStyle(fontSize: 25),),
+                  Text(' Reg_No - ',style: TextStyle(fontSize: 25),),
                   
                   Text(widget.uniqueRegNo,style: TextStyle(fontSize: 25),),
                   // Text(widget.allMarksheet[0].toString()),
@@ -49,7 +49,7 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               ),
               SizedBox(height: 20,),
               Row(children: [
-                Text('Name',style: TextStyle(fontSize: 25),),
+                Text(' Name - ',style: TextStyle(fontSize: 25),),
               Text(widget.detailInfo[0].toString(),style: TextStyle(fontSize: 25),),
 
               
@@ -58,28 +58,28 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               
               Row(children: [
                
-              Text('Father Name - ',style: TextStyle(fontSize: 25),),
+              Text(' Father Name - ',style: TextStyle(fontSize: 25),),
               Text(widget.detailInfo[1].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
-              Text('Mother Name',style: TextStyle(fontSize: 25),),
+              Text(' Mother Name - ',style: TextStyle(fontSize: 25),),
               Text(widget.detailInfo[2].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
-              Text('Program- ',style: TextStyle(fontSize: 25),),
+              Text(' University - ',style: TextStyle(fontSize: 25),),
               Text(widget.detailInfo[3].toString(),style: TextStyle(fontSize: 25),),
               
               ],),
               SizedBox(height: 20,),
               Row(children: [
                 
-              Text('degree',style: TextStyle(fontSize: 25),),
+              Text(' Program - ',style: TextStyle(fontSize: 25),),
               Text(widget.detailInfo[4].toString(),style: TextStyle(fontSize: 25),),
             
               ],),
@@ -87,7 +87,7 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
               SizedBox(height: 20,),
               Row(children: [
                
-              Text('university',style: TextStyle(fontSize: 25),),
+              Text(' Degree - ',style: TextStyle(fontSize: 25),),
               Text(widget.detailInfo[5].toString(),style: TextStyle(fontSize: 25),),
               ],),
               SizedBox(height: 20,),

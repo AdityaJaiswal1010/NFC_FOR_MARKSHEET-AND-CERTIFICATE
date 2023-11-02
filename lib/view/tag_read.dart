@@ -16,6 +16,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:contacts_service/contacts_service.dart";
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:nfc_manager/platform_tags.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -66,7 +67,7 @@ class TagReadPage extends StatelessWidget {
         title: Center(
             child: Row(
           children: [
-            Image.asset('assets/tinkertech.jpg', fit: BoxFit.cover, height: 32),
+            // Image.asset('assets/tinkertech.jpg', fit: BoxFit.cover, height: 32),
             Text('    Scan Smart Doc'),
           ],
         )),
@@ -76,16 +77,69 @@ class TagReadPage extends StatelessWidget {
         children: [
           FormSection(
             children: [
-              FormRow(
-                title: Text('Start Session',
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary)),
-                onTap: () => startSession(
+              Center(
+                child: Container(
+                  
+                  height: 200,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    
+                    borderRadius: BorderRadius.circular(30),
+                    // color: Theme.of(context).hintColor,
+                    color: Colors.amber,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        offset: Offset(5, 5),
+                        color: Colors.grey.withOpacity(0.5),
+                      ),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    
+                    onPressed: () {
+                      startSession(
                   context: context,
                   handleTag: Provider.of<TagReadModel>(context, listen: false)
                       .handleTag,
+                );
+                style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.amber,
+  );
+                    },
+                    child: Column(
+                      
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.nfcSymbol,
+                          size: 50,
+                          color: Colors.black,
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Start Session',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
+              // FormRow(
+              //   title: Text('Start Session',
+              //       style: TextStyle(
+              //           color: Theme.of(context).colorScheme.primary)),
+              //   onTap: () => startSession(
+              //     context: context,
+              //     handleTag: Provider.of<TagReadModel>(context, listen: false)
+              //         .handleTag,
+              //   ),
+              // ),
             ],
           ),
           // consider: Selector<Tuple<{TAG}, {ADDITIONAL_DATA}>>
@@ -838,8 +892,10 @@ class _TagInfoState extends State<_TagInfo> {
     Future<int> rrrr = checkBothChipNDbId(widget.tag, uniqueRegNo);
     return Column(
       children: [
+        SizedBox(height: 50,),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber,
                 // primary: Color(0xFF00E5FF),
                 fixedSize: Size(250, 250)),
             onPressed: () {
@@ -864,7 +920,7 @@ class _TagInfoState extends State<_TagInfo> {
             },
             child: Text(
               'Details',
-              style: TextStyle(fontSize: 50),
+              style: TextStyle(fontSize: 50,color: Colors.black),
             ))
       ],
     );

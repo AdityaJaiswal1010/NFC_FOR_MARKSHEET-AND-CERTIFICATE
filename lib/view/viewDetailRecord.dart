@@ -34,7 +34,7 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
         title: Center(
           child: Row(
             children: [
-                            Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                            // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
               Text('  Details' ,textAlign: TextAlign.center,),
             ],
           ),
@@ -54,12 +54,12 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/tinkertech.jpg", 
-                        gaplessPlayback: true, 
-                        fit: BoxFit.fill,
-                        height: 300,
-                        width: 300,
-                        ),
+              // Image.asset("assets/tinkertech.jpg", 
+              //           gaplessPlayback: true, 
+              //           fit: BoxFit.fill,
+              //           height: 300,
+              //           width: 300,
+              //           ),
               // Icon(FontAwesomeIcons.tasks),
               SizedBox(
                 width: 20,

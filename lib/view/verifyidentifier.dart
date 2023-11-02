@@ -77,7 +77,7 @@ import 'package:firebase_core/firebase_core.dart';
               
               title:  Center(child: Row(
                 children: [
-                                      Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
+                                      // Image.asset('assets/tinkertech.jpg',fit: BoxFit.cover, height: 32),
 
                   Text('    Verify'),
                 ],
