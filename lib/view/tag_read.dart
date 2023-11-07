@@ -694,6 +694,9 @@ class _TagInfoState extends State<_TagInfo> {
           print(allSubjectMarks);
           print(personalDetails);
           print(uniqueRegNo);
+          allSubjects[0][0]='ENGINEERING MATHEMATICS-I';
+          print('updated value');
+          print(allSubjects);
           int j = 0;
           for (j = 0; j < namedata.length; j++) {
             if (namedata[j] == ' ') break;
