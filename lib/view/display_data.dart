@@ -30,8 +30,8 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Image.asset('assets/xyz.jpg'),
-             SizedBox(height: 30,),
+             Image.asset('assets/xyz.png'),
+            //  SizedBox(height: 30,),
             Container(
               color: Colors.amber,
               child: ListView(
@@ -41,9 +41,9 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
                 children: [
                   Image.asset(
                   'assets/photocopy.jpg',
-                  width: 100,
+                  width: 550,
                   // fit: BoxFit.cover,
-                  height: 100,
+                  height: 200,
                 ),
                 SizedBox(height: 30,),
                   Row(
