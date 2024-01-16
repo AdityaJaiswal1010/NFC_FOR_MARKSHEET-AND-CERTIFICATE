@@ -42,6 +42,8 @@ dependencies:
   flutter_image_compress: 
   encrypt:
   encryptor: ^0.0.1
+  image_picker: 
+  file_picker: 
   # flutter_plugin_pdf_viewer: 
   # flutter_pdf_viewer:
 
