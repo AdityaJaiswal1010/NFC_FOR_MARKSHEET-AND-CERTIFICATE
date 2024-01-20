@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:encryptor/encryptor.dart';
@@ -52,6 +52,15 @@ class EditExternalModel with ChangeNotifier {
   Map<String,dynamic> um=userresponse.data()!;
   int regNo=um['reg_no'];
   int seatNo=um['seat_no'];
+  String image=um['image'];
+  final resp = await http.get(Uri.parse(image.toString()));
+  final bytes = resp.bodyBytes;
+  Uint8List? imageByte = Uint8List.fromList(bytes);
+  print('Actual Image byte size ${imageByte.length}');
+  print(imageByte);
+  String base64String = base64Encode(imageByte);
+  print('String ${base64String.length}');
+  print(base64String);
   String candidateDetails=um['candidate_name']+','+um['father_name']+','+um['mother_name']+','+um['university']+','+um['degree']+','+um['program'];
   String degree=um['degree'];
   String sub_name='';
@@ -97,6 +106,7 @@ class EditExternalModel with ChangeNotifier {
   // String course_3_credit=childDetail['credit_grade_point_3'].toString();
   // String course_4_credit=childDetail['credit_grade_point_4'].toString();
   }
+
   print(actualStringToBeStored);
   // final String encryptionKey = 'my 32 length key................';
   // final key = encrypt.Key.fromUtf8(encryptionKey);
@@ -118,7 +128,7 @@ class EditExternalModel with ChangeNotifier {
   print(actualStringToBeStored.substring(0,actualStringToBeStored.length-1));
     var key = 'Key to encrypt and decrpyt the plain text';
   var encrypted = Encryptor.encrypt(key, actualStringToBeStored.substring(0,actualStringToBeStored.length-1));
-  actualStringToBeStored='['+encrypted.toString().trim()+']';
+  actualStringToBeStored='['+encrypted.toString().trim()+']{'+base64String+'}';
   print('after encryption');
   print(actualStringToBeStored);
   // String actualData=course_1_name+','+course_2_name+','+course_1_code+','+course_2_code+','+course_1_grade+','+course_2_grade+','+course_1_marks+','+course_2_marks+','+course_1_max_marks+','+course_2_max_marks+','+course_1_credit+','+course_2_credit;

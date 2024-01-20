@@ -36,6 +36,8 @@ class _BytecodeToImageState extends State<BytecodeToImage> {
       Uint8List bytes = await file.readAsBytes();
 
       print("Original image size: ${bytes.length} bytes\n");
+      String base64String = base64Encode(bytes);
+      print("String ${base64String.length}");
       print(bytes);
       setState(() {
         _imageBytes = bytes;
