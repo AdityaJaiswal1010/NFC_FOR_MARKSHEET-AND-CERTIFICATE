@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:encryptor/encryptor.dart';
@@ -179,6 +180,7 @@ class _TagInfoState extends State<_TagInfo> {
     List<List<String>> allSubjectCode = [];
     List<List<String>> allSubjectGrade = [];
     List<List<String>> allSubjectMarks = [];
+    String imageData='';
     String uniqueRegNo = '';
     String personalDetails = '';
     int indexToMarksheetDetails = 0;
@@ -195,345 +197,26 @@ class _TagInfoState extends State<_TagInfo> {
     String comparefromchip = '';
     String comparefromdb = '';
     Object? tech;
-
-    // if (Platform.isAndroid) {
-    //   tagWidgets.add(FormRow(
-    //     title: Text('Identifier'),
-    //     subtitle: Text('${(
-    //       NfcA.from(tag)?.identifier ??
-    //       NfcB.from(tag)?.identifier ??
-    //       NfcF.from(tag)?.identifier ??
-    //       NfcV.from(tag)?.identifier ??
-    //       Uint8List(0)
-    //     ).toHexString()}'),
-    //   ));
-    //   tagWidgets.add(FormRow(
-    //     title: Text('Tech List'),
-    //     subtitle: Text(_getTechListString(tag)),
-    //   ));
-
-    //   tech = NfcA.from(tag);
-    //   if (tech is NfcA) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcA - Atqa'),
-    //       subtitle: Text('${tech.atqa.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcA - Sak'),
-    //       subtitle: Text('${tech.sak}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcA - Max Transceive Length'),
-    //       subtitle: Text('${tech.maxTransceiveLength}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcA - Timeout'),
-    //       subtitle: Text('${tech.timeout}'),
-    //     ));
-
-    //     tech = MifareClassic.from(tag);
-    //     if (tech is MifareClassic) {
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareClassic - Type'),
-    //         subtitle: Text(_getMiFareClassicTypeString(tech.type)),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareClassic - Size'),
-    //         subtitle: Text('${tech.size}'),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareClassic - Sector Count'),
-    //         subtitle: Text('${tech.sectorCount}'),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareClassic - Block Count'),
-    //         subtitle: Text('${tech.blockCount}'),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareClassic - Max Transceive Length'),
-    //         subtitle: Text('${tech.maxTransceiveLength}'),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareClassic - Timeout'),
-    //         subtitle: Text('${tech.timeout}'),
-    //       ));
-    //     }
-
-    //     tech = MifareUltralight.from(tag);
-    //     if (tech is MifareUltralight) {
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareUltralight - Type'),
-    //         subtitle: Text(_getMiFareUltralightTypeString(tech.type)),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareUltralight - Max Transceive Length'),
-    //         subtitle: Text('${tech.maxTransceiveLength}'),
-    //       ));
-    //       tagWidgets.add(FormRow(
-    //         title: Text('MifareUltralight - Timeout'),
-    //         subtitle: Text('${tech.timeout}'),
-    //       ));
-    //     }
-    //   }
-
-    //   tech = NfcB.from(tag);
-    //   if (tech is NfcB) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcB - Application Data'),
-    //       subtitle: Text('${tech.applicationData.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcB - Protocol Info'),
-    //       subtitle: Text('${tech.protocolInfo.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcB - Max Transceive Length'),
-    //       subtitle: Text('${tech.maxTransceiveLength}'),
-    //     ));
-    //   }
-
-    //   tech = NfcF.from(tag);
-    //   if (tech is NfcF) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcF - System Code'),
-    //       subtitle: Text('${tech.systemCode.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcF - Manufacturer'),
-    //       subtitle: Text('${tech.manufacturer.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcF - Max Transceive Length'),
-    //       subtitle: Text('${tech.maxTransceiveLength}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcF - Timeout'),
-    //       subtitle: Text('${tech.timeout}'),
-    //     ));
-    //   }
-
-    //   tech = NfcV.from(tag);
-    //   if (tech is NfcV) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcV - DsfId'),
-    //       subtitle: Text('${tech.dsfId}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcV - Response Flags'),
-    //       subtitle: Text('${tech.responseFlags}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('NfcV - Max Transceive Length'),
-    //       subtitle: Text('${tech.maxTransceiveLength}'),
-    //     ));
-    //   }
-
-    //   tech = IsoDep.from(tag);
-    //   if (tech is IsoDep) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IsoDep - Hi Layer Response'),
-    //       subtitle: Text('${tech.hiLayerResponse?.toHexString() ?? '-'}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IsoDep - Historical Bytes'),
-    //       subtitle: Text('${tech.historicalBytes?.toHexString() ?? '-'}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IsoDep - Extended Length Apdu Supported'),
-    //       subtitle: Text('${tech.isExtendedLengthApduSupported}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IsoDep - Max Transceive Length'),
-    //       subtitle: Text('${tech.maxTransceiveLength}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IsoDep - Timeout'),
-    //       subtitle: Text('${tech.timeout}'),
-    //     ));
-    //   }
-    // }
-
-    // if (Platform.isIOS) {
-    //   tech = FeliCa.from(tag);
-    //   if (tech is FeliCa) {
-    //     final manufacturerParameter = additionalData['manufacturerParameter'] as Uint8List?;
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Type'),
-    //       subtitle: Text('FeliCa'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Current IDm'),
-    //       subtitle: Text('${tech.currentIDm.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Current System Code'),
-    //       subtitle: Text('${tech.currentSystemCode.toHexString()}'),
-    //     ));
-    //     if (manufacturerParameter != null)
-    //       tagWidgets.add(FormRow(
-    //         title: Text('Manufacturer Parameter'),
-    //         subtitle: Text('${manufacturerParameter.toHexString()}'),
-    //       ));
-    //   }
-
-    //   tech = Iso15693.from(tag);
-    //   if (tech is Iso15693) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Type'),
-    //       subtitle: Text('ISO15693'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Identifier'),
-    //       subtitle: Text('${tech.identifier.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IC Serial Number'),
-    //       subtitle: Text('${tech.icSerialNumber.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('IC Manufacturer Code'),
-    //       subtitle: Text('${tech.icManufacturerCode}'),
-    //     ));
-    //   }
-
-    //   tech = Iso7816.from(tag);
-    //   if (tech is Iso7816) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Type'),
-    //       subtitle: Text('ISO7816'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Identifier'),
-    //       subtitle: Text('${tech.identifier.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Initial Selected AID'),
-    //       subtitle: Text('${tech.initialSelectedAID}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Application Data'),
-    //       subtitle: Text('${tech.applicationData?.toHexString() ?? '-'}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Historical Bytes'),
-    //       subtitle: Text('${tech.historicalBytes?.toHexString() ?? '-'}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Proprietary Application Data Coding'),
-    //       subtitle: Text('${tech.proprietaryApplicationDataCoding}'),
-    //     ));
-    //   }
-
-    //   tech = MiFare.from(tag);
-    //   if (tech is MiFare) {
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Type'),
-    //       subtitle: Text('MiFare ' + _getMiFareFamilyString(tech.mifareFamily)),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Identifier'),
-    //       subtitle: Text('${tech.identifier.toHexString()}'),
-    //     ));
-    //     tagWidgets.add(FormRow(
-    //       title: Text('Historical Bytes'),
-    //       subtitle: Text('${tech.historicalBytes?.toHexString() ?? '-'}'),
-    //     ));
-    //   }
-    // }
+    late Uint8List byteData = Uint8List(0);
+    
 
     tech = Ndef.from(widget.tag);
     if (tech is Ndef) {
       final cachedMessage = tech.cachedMessage;
       final canMakeReadOnly = tech.additionalData['canMakeReadOnly'] as bool?;
       final type = tech.additionalData['type'] as String?;
-      // if (type != null)
-      //   ndefWidgets.add(FormRow(
-      //     title: Text('Type'),
-      //     subtitle: Text(_getNdefType(type)),
-      //   ));
-      // ndefWidgets.add(FormRow(
-      //   title: Text('Size'),
-      //   subtitle: Text('${cachedMessage?.byteLength ?? 0} / ${tech.maxSize} bytes'),
-      // ));
-      // ndefWidgets.add(FormRow(
-      //   title: Text('Writable'),
-      //   subtitle: Text('${tech.isWritable}'),
-      // ));
-      // if (canMakeReadOnly != null)
-      //   ndefWidgets.add(FormRow(
-      //     title: Text('Can Make Read Only'),
-      //     subtitle: Text('$canMakeReadOnly'),
-      //   ));
+      
 
       if (cachedMessage != null)
         Iterable.generate(cachedMessage.records.length).forEach((i) async {
           final record = cachedMessage.records[i];
           final info = NdefRecordInfo.fromNdef(record);
-          // ndefWidgets.add(FormRow(
-          //   title: Text('#$i ${info.title}'),
-          //   subtitle: Text('${info.subtitle}'),
-          //   trailing: Icon(Icons.chevron_right),
-          //   onTap: () => Navigator.push(context, MaterialPageRoute(
-          //     builder: (context) => NdefRecordPage(i, record),
-
-          //   )),
-
-          // ));
-
-          //   var dbMap=await FirebaseFirestore.instance.collection('tagmap').doc('jYBWvFrpb1QjIwBHhql7').get();
-          //   Map<String,dynamic> m=dbMap.data()!;
-          //   Map<dynamic,dynamic> alldataofmap=m['Mapping'];
-
-          //   String id='${(
-          //   NfcA.from(widget.tag)?.identifier ??
-          //   NfcB.from(widget.tag)?.identifier ??
-          //   NfcF.from(widget.tag)?.identifier ??
-          //   NfcV.from(widget.tag)?.identifier ??
-          //   Uint8List(0)
-          // ).toHexString()}'.toString();
-          // String perfectid='';
-          // int pointer=0;
-          // for(int i=1;i<id.length;i++)
-          // {
-
-          //   if(id[i]=='x')
-          //   {
-
-          //   }
-
-          //   else if(id[i]==' ')
-          //   {
-
-          //   }
-          //   else{
-          //     perfectid+=id[i];
-          //   }
-          // }
-          // print('perfecccccccccccccccccccccccct');
-          // print(perfectid);
-          // String actualid='';
-          // int counter=0;
-          // for(int i=0;i<perfectid.length;i++)
-          // {
-          //   counter=counter+1;
-          //   if(counter>2)
-          //   {
-          //     counter=0;
-          //   }
-          //   else{
-          //     actualid+=perfectid[i];
-          //   }
-          // }
-          // print(actualid);
-          // setState(() {
-          //   comparefromchip=actualid.toString();
-          // });
           String v = '${info.subtitle}';
           int latch = 0;
           String first = '';
           String last = '';
           for (int i = 0; i < v.length; i++) {
-            if (v[i] == ']') {
+            if (v[i] == ']'||v[i]=='{') {
               break;
             }
             if (v[i] == ')') {
@@ -551,17 +234,8 @@ class _TagInfoState extends State<_TagInfo> {
             }
           }
           print('here is actual enc data');
-          // final String encryptionKey = 'my 32 length key................';
           print(last);
           print(first);
-
-          //       final key = encrypt.Key.fromUtf8(encryptionKey);
-          //       final iv = encrypt.IV.fromLength(16);
-          // final encrypter = encrypt.Encrypter(encrypt.AES(key));
-          // final decrypted = encrypter.decrypt64(last, iv: iv);
-          // print('decrypted data');
-          // print(decrypted.toString());
-          // String vari=first+decrypted.toString();
           var key = 'Key to encrypt and decrpyt the plain text';
           print('fetched encrypted part');
           print(last);
@@ -574,11 +248,13 @@ class _TagInfoState extends State<_TagInfo> {
               ']';
           print(vari);
           print('here is the subtitle');
-          print('${info.subtitle}');
+          print('${String.fromCharCodes(record.payload).length}');
+          print(info.subtitle.length);
           String namedata = '';
 
           print(vari);
-
+          print('vari length '+v.length.toString());
+          print('last char'+v[v.length-1]);
           for (int i = 1; i < vari.length; i++) {
             if (vari[i] == ':') {
               setState(() {
@@ -654,20 +330,7 @@ class _TagInfoState extends State<_TagInfo> {
               subjectMarks.add(appender);
               appender = '';
               count++;
-              // if (count == 15 || count == 16) {
-              //   count = 0;
-              //   if (appender != '') 
-              //     subjectMarks.add(appender);
-              //   appender = '';
-              //   allSubjects.add(subject);
-              //   allSubjectMarks.add(subjectMarks);
-              //   allSubjectCode.add(subjectCode);
-              //   allSubjectGrade.add(subjectGrade);
-              //   subject = [];
-              //   subjectCode = [];
-              //   subjectGrade = [];
-              //   subjectMarks = [];
-              // }
+              
               continue;
             }
             if (vari[i] == ']') {
@@ -686,14 +349,53 @@ class _TagInfoState extends State<_TagInfo> {
               continue;
             }
             appender += vari[i];
+            if(vari[i]=='{')
+              {
+                setState(() {
+                  imageData=vari.substring(i+1,vari.length-1);
+                });
+                i=vari.length;
+              }
           }
-          print('all the detail data');
+          int f=0;
+          print('length of v'+v.length.toString());
+          for (int ind = 0; ind < v.length; ind++) {
+            if(v[ind]!='{')
+            {
+
+              continue;
+            }
+            if(v[ind]=='{')
+            {
+              imageData=v.substring(ind+1,v.length-1);
+              print(imageData);
+              break;
+              // f=1;
+              // continue;
+            }
+            
+            if(f==1 && ind<v.length-1){
+              print(v[ind]);
+              setState(() {
+                imageData=imageData+v[ind];
+              });
+              
+            }
+          }
+          print(imageData.toString().length);
+          print('all the detail data\n');
+          print(imageData[imageData.length-1]);
+          setState(() {
+            byteData=base64Decode(imageData);
+          });
+          print(byteData);
           print(allSubjects);
           print(allSubjectCode);
           print(allSubjectGrade);
           print(allSubjectMarks);
           print(personalDetails);
           print(uniqueRegNo);
+
           allSubjects[0][0]='ENGINEERING MATHEMATICS-I';
           print('updated value');
           print(allSubjects);
@@ -734,36 +436,7 @@ class _TagInfoState extends State<_TagInfo> {
           setState(() {
             res = 0;
           });
-          // List<String> regNoList=[];
-          // print('-----------------------');
-          // print(maildata.toString());
-          // String refid=maildata.toString().trim();
-          // var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
-          // Map<String, dynamic> m=resultData.data()!;
-          // List<dynamic> childidList=m['childid'];
-
-          // // for(int i=0;i<m['childid'].length;i++){
-          // //   setState(() {
-          // //     childidList.add(m['childid'][i].toString());
-          // //   });
-          // // }
-          // print(childidList);
-          // List<String> allcgpi=[];
-          // print(childidList.length.toInt());
-          // for(var i=0;i<childidList.length.toInt();i++){
-          //   var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
-          //   Map<String,dynamic> mdata=r.data()!;
-          //   if(allcgpi.length==childidList.length.toInt())
-          //     break;
-          //   setState(() {
-          //     allcgpi.add(mdata['sgpi'].toString());
-          //   });
-          // }
-          // print(allcgpi);
-          // Navigator.push(context, MaterialPageRoute(
-          //             builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,),
-          //           ));
-
+          
           ndefWidgets.add(
             Column(
               children: [
@@ -780,45 +453,7 @@ class _TagInfoState extends State<_TagInfo> {
                   ],
                 ),
                 SizedBox(height: 12),
-                //  Row(
-                //     children: [
-                //       Text('Personal Details '),
-                //       Text(personalDetails),
-                //     ],
-
-                //   ),
-                //   SizedBox(height: 12),
-                //  Row(
-                //     children: [
-                //       Text('Code'),
-                //       Text(allSubjectCode.toString()),
-                //     ],
-
-                //   ),
-                //    SizedBox(height: 12),
-                //  Row(
-                //     children: [
-                //       Text('Marks'),
-                //       Text(allSubjectMarks.toString()),
-                //     ],
-
-                //   ),
-                //    SizedBox(height: 12),
-                //  Row(
-                //     children: [
-                //       Text('Code'),
-                //       Text(allSubjectGrade.toString()),
-                //     ],
-
-                // ),
-                // SizedBox(height: 12),
-                //  Row(
-                //   children: [
-                //     Text('Seat_No- ',style: TextStyle(fontSize: 25),),
-                //     Text(phonenum,style: TextStyle(fontSize: 25),),
-                //   ],
-
-                // ),
+                
                 SizedBox(height: 12),
                 // Row(
                 //   children: [
@@ -863,29 +498,6 @@ class _TagInfoState extends State<_TagInfo> {
             ),
           );
         });
-
-      // print('-----------------------');
-      // print(maildata.toString());
-      // String refid=maildata.toString().trim();
-      // var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
-      // Map<String, dynamic> m=resultData.data()!;
-      // List<dynamic> childidList=m['childid'];
-      // print(childidList);
-      // List<String> allcgpi=[];
-      // print(childidList.length.toInt());
-      // for(var i=0;i<childidList.length.toInt();i++){
-      //   var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
-      //   Map<String,dynamic> mdata=r.data()!;
-      //   if(allcgpi.length==childidList.length.toInt())
-      //     break;
-      //   setState(() {
-      //     allcgpi.add(mdata['sgpi'].toString());
-      //   });
-      // }
-      // print(allcgpi);
-      // Navigator.push(context, MaterialPageRoute(
-      //             builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,),
-      //           ));
     }
     // res=(checkBothChipNDbId(widget.tag,fname)) as int ;
     print('gotttttttttttttttttttttt');
@@ -928,7 +540,10 @@ class _TagInfoState extends State<_TagInfo> {
                           allSubjectCode,
                           allSubjectMarks,
                           allSubjectGrade,
-                          personalDetails),
+                          personalDetails,
+                          byteData
+                          
+                          ),
                     ));
               },
               child: Text(
@@ -1055,67 +670,7 @@ class _TagInfoState extends State<_TagInfo> {
     }
   }
 
-  // Future<void> linkToPage(String maildata, String fname, String lname, String phonenum) async {
-  //   // print('-----------------------');
-  //   //       print(maildata.toString());
-  //   //       String refid=maildata.toString().trim();
-  //   //       var resultData= await FirebaseFirestore.instance.collection('users').doc(refid).get();
-  //   //       Map<String, dynamic> m=resultData.data()!;
-  //   //       List<dynamic> childidList=m['childid'];
-  //   //       print(childidList);
-  //   //       List<String> allcgpi=[];
-  //   //       List<dynamic> refmarksheet=m['allmarksheet'];
-  //   //       List<String> allMarkSheet=[];
-  //   //       for(var i=0;i<refmarksheet.length.toInt();i++)
-  //   //       {
-  //   //         setState(() {
-  //   //           allMarkSheet.add(refmarksheet[i.toInt()].toString());
-  //   //         });
-
-  //   //       }
-  //   //       print(childidList.length.toInt());
-  //   //       for(var i=0;i<childidList.length.toInt();i++){
-  //   //         var r= await FirebaseFirestore.instance.collection('forms').doc(childidList[i].toString().trim()).get();
-  //   //         Map<String,dynamic> mdata=r.data()!;
-  //   //         if(allcgpi.length==childidList.length.toInt())
-  //   //           break;
-  //   //         setState(() {
-  //   //           allcgpi.add(mdata['sgpi'].toString());
-  //   //         });
-  //   //       }
-  //   //       print('before');
-  //   //       print(allcgpi);
-  //   //       print('after');
-  //   //       print('---------------');
-  //   //       print(allMarkSheet);
-  //   List<String> detailInfo=[];
-  //             String tempInfo='';
-  //             int count=0;
-  //             for(int i=0;i<widget.personalDetails.length;i++)
-  //             {
-  //               if(widget.personalDetails[i]==' '&& count>=1)
-  //               {
-  //                 detailInfo.add(tempInfo);
-  //                 count=0;
-  //                 tempInfo='';
-  //                 continue;
-  //               }
-  //               if(widget.personalDetails[i]==' ')
-  //               {
-  //                 count++;
-  //               }
-  //               tempInfo+=widget.personalDetails[i];
-
-  //             }
-  //             if(tempInfo!='')
-  //             {
-  //               detailInfo.add(tempInfo);
-
-  //             }
-  //         Navigator.push(context, MaterialPageRoute(
-  //                     builder: (context) => DisplayNfcData(m,maildata.toString(),allcgpi,fname,phonenum,allMarkSheet),
-  //                   ));
-  // }
+  
 }
 
 Future<void> saveContactInPhone(
@@ -1155,16 +710,7 @@ Future<void> saveContactInPhone(
 }
 
 _savedata(String fname, String lname, String phonenum, String maildata) async {
-  // var newPerson=Contact();
-  // newPerson.givenName=fname+lname;
-  // newPerson.phones=[Item(label: 'mobile',value: phonenum)];
-  // newPerson.emails=[Item(label: 'work',value: maildata)];
-
-  //   await ContactsService.addContact(newPerson);
-  //   var contacts = await ContactsService.getContacts();
-  //   setState((){
-  //     var name=contacts;
-  //   });
+  
 }
 
 String _getTechListString(NfcTag tag) {

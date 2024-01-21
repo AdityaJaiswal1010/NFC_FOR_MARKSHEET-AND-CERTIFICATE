@@ -126,8 +126,8 @@ class _viewDetailRecordState extends State<viewDetailRecord> {
     //       print('---------------');
     //       print(allMarkSheet);
 
-          Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => DisplayNfcData(widget.detailInfo,widget.uniqueRegNo),
-                    ));
+          // Navigator.push(context, MaterialPageRoute(
+          //             builder: (context) => DisplayNfcData(widget.detailInfo,widget.uniqueRegNo),
+          //           ));
   }
 }

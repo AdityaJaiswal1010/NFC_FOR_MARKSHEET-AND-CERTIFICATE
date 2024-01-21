@@ -128,7 +128,7 @@ class EditExternalModel with ChangeNotifier {
   print(actualStringToBeStored.substring(0,actualStringToBeStored.length-1));
     var key = 'Key to encrypt and decrpyt the plain text';
   var encrypted = Encryptor.encrypt(key, actualStringToBeStored.substring(0,actualStringToBeStored.length-1));
-  actualStringToBeStored='['+encrypted.toString().trim()+']{'+base64String+'}';
+  actualStringToBeStored='['+encrypted.toString().trim()+']{'+base64String.toString()+'}';
   print('after encryption');
   print(actualStringToBeStored);
   // String actualData=course_1_name+','+course_2_name+','+course_1_code+','+course_2_code+','+course_1_grade+','+course_2_grade+','+course_1_marks+','+course_2_marks+','+course_1_max_marks+','+course_2_max_marks+','+course_1_credit+','+course_2_credit;

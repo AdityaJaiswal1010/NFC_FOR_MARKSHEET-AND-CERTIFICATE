@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:app/view/pdfview.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -6,7 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 class DisplayNfcData extends StatefulWidget {
   final List<String> detailInfo;
   final String uniqueRegNo;
-  const DisplayNfcData(this.detailInfo, this.uniqueRegNo, {Key? key}) : super(key: key);
+  final Uint8List byteData;
+  const DisplayNfcData(this.detailInfo, this.uniqueRegNo, this.byteData, {Key? key}) : super(key: key);
 
   @override
   State<DisplayNfcData> createState() => _DisplayNfcDataState();
@@ -39,8 +42,8 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
                 scrollDirection: Axis.vertical,
                 
                 children: [
-                  Image.asset(
-                  'assets/photocopy.jpg',
+                  Image.memory(
+                  widget.byteData,
                   width: 550,
                   // fit: BoxFit.cover,
                   height: 200,

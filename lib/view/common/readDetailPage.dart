@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:app/view/ViewAllMarksheet.dart';
 import 'package:app/view/allmarksheetpage.dart';
 import 'package:app/view/common/form_row.dart';
@@ -8,7 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReadRecordDetail extends StatefulWidget {
-  ReadRecordDetail(this.ndefWidgets, this.maildata, this.fname, this.lname, this.phonenum, this.rrrr, this.resultedvalue,this.uniqueRegNo,this.allSubjects,this.allSubjectCode,this.allSubjectMarks,this.allSubjectGrade, this.personalDetails, {Key? key}) : super(key: key);
+  ReadRecordDetail(this.ndefWidgets, this.maildata, this.fname, this.lname, this.phonenum, this.rrrr, this.resultedvalue,this.uniqueRegNo,this.allSubjects,this.allSubjectCode,this.allSubjectMarks,this.allSubjectGrade, this.personalDetails, this.byteData, {Key? key}) : super(key: key);
   String uniqueRegNo;
   String personalDetails;
   List<List<String>> allSubjects;
@@ -22,6 +24,7 @@ class ReadRecordDetail extends StatefulWidget {
    String fname;
     String lname;
    String phonenum;
+   Uint8List byteData;
   @override
   State<ReadRecordDetail> createState() => _ReadRecordDetailState();
 }
@@ -118,7 +121,7 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
             
                 
                     Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => DisplayNfcData(detailInfo,widget.uniqueRegNo)));
+                                  builder: (context) => DisplayNfcData(detailInfo,widget.uniqueRegNo,widget.byteData)));
                                   //splash page 5 sec link
                                   // viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
                     
