@@ -127,10 +127,11 @@ class _ViewAllMarksheetState extends State<ViewAllMarksheet> {
     // print('after');
     // print('---------------');
     // print(allMarkSheet);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade),
-        ));
+    // Navigator.push(
+        // context,
+        // MaterialPageRoute(
+          // builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade),
+        // )
+        // );
   }
 }

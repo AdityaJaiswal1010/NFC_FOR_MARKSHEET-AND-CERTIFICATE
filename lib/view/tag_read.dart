@@ -172,6 +172,12 @@ class _TagInfoState extends State<_TagInfo> {
   int resultedvalue = 0;
   @override
   Widget build(BuildContext context) {
+    late List<String> allCredit;
+    late List<String> allGrade;
+    late List<String> allSubjectsCode;
+    late List<String> decodedSubject =[];
+    late List<String> allSubject;
+    late List<String> allPersonalData;
     List<String> subject = [];
     List<String> subjectCode = [];
     List<String> subjectGrade = [];
@@ -197,6 +203,7 @@ class _TagInfoState extends State<_TagInfo> {
     String comparefromchip = '';
     String comparefromdb = '';
     Object? tech;
+    late int refSize;
     late Uint8List byteData = Uint8List(0);
     
 
@@ -215,6 +222,20 @@ class _TagInfoState extends State<_TagInfo> {
           int latch = 0;
           String first = '';
           String last = '';
+          int refIndex=0;
+          for(int index=v.length-1;index>0;index--)
+          {
+            if(v[index]=='}')
+            {
+              refIndex=index;
+              break;
+            }
+          }
+          refSize=int.parse(v.substring(refIndex+1,v.length));
+          print('Ref Size');
+          print(refSize);
+          int imageIndex=0;
+          int imageEnd=0;
           for (int i = 0; i < v.length; i++) {
             if (v[i] == ']'||v[i]=='{') {
               break;
@@ -233,209 +254,331 @@ class _TagInfoState extends State<_TagInfo> {
               first += v[i];
             }
           }
+          // last='';
+          // for(int indexValue=0;indexValue<v.length;indexValue++)
+          // {
+          //   if(v[indexValue]=='[')
+          //   {
+          //     indexValue++;
+          //     while(v[indexValue]!=']')
+          //     {
+          //       last+=v[indexValue];
+          //     }
+          //     if(v[indexValue]==']')
+          //       break;
+          //   }
+          // }
+          print(last);
+          for (int i = 0; i < v.length; i++) {
+            if(v[i]=='{')
+            {
+              imageIndex=i;
+            }
+            if(v[i]=='}')
+            {
+              imageEnd=i;
+              break;
+            }
+          }
+          setState(() {
+            imageData=v.substring(imageIndex+1,imageEnd);
+          });
+          
           print('here is actual enc data');
-          print(last);
-          print(first);
+          print(v);
+          print('Encrypted Part');
+          print(last.trim().toString());
           var key = 'Key to encrypt and decrpyt the plain text';
-          print('fetched encrypted part');
-          print(last);
-          var decrypted = Encryptor.decrypt(key, last.trim());
-          print('actual data');
-          print(decrypted.toString());
-
+          String decrypted = Encryptor.decrypt(key, last.trim()).toString();
           String vari = first +
               decrypted.toString().trim()+
               ']';
-          print(vari);
-          print('here is the subtitle');
-          print('${String.fromCharCodes(record.payload).length}');
-          print(info.subtitle.length);
-          String namedata = '';
+          print('Actual Segregated data');
+          print(first);
+          print(decrypted.toString().trim());
+          print(imageData);
 
-          print(vari);
-          print('vari length '+v.length.toString());
-          print('last char'+v[v.length-1]);
-          for (int i = 1; i < vari.length; i++) {
-            if (vari[i] == ':') {
-              setState(() {
-                uniqueRegNo = namedata;
-                namedata = '';
-              });
-            }
-            if (vari[i] == ')') {
-              setState(() {
-                personalDetails = namedata;
-                namedata = '';
-                for (int temp = i; temp < vari.length; temp++) {
-                  if (vari[temp] != '[') {
-                    continue;
-                  } else {
-                    indexToMarksheetDetails = temp + 1;
-                    break;
-                  }
-                }
-              });
-              break;
-            }
-            namedata += vari[i];
-          }
-          // for seperator
-          String temp='';
-          int c=0;
-          for(int ind = indexToMarksheetDetails;ind<vari.length;ind++){
-            
-            if(vari[ind]==']')
+          //image processing
+          byteData=base64Decode(imageData);
+          print(byteData);
+          //personal data extraction
+          int refPointer=0;
+          for(int j=1;j<first.length;j++)
+          {
+            if(first[j]==':')
             {
-              temp+=vari[ind];
+              refPointer=j+1;
               break;
             }
              
-            if(vari[ind]==',')
-              {
-                c++;
-                if(c==16)
-                {
-                  c=0;
-                  temp+=']';
-                  temp+='[';
-                  continue;
-                }
-              }
-              
-            temp+=vari[ind];
+            else{
+              uniqueRegNo+=first[j];
+            }
           }
-          vari=temp;
-          print('new vari');
-          print(vari);
-          for (int i = 0; i < vari.length; i++) {
-            if (vari[i] == ',' && count < 4) {
-              subject.add(appender);
-              count++;
-              appender = '';
-              continue;
-            }
-            if (vari[i] == ',' && count < 8 && count >= 4) {
-              subjectCode.add(appender);
-              appender = '';
-              count++;
-              continue;
-            }
-            if (vari[i] == ',' && count < 12 && count >= 8) {
-              subjectGrade.add(appender);
-              appender = '';
-              count++;
-              continue;
-            }
-            if (vari[i] == ',' && count < 16 && count >= 12) {
-              subjectMarks.add(appender);
-              appender = '';
-              count++;
-              
-              continue;
-            }
-            if (vari[i] == ']') {
-              i++;
-              count = 0;
-              if (appender != '') subjectMarks.add(appender);
-              appender = '';
-              allSubjects.add(subject);
-              allSubjectMarks.add(subjectMarks);
-              allSubjectCode.add(subjectCode);
-              allSubjectGrade.add(subjectGrade);
-              subject = [];
-              subjectCode = [];
-              subjectGrade = [];
-              subjectMarks = [];
-              continue;
-            }
-            appender += vari[i];
-            if(vari[i]=='{')
-              {
-                setState(() {
-                  imageData=vari.substring(i+1,vari.length-1);
-                });
-                i=vari.length;
-              }
-          }
-          int f=0;
-          print('length of v'+v.length.toString());
-          for (int ind = 0; ind < v.length; ind++) {
-            if(v[ind]!='{')
-            {
+          String personal=first.substring(refPointer);
+          List<String> allPersonal=personal.split(',');
+          print(allPersonal);
+            setState(() {
+              allPersonalData=allPersonal;
+            });
+          //actual marks data to work on
+          String bodyData=decrypted.toString().trim();
+          List<String> elements = bodyData.split(',');
+          print(elements);
+          int infoIndex=0;
+  // Iterate through the elements to find the index of the first alphanumeric character
+  for (int i = 0; i < elements.length; i++) {
+    String element = elements[i].trim(); // Remove any leading/trailing whitespace
+    // Check if the element is alphanumeric
+    if (element.isNotEmpty &&
+        RegExp(r'^[a-zA-Z0-9]+$').hasMatch(element)) {
+      // Return the index of the first character of the alphanumeric element
+      infoIndex=bodyData.indexOf(element[0]);
+      break;
+    }
+  }
+  List<String> actualPairedString=elements.reversed.toList();
+  print(actualPairedString);
+  
+  int dataTobeExtracted=(elements.length ~/ refSize.toInt());
+  int refCounter=dataTobeExtracted*refSize;
+  print(refCounter);
+  print(infoIndex);
+  print(elements.length);
+  List<String> dataList=actualPairedString.sublist(0,refCounter);
+  actualPairedString=dataList.reversed.toList();
+  print(actualPairedString);
+  int counterForListing=0;
+  List<String> temp=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  // print(temp);
+  setState(() {
+    allSubjectsCode=temp;
+  });
+  
+  print(allSubjectsCode);
+  counterForListing+=refSize;
+  List<String>temp1=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  setState(() {
+    allGrade=temp1;    
+  });
+  print(allGrade);
+  counterForListing+=refSize;
+  List<String> temp2=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  setState(() {
+    allCredit=temp2;   
+  });
+  print(allCredit);
+  counterForListing+=refSize;
+  
+  List<String> temp3=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  setState(() {
+    allSubject=temp3;
+  });
+  // print(allSubjectsCode);
+  // print(allGrade);
+  // print(allCredit);
+  // print(allSubject);
+  for(int pointer=0;pointer<allSubject.length;pointer++)
+  {
+    setState(() {
+      decodedSubject.add(Code[allSubject[pointer].toString()].toString());
+    });
+    
+  }
+  print(allSubjectsCode);
+  print(allGrade);
+  print(allCredit);
+  print(decodedSubject);
+          // print(imageData[imageData.length-1]);
+          // print('here is the subtitle');
+          // print('${String.fromCharCodes(record.payload).length}');
+          // print(info.subtitle.length);
+          // String namedata = '';
 
-              continue;
-            }
-            if(v[ind]=='{')
-            {
-              imageData=v.substring(ind+1,v.length-1);
-              print(imageData);
-              break;
-              // f=1;
-              // continue;
-            }
+          // print(vari);
+          // print('vari length '+v.length.toString());
+          // print('last char'+v[v.length-1]);
+          // for (int i = 1; i < vari.length; i++) {
+          //   if (vari[i] == ':') {
+          //     setState(() {
+          //       uniqueRegNo = namedata;
+          //       namedata = '';
+          //     });
+          //   }
+          //   if (vari[i] == ')') {
+          //     setState(() {
+          //       personalDetails = namedata;
+          //       namedata = '';
+          //       for (int temp = i; temp < vari.length; temp++) {
+          //         if (vari[temp] != '[') {
+          //           continue;
+          //         } else {
+          //           indexToMarksheetDetails = temp + 1;
+          //           break;
+          //         }
+          //       }
+          //     });
+          //     break;
+          //   }
+          //   namedata += vari[i];
+          // }
+          // // for seperator
+          // String temp='';
+          // int c=0;
+          // for(int ind = indexToMarksheetDetails;ind<vari.length;ind++){
             
-            if(f==1 && ind<v.length-1){
-              print(v[ind]);
-              setState(() {
-                imageData=imageData+v[ind];
-              });
+          //   if(vari[ind]==']')
+          //   {
+          //     temp+=vari[ind];
+          //     break;
+          //   }
+             
+          //   if(vari[ind]==',')
+          //     {
+          //       c++;
+          //       if(c==16)
+          //       {
+          //         c=0;
+          //         temp+=']';
+          //         temp+='[';
+          //         continue;
+          //       }
+          //     }
               
-            }
-          }
-          print(imageData.toString().length);
-          print('all the detail data\n');
-          print(imageData[imageData.length-1]);
-          setState(() {
-            byteData=base64Decode(imageData);
-          });
-          print(byteData);
-          print(allSubjects);
-          print(allSubjectCode);
-          print(allSubjectGrade);
-          print(allSubjectMarks);
-          print(personalDetails);
-          print(uniqueRegNo);
+          //   temp+=vari[ind];
+          // }
+          // vari=temp;
+          // print('new vari');
+          // print(vari);
+          // for (int i = 0; i < vari.length; i++) {
+          //   if (vari[i] == ',' && count < 4) {
+          //     subject.add(appender);
+          //     count++;
+          //     appender = '';
+          //     continue;
+          //   }
+          //   if (vari[i] == ',' && count < 8 && count >= 4) {
+          //     subjectCode.add(appender);
+          //     appender = '';
+          //     count++;
+          //     continue;
+          //   }
+          //   if (vari[i] == ',' && count < 12 && count >= 8) {
+          //     subjectGrade.add(appender);
+          //     appender = '';
+          //     count++;
+          //     continue;
+          //   }
+          //   if (vari[i] == ',' && count < 16 && count >= 12) {
+          //     subjectMarks.add(appender);
+          //     appender = '';
+          //     count++;
+              
+          //     continue;
+          //   }
+          //   if (vari[i] == ']') {
+          //     i++;
+          //     count = 0;
+          //     if (appender != '') subjectMarks.add(appender);
+          //     appender = '';
+          //     allSubjects.add(subject);
+          //     allSubjectMarks.add(subjectMarks);
+          //     allSubjectCode.add(subjectCode);
+          //     allSubjectGrade.add(subjectGrade);
+          //     subject = [];
+          //     subjectCode = [];
+          //     subjectGrade = [];
+          //     subjectMarks = [];
+          //     continue;
+          //   }
+          //   appender += vari[i];
+          //   if(vari[i]=='{')
+          //     {
+          //       setState(() {
+          //         imageData=vari.substring(i+1,vari.length-1);
+          //       });
+          //       i=vari.length;
+          //     }
+          // }
+          // int f=0;
+          // print('length of v'+v.length.toString());
+          // for (int ind = 0; ind < v.length; ind++) {
+          //   if(v[ind]!='{')
+          //   {
 
-          allSubjects[0][0]='ENGINEERING MATHEMATICS-I';
-          print('updated value');
-          print(allSubjects);
-          int j = 0;
-          for (j = 0; j < namedata.length; j++) {
-            if (namedata[j] == ' ') break;
-            fname += namedata[j];
-          }
+          //     continue;
+          //   }
+          //   if(v[ind]=='{')
+          //   {
+          //     imageData=v.substring(ind+1,v.length-1);
+          //     print(imageData);
+          //     break;
+          //     // f=1;
+          //     // continue;
+          //   }
+            
+          //   if(f==1 && ind<v.length-1){
+          //     print(v[ind]);
+          //     setState(() {
+          //       imageData=imageData+v[ind];
+          //     });
+              
+          //   }
+          // }
+          // print(imageData.toString().length);
+          // print('all the detail data\n');
+          // print(imageData[imageData.length-1]);
+          // setState(() {
+          //   byteData=base64Decode(imageData);
+          // });
+          // print(byteData);
+          // print(allSubjects);
+          // print(allSubjectCode);
+          // print(allSubjectGrade);
+          // print(allSubjectMarks);
+          // print(personalDetails);
+          // print(uniqueRegNo);
 
-          for (j = j + 1; j < namedata.length; j++) {
-            if (namedata[j] == ' ') break;
-            lname += namedata[j];
-          }
+          // allSubjects[0][0]='ENGINEERING MATHEMATICS-I';
+          // print('updated value');
+          // print(allSubjects);
+          // int j = 0;
+          // for (j = 0; j < namedata.length; j++) {
+          //   if (namedata[j] == ' ') break;
+          //   fname += namedata[j];
+          // }
 
-          int flag = 1;
-          for (int i = 1; i < vari.length; i++) {
-            if (vari[i] == ')') break;
-            if (flag == 1 && vari[i] != ':') continue;
-            if (vari[i] == ':') {
-              flag = 0;
-              continue;
-            }
-            phonenum += vari[i];
-          }
+          // for (j = j + 1; j < namedata.length; j++) {
+          //   if (namedata[j] == ' ') break;
+          //   lname += namedata[j];
+          // }
 
-          flag = 1;
-          for (int i = 1; i < vari.length; i++) {
-            if (vari[i] != ')' && flag == 1) continue;
-            if (vari[i] == ')') {
-              flag = 0;
-              continue;
-            }
-            if (flag == 0) {
-              maildata += vari[i];
-            }
-          }
-          print('heyyyyyyyyyyyyyyyyyyyy');
-          setState(() {
-            res = 0;
-          });
+          // int flag = 1;
+          // for (int i = 1; i < vari.length; i++) {
+          //   if (vari[i] == ')') break;
+          //   if (flag == 1 && vari[i] != ':') continue;
+          //   if (vari[i] == ':') {
+          //     flag = 0;
+          //     continue;
+          //   }
+          //   phonenum += vari[i];
+          // }
+
+          // flag = 1;
+          // for (int i = 1; i < vari.length; i++) {
+          //   if (vari[i] != ')' && flag == 1) continue;
+          //   if (vari[i] == ')') {
+          //     flag = 0;
+          //     continue;
+          //   }
+          //   if (flag == 0) {
+          //     maildata += vari[i];
+          //   }
+          // }
+          // print('heyyyyyyyyyyyyyyyyyyyy');
+          // setState(() {
+          //   res = 0;
+          // });
           
           ndefWidgets.add(
             Column(
@@ -541,8 +684,12 @@ class _TagInfoState extends State<_TagInfo> {
                           allSubjectMarks,
                           allSubjectGrade,
                           personalDetails,
-                          byteData
-                          
+                          byteData,
+                          allSubjectsCode,
+                          allGrade,
+                          allCredit,
+                          decodedSubject,
+                          allPersonalData,
                           ),
                     ));
               },
@@ -663,9 +810,9 @@ class _TagInfoState extends State<_TagInfo> {
       return 1;
     } else {
       print('chip unmatched');
-      setState(() {
-        resultedvalue = 0;
-      });
+      // setState(() {
+      //   resultedvalue = 0;
+      // });
       return 0;
     }
   }

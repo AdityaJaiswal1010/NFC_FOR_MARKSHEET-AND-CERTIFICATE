@@ -10,13 +10,18 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReadRecordDetail extends StatefulWidget {
-  ReadRecordDetail(this.ndefWidgets, this.maildata, this.fname, this.lname, this.phonenum, this.rrrr, this.resultedvalue,this.uniqueRegNo,this.allSubjects,this.allSubjectCode,this.allSubjectMarks,this.allSubjectGrade, this.personalDetails, this.byteData, {Key? key}) : super(key: key);
+  ReadRecordDetail(this.ndefWidgets, this.maildata, this.fname, this.lname, this.phonenum, this.rrrr, this.resultedvalue,this.uniqueRegNo,this.allSubjects,this.allSubjectCode,this.allSubjectMarks,this.allSubjectGrade, this.personalDetails, this.byteData, this.allSubjectsCode, this.allGrade, this.allCredit, this.decodedSubject, this.allPersonalData, {Key? key}) : super(key: key);
   String uniqueRegNo;
+  List<String> allPersonalData;
   String personalDetails;
   List<List<String>> allSubjects;
   List<List<String>> allSubjectCode;
   List<List<String>> allSubjectMarks; 
   List<List<String>> allSubjectGrade;
+  List<String>allSubjectsCode;
+  List<String> allGrade;
+  List<String>allCredit;
+  List<String> decodedSubject;
   List<Widget> ndefWidgets;
   String maildata;
   int resultedvalue;
@@ -121,7 +126,7 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
             
                 
                     Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => DisplayNfcData(detailInfo,widget.uniqueRegNo,widget.byteData)));
+                                  builder: (context) => DisplayNfcData(widget.allPersonalData,widget.uniqueRegNo,widget.byteData)));
                                   //splash page 5 sec link
                                   // viewDetailRecord(widget.maildata, widget.fname, widget.lname, widget.phonenum,detailInfo,widget.uniqueRegNo)));
                     
@@ -156,7 +161,7 @@ class _ReadRecordDetailState extends State<ReadRecordDetail> {
               ),
               onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => AllMarksheetPage(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
+                                  builder: (context) => AllMarksheetPage(widget.allSubjectsCode,widget.allGrade,widget.allCredit,widget.decodedSubject)));
                                   
                                   // link to 5 sec splash
                                   // ViewAllMarksheet(widget.allSubjects,widget.allSubjectCode,widget.allSubjectMarks,widget.allSubjectGrade)));
