@@ -1,14 +1,16 @@
 import 'dart:typed_data';
-
-import 'package:app/view/pdfview.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 class DisplayNfcData extends StatefulWidget {
   final List<String> detailInfo;
   final String uniqueRegNo;
   final Uint8List byteData;
-  const DisplayNfcData(this.detailInfo, this.uniqueRegNo, this.byteData, {Key? key}) : super(key: key);
+
+  const DisplayNfcData(
+      this.detailInfo, this.uniqueRegNo, this.byteData,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<DisplayNfcData> createState() => _DisplayNfcDataState();
@@ -21,41 +23,52 @@ class _DisplayNfcDataState extends State<DisplayNfcData> {
       appBar: AppBar(
         title: Text('Personal Detail'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.memory(
-            widget.byteData,
-            width: 550,
-            height: 200,
-          ),
-          SizedBox(height: 30),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: widget.detailInfo.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(widget.detailInfo[index]),
-                    ],
-                  ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 20),
+            Hero(
+              tag: 'nfc_image',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.memory(
+                  widget.byteData,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 200,
                 ),
-              );
-            },
-          ),
-          SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-            },
-            child: Text('Back'),
-          ),
-        ],
+              ),
+            ),
+            SizedBox(height: 30),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: widget.detailInfo.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  elevation: 3,
+                  child: ListTile(
+                    title: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.detailInfo[index],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back'),
+            ),
+          ],
+        ),
       ),
     );
   }
