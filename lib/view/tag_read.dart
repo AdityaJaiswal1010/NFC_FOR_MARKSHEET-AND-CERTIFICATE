@@ -321,6 +321,7 @@ class _TagInfoState extends State<_TagInfo> {
             setState(() {
               allPersonalData=allPersonal;
             });
+            allPersonalData[allPersonalData.length-1]=allPersonalData[allPersonalData.length-1].substring(0,allPersonalData[allPersonalData.length-1].length-3);
           //actual marks data to work on
           String bodyData=decrypted.toString().trim();
           List<String> elements = bodyData.split(',');

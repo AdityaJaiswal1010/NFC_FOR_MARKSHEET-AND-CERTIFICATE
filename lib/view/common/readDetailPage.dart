@@ -67,28 +67,28 @@ class ReadRecordDetail extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DisplayNfcData(
-                      allPersonalData,
-                      uniqueRegNo,
-                      byteData,
-                    ),
-                  ),
-                );
-              },
-              child: Text(
-                'Student\'s Personal Details',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.amber,
-                minimumSize: Size(350, 150),
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => DisplayNfcData(
+            //           allPersonalData,
+            //           uniqueRegNo,
+            //           byteData,
+            //         ),
+            //       ),
+            //     );
+            //   },
+            //   child: Text(
+            //     'Student\'s Personal Details',
+            //     style: TextStyle(fontSize: 20, color: Colors.white),
+            //   ),
+            //   style: ElevatedButton.styleFrom(
+            //     primary: Colors.amber,
+            //     minimumSize: Size(350, 150),
+            //   ),
+            // ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -100,6 +100,8 @@ class ReadRecordDetail extends StatelessWidget {
                       allGrade,
                       allCredit,
                       decodedSubject,
+                      allPersonalData,
+                      byteData,
                     ),
                   ),
                 );

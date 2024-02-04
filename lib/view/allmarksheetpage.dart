@@ -18,12 +18,14 @@ class AllMarksheetPage extends StatefulWidget {
   final List<String> allSubjectCode;
   final List<String> allSubjectMarks;
   final List<String> allSubjectGrade;
+  final List<String> detailInfo;
+  final Uint8List byteData;
 
   const AllMarksheetPage(
     this.allSubjectCode,
     this.allSubjectMarks,
     this.allSubjectGrade,
-    this.allSubjects, {
+    this.allSubjects, this.detailInfo, this.byteData, {
     Key? key,
   }) : super(key: key);
 
@@ -35,7 +37,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
-  late Animation<double> _slideAnimation;
+  late Animation<Offset> _slideAnimation;
 
   @override
   void initState() {
@@ -50,12 +52,13 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
         curve: Curves.easeIn,
       ),
     );
-    _slideAnimation = Tween<double>(begin: 100, end: 0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
+    _slideAnimation = Tween<Offset>(
+      begin: Offset(0, 0.5),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
 
     _controller.forward();
   }
@@ -74,110 +77,138 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 30),
-            FadeTransition(
-              opacity: _fadeAnimation,
-              child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: Offset(0, 0.5),
-                  end: Offset.zero,
-                ).animate(CurvedAnimation(
-                  parent: _controller,
-                  curve: Curves.easeInOut,
-                )),
-                child: Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Image.asset(
-                    'assets/xyz.png',
-                    width: 200,
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 20),
+              Hero(
+                tag: 'nfc_image',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: Image.memory(
+                    widget.byteData,
+                    // fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 200,
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 30),
-            Text(
-              'Result',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Table(
-                border: TableBorder.all(),
-                children: [
-                  TableRow(children: [
-                    TableCell(
-                      child: Center(
+              SizedBox(height: 30),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.detailInfo.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    elevation: 3,
+                    child: ListTile(
+                      title: Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
-                          'Subject',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          widget.detailInfo[index],
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ),
-                    TableCell(
-                      child: Center(
-                        child: Text(
-                          'Code',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    TableCell(
-                      child: Center(
-                        child: Text(
-                          'Marks',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    TableCell(
-                      child: Center(
-                        child: Text(
-                          'Grade',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ]),
-                  for (int i = 0; i < widget.allSubjects.length; i++)
+                  );
+                },
+              ),
+              SizedBox(height: 12),
+              // SizedBox(height: 30),
+              FadeTransition(
+                opacity: _fadeAnimation,
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  // child: Container(
+                  //   padding: EdgeInsets.all(16.0),
+                  //   child: Image.asset(
+                  //     'assets/xyz.png',
+                  //     width: 200,
+                  //   ),
+                  // ),
+                ),
+              ),
+              SizedBox(height: 30),
+              Text(
+                'Result',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Table(
+                  border: TableBorder.all(),
+                  children: [
                     TableRow(children: [
                       TableCell(
-                        child: Center(child: Text(widget.allSubjects[i])),
+                        child: Center(
+                          child: Text(
+                            'Subject Title',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                       TableCell(
-                        child: Center(child: Text(widget.allSubjectCode[i])),
+                        child: Center(
+                          child: Text(
+                            'Code',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                       TableCell(
-                        child: Center(child: Text(widget.allSubjectMarks[i])),
+                        child: Center(
+                          child: Text(
+                            'Grades',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                       TableCell(
-                        child: Center(child: Text(widget.allSubjectGrade[i])),
+                        child: Center(
+                          child: Text(
+                            'Credit',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                     ]),
-                ],
+                    for (int i = 0; i < widget.allSubjects.length; i++)
+                      TableRow(children: [
+                        TableCell(
+                          child:
+                              Center(child: Text(widget.allSubjects[i])),
+                        ),
+                        TableCell(
+                          child:
+                              Center(child: Text(widget.allSubjectCode[i])),
+                        ),
+                        TableCell(
+                          child:
+                              Center(child: Text(widget.allSubjectMarks[i])),
+                        ),
+                        TableCell(
+                          child:
+                              Center(child: Text(widget.allSubjectGrade[i])),
+                        ),
+                      ]),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            SlideTransition(
-              position: Tween<Offset>(
-                begin: Offset(0, 0.5),
-                end: Offset.zero,
-              ).animate(CurvedAnimation(
-                parent: _controller,
-                curve: Curves.easeInOut,
-              )),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Back'),
+              SizedBox(height: 20),
+              SlideTransition(
+                position: _slideAnimation,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Back'),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-          ],
+              SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -235,3 +266,138 @@ class _ViewState extends State<View> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// child: Table(
+//   border: TableBorder.all(),
+//   children: [
+//     TableRow(children: [
+//       TableCell(
+//         child: Container(
+//           width: 150, // Adjust the width as needed
+//           child: Center(
+//             child: SingleChildScrollView(
+//               scrollDirection: Axis.horizontal,
+//               child: Text(
+//                 'Subject Title',
+//                 style: TextStyle(fontWeight: FontWeight.bold),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//       TableCell(
+//         child: Container(
+//           width: 100, // Adjust the width as needed
+//           child: Center(
+//             child: SingleChildScrollView(
+//               scrollDirection: Axis.horizontal,
+//               child: Text(
+//                 'Code',
+//                 style: TextStyle(fontWeight: FontWeight.bold),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//       TableCell(
+//         child: Container(
+//           width: 100, // Adjust the width as needed
+//           child: Center(
+//             child: SingleChildScrollView(
+//               scrollDirection: Axis.horizontal,
+//               child: Text(
+//                 'Grades',
+//                 style: TextStyle(fontWeight: FontWeight.bold),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//       TableCell(
+//         child: Container(
+//           width: 100, // Adjust the width as needed
+//           child: Center(
+//             child: SingleChildScrollView(
+//               scrollDirection: Axis.horizontal,
+//               child: Text(
+//                 'Credit',
+//                 style: TextStyle(fontWeight: FontWeight.bold),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     ]),
+//     for (int i = 0; i < widget.allSubjects.length; i++)
+//       TableRow(children: [
+//         TableCell(
+//           child: Container(
+//             width: 150, // Adjust the width as needed
+//             child: Center(
+//               child: SingleChildScrollView(
+//                 scrollDirection: Axis.horizontal,
+//                 child: Text(
+//                   widget.allSubjects[i],
+//                   style: TextStyle(fontWeight: FontWeight.normal),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//         TableCell(
+//           child: Container(
+//             width: 100, // Adjust the width as needed
+//             child: Center(
+//               child: SingleChildScrollView(
+//                 scrollDirection: Axis.horizontal,
+//                 child: Text(
+//                   widget.allSubjectCode[i],
+//                   style: TextStyle(fontWeight: FontWeight.normal),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//         TableCell(
+//           child: Container(
+//             width: 100, // Adjust the width as needed
+//             child: Center(
+//               child: SingleChildScrollView(
+//                 scrollDirection: Axis.horizontal,
+//                 child: Text(
+//                   widget.allSubjectMarks[i],
+//                   style: TextStyle(fontWeight: FontWeight.normal),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//         TableCell(
+//           child: Container(
+//             width: 100, // Adjust the width as needed
+//             child: Center(
+//               child: SingleChildScrollView(
+//                 scrollDirection: Axis.horizontal,
+//                 child: Text(
+//                   widget.allSubjectGrade[i],
+//                   style: TextStyle(fontWeight: FontWeight.normal),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ]),
+//   ],
+// ),
