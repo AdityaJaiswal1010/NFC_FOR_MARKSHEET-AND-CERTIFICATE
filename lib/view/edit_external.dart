@@ -62,7 +62,8 @@ class EditExternalModel with ChangeNotifier {
   print('String ${base64String.length}');
   print(base64String);
   late int sizeData;
-  String candidateDetails='Name - '+um['candidate_name'].toString()+','+'Father Name - '+um['father_name'].toString()+','+'Mother Name - '+um['mother_name']+','+'University - '+um['university']+','+'Degree - '+um['degree']+','+'Program - '+um['program'];
+  String candidateDetails='Name-'+um['candidate_name'].toString()+','+'Father Name-'+um['father_name'].toString()+','+'Mother Name-'+um['mother_name']+','+'University-'+um['university']+','
+  +'Degree-'+um['degree'].toString()+','+'Program-'+um['program'].toString()+','+'ABC ID-'+um['ABCno'].toString()+','+'Regulation-'+um['Regulation'].toString()+','+'DoB-'+um['dob'].toString()+','+'Final CGPA-'+um['final_gpa'].toString();
   String degree=um['degree'];
   String sub_name='';
   String sub_code='';
@@ -157,6 +158,14 @@ class EditExternalModel with ChangeNotifier {
   }
   else
     break;
+  }
+  List<dynamic> att=childDetail['ATT'];
+  List<dynamic> sem=childDetail['SemSubjectwise'];
+  for(int ind=0;ind<att.length;ind++){
+    finalString+=att[ind].toString()+',';
+  }
+  for(int ind=0;ind<sem.length;ind++){
+    finalString+=sem[ind].toString()+',';
   }
   }
   actualStringToBeStored+=finalString;

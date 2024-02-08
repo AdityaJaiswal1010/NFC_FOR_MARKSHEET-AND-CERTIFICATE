@@ -20,12 +20,14 @@ class AllMarksheetPage extends StatefulWidget {
   final List<String> allSubjectGrade;
   final List<String> detailInfo;
   final Uint8List byteData;
+  final List<String> allAtt;
+  final List<String> allSem;
 
   const AllMarksheetPage(
     this.allSubjectCode,
     this.allSubjectMarks,
     this.allSubjectGrade,
-    this.allSubjects, this.detailInfo, this.byteData, {
+    this.allSubjects, this.detailInfo, this.byteData, this.allAtt, this.allSem, {
     Key? key,
   }) : super(key: key);
 
@@ -73,7 +75,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transcripts'),
+        title: Text('CONSOLIDATED GRADE CARD'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -144,6 +146,14 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                       TableCell(
                         child: Center(
                           child: Text(
+                            'Sem',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Center(
+                          child: Text(
                             'Subject Title',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -173,9 +183,21 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                           ),
                         ),
                       ),
+                      TableCell(
+                        child: Center(
+                          child: Text(
+                            'ATT Code',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                     ]),
                     for (int i = 0; i < widget.allSubjects.length; i++)
                       TableRow(children: [
+                        TableCell(
+                          child:
+                              Center(child: Text(widget.allSem[i])),
+                        ),
                         TableCell(
                           child:
                               Center(child: Text(widget.allSubjects[i])),
@@ -192,10 +214,16 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                           child:
                               Center(child: Text(widget.allSubjectGrade[i])),
                         ),
+                        TableCell(
+                          child:
+                              Center(child: Text(widget.allAtt[i])),
+                        ),
                       ]),
                   ],
                 ),
               ),
+              SizedBox(height: 20),
+              Text('Medium of instruction - English'),
               SizedBox(height: 20),
               SlideTransition(
                 position: _slideAnimation,

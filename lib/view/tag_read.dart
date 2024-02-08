@@ -174,6 +174,8 @@ class _TagInfoState extends State<_TagInfo> {
   Widget build(BuildContext context) {
     late List<String> allCredit;
     late List<String> allGrade;
+    late List<String> allSem;
+    late List<String> allAtt;
     late List<String> allSubjectsCode;
     late List<String> decodedSubject =[];
     late List<String> allSubject;
@@ -375,6 +377,21 @@ class _TagInfoState extends State<_TagInfo> {
   setState(() {
     allSubject=temp3;
   });
+  
+  counterForListing+=refSize;
+  
+  List<String> temp4=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  setState(() {
+    allAtt=temp4;
+  });
+  print(allAtt);
+  counterForListing+=refSize;
+  
+  List<String> temp5=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  setState(() {
+    allSem=temp5;
+  });
+  print(allSem);
   // print(allSubjectsCode);
   // print(allGrade);
   // print(allCredit);
@@ -691,6 +708,8 @@ class _TagInfoState extends State<_TagInfo> {
                           allCredit,
                           decodedSubject,
                           allPersonalData,
+                          allAtt,
+                          allSem,
                           ),
                     ));
               },

@@ -24,6 +24,8 @@ class ReadRecordDetail extends StatelessWidget {
   final String lname;
   final String phonenum;
   final Uint8List byteData;
+  final List<String> allSem;
+  final List<String> allAtt;
 
   ReadRecordDetail(
     this.ndefWidgets,
@@ -44,7 +46,10 @@ class ReadRecordDetail extends StatelessWidget {
     this.allGrade,
     this.allCredit,
     this.decodedSubject,
-    this.allPersonalData, {
+    this.allPersonalData, 
+    this.allAtt,
+    this.allSem,
+     {
     Key? key,
   }) : super(key: key);
 
@@ -102,6 +107,8 @@ class ReadRecordDetail extends StatelessWidget {
                       decodedSubject,
                       allPersonalData,
                       byteData,
+                      allAtt,
+                      allSem,
                     ),
                   ),
                 );
