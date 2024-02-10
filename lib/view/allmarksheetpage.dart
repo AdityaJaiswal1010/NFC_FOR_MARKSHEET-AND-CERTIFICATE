@@ -9,7 +9,6 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 // import 'package:flutter_pdf_viewer/flutter_pdf_viewer.dart';
-import 'package:flutter/material.dart';import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
@@ -24,59 +23,29 @@ class AllMarksheetPage extends StatefulWidget {
   final List<String> allSem;
 
   const AllMarksheetPage(
-    this.allSubjectCode,
-    this.allSubjectMarks,
-    this.allSubjectGrade,
-    this.allSubjects, this.detailInfo, this.byteData, this.allAtt, this.allSem, {
-    Key? key,
-  }) : super(key: key);
+      this.allSubjectCode,
+      this.allSubjectMarks,
+      this.allSubjectGrade,
+      this.allSubjects,
+      this.detailInfo,
+      this.byteData,
+      this.allAtt,
+      this.allSem, {
+        Key? key,
+      }) : super(key: key);
 
   @override
   State<AllMarksheetPage> createState() => _AllMarksheetPageState();
 }
 
-class _AllMarksheetPageState extends State<AllMarksheetPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _fadeAnimation;
-  late Animation<Offset> _slideAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: Duration(milliseconds: 800),
-      vsync: this,
-    );
-    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeIn,
-      ),
-    );
-    _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 0.5),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
-
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class _AllMarksheetPageState extends State<AllMarksheetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('CONSOLIDATED GRADE CARD'),
         centerTitle: true,
+        backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -91,177 +60,39 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                   borderRadius: BorderRadius.circular(12.0),
                   child: Image.memory(
                     widget.byteData,
-                    // fit: BoxFit.cover,
                     width: double.infinity,
                     height: 200,
                   ),
                 ),
               ),
               SizedBox(height: 30),
-              Text('Student Detail',
-               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              SizedBox(height: 30),
-              ListView.builder(
-  shrinkWrap: true,
-  itemCount: (widget.detailInfo.length / 2).ceil(), // Determine the number of rows
-  itemBuilder: (BuildContext context, int index) {
-    // Calculate the indices for the pair of elements in the list
-    int firstIndex = index * 2;
-    int secondIndex = firstIndex + 1;
-
-    // Check if the second index is within the bounds of the list
-    bool hasNext = secondIndex < widget.detailInfo.length;
-
-    return Card(
-      elevation: 3,
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                widget.detailInfo[firstIndex],
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-          if (hasNext) // Render the second element if available
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  widget.detailInfo[secondIndex],
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-            ),
-            Divider(height: 1, color: Colors.black), // Add a Divider if there's a second element
-        ],
-      ),
-    );
-  },
-),
-
-              SizedBox(height: 12),
-              // SizedBox(height: 30),
-              FadeTransition(
-                opacity: _fadeAnimation,
-                child: SlideTransition(
-                  position: _slideAnimation,
-                  // child: Container(
-                  //   padding: EdgeInsets.all(16.0),
-                  //   child: Image.asset(
-                  //     'assets/xyz.png',
-                  //     width: 200,
-                  //   ),
-                  // ),
-                ),
-              ),
-              SizedBox(height: 30),
               Text(
-                'Result',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                'Student Detail',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.deepPurple),
               ),
               SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Table(
-                  border: TableBorder.all(),
-                  children: [
-                    TableRow(children: [
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'Sem',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'Subject Code',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'Subject Title',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'Credit',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'Grade',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'ATT Code',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ]),
-                    for (int i = 0; i < widget.allSubjects.length; i++)
-                      TableRow(children: [
-                        TableCell(
-                          child:
-                              Center(child: Text(widget.allSem[i])),
-                        ),
-                        TableCell(
-                          child:
-                              Center(child: Text(widget.allSubjectCode[i])),
-                        ),
-                        TableCell(
-                          child:
-                              Center(child: Text(widget.allSubjects[i])),
-                        ),
-                        
-                       
-                        TableCell(
-                          child:
-                              Center(child: Text(widget.allSubjectGrade[i])),
-                        ),
-                         TableCell(
-                          child:
-                              Center(child: Text(widget.allSubjectMarks[i])),
-                        ),
-                        TableCell(
-                          child:
-                              Center(child: Text(widget.allAtt[i])),
-                        ),
-                      ]),
-                  ],
-                ),
+              _buildDetailInfo(),
+              SizedBox(height: 20),
+              Text(
+                'Result',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.deepPurple),
               ),
+              SizedBox(height: 20),
+              _buildResultTable(),
               SizedBox(height: 20),
               Text('Medium of instruction - English'),
               SizedBox(height: 20),
-              SlideTransition(
-                position: _slideAnimation,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Back'),
-                ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Back'),
               ),
               SizedBox(height: 20),
             ],
@@ -270,8 +101,132 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
       ),
     );
   }
+Widget _buildDetailInfo() {
+  // Assuming that each piece of information is separated by a dash "-"
+  // and the detailInfo list is structured accordingly.
+  List<Widget> rows = [];
+  for (int i = 0; i < widget.detailInfo.length; i += 3) {
+    List<Widget> cells = [];
+    for (int j = 0; j < 3; j++) {
+      // Check if the index is within bounds of the list
+      if (i + j < widget.detailInfo.length) {
+        var detailParts = widget.detailInfo[i + j].split('-');
+        if (detailParts.length >= 2) {
+          cells.add(
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                margin: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: Offset(0, 2), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: RichText(
+                  text: TextSpan(
+                    text: '${detailParts[0]}: ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black54,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: detailParts.sublist(1).join('-'),
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      } else {
+        cells.add(Expanded(child: Container())); // Empty expanded widget
+      }
+    }
+    rows.add(Row(children: cells));
+  }
+  return Column(children: rows);
 }
 
+  Widget _buildResultTable() {
+    return Table(
+      border: TableBorder.all(color: Colors.grey.shade300),
+      columnWidths: const <int, TableColumnWidth>{
+        0: FlexColumnWidth(),
+        1: FlexColumnWidth(),
+        2: FlexColumnWidth(2),
+        3: FlexColumnWidth(),
+        4: FlexColumnWidth(),
+        5: FlexColumnWidth(),
+      },
+      children: [
+        TableRow(
+          children: [
+            _buildTableHeader('Sem'),
+            _buildTableHeader('Subject Code'),
+            _buildTableHeader('Subject Title'),
+            _buildTableHeader('Credit'),
+            _buildTableHeader('Grade'),
+            _buildTableHeader('ATT Code'),
+          ],
+        ),
+        for (int i = 0; i < widget.allSubjects.length; i++)
+          TableRow(
+            decoration: BoxDecoration(
+              color: i % 2 == 0 ? Colors.grey.shade100 : null,
+            ),
+            children: [
+              _buildTableCell(widget.allSem[i]),
+              _buildTableCell(widget.allSubjectCode[i]),
+              _buildTableCell(widget.allSubjects[i]),
+              _buildTableCell(widget.allSubjectMarks[i]),
+              _buildTableCell(widget.allSubjectGrade[i]),
+              _buildTableCell(widget.allAtt[i]),
+            ],
+          ),
+      ],
+    );
+  }
+
+  Widget _buildTableHeader(String title) {
+    return TableCell(
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTableCell(String text) {
+    return TableCell(
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(text),
+        ),
+      ),
+    );
+  }
+}
 
 
 class View extends StatefulWidget {
