@@ -98,24 +98,51 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                 ),
               ),
               SizedBox(height: 30),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: widget.detailInfo.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    elevation: 3,
-                    child: ListTile(
-                      title: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          widget.detailInfo[index],
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+              Text('Student Detail',
+               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
+              SizedBox(height: 30),
+              ListView.builder(
+  shrinkWrap: true,
+  itemCount: (widget.detailInfo.length / 2).ceil(), // Determine the number of rows
+  itemBuilder: (BuildContext context, int index) {
+    // Calculate the indices for the pair of elements in the list
+    int firstIndex = index * 2;
+    int secondIndex = firstIndex + 1;
+
+    // Check if the second index is within the bounds of the list
+    bool hasNext = secondIndex < widget.detailInfo.length;
+
+    return Card(
+      elevation: 3,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                widget.detailInfo[firstIndex],
+                style: TextStyle(fontSize: 12),
+              ),
+            ),
+          ),
+          if (hasNext) // Render the second element if available
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  widget.detailInfo[secondIndex],
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+            ),
+            Divider(height: 1, color: Colors.black), // Add a Divider if there's a second element
+        ],
+      ),
+    );
+  },
+),
+
               SizedBox(height: 12),
               // SizedBox(height: 30),
               FadeTransition(
@@ -154,6 +181,14 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                       TableCell(
                         child: Center(
                           child: Text(
+                            'Subject Code',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Center(
+                          child: Text(
                             'Subject Title',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -162,23 +197,15 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                       TableCell(
                         child: Center(
                           child: Text(
-                            'Code',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
-                            'Grades',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      TableCell(
-                        child: Center(
-                          child: Text(
                             'Credit',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      TableCell(
+                        child: Center(
+                          child: Text(
+                            'Grade',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -200,19 +227,21 @@ class _AllMarksheetPageState extends State<AllMarksheetPage>
                         ),
                         TableCell(
                           child:
-                              Center(child: Text(widget.allSubjects[i])),
-                        ),
-                        TableCell(
-                          child:
                               Center(child: Text(widget.allSubjectCode[i])),
                         ),
                         TableCell(
                           child:
-                              Center(child: Text(widget.allSubjectMarks[i])),
+                              Center(child: Text(widget.allSubjects[i])),
                         ),
+                        
+                       
                         TableCell(
                           child:
                               Center(child: Text(widget.allSubjectGrade[i])),
+                        ),
+                         TableCell(
+                          child:
+                              Center(child: Text(widget.allSubjectMarks[i])),
                         ),
                         TableCell(
                           child:
