@@ -65,6 +65,7 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
                   ),
                 ),
               ),
+              (widget.detailInfo[0].toLowerCase().contains('folio'))?Text(widget.detailInfo[0]):Text(''),
               SizedBox(height: 30),
               Text(
                 'Student Detail',
@@ -102,113 +103,162 @@ class _AllMarksheetPageState extends State<AllMarksheetPage> {
     );
   }
 Widget _buildDetailInfo() {
-  // Assuming that each piece of information is separated by a dash "-"
-  // and the detailInfo list is structured accordingly.
-  List<Widget> rows = [];
-  for (int i = 0; i < widget.detailInfo.length; i += 3) {
+  TextStyle titleStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black54,
+    fontSize: 14,
+  );
+  TextStyle dataStyle = TextStyle(
+    fontWeight: FontWeight.normal,
+    color: Colors.black54,
+    fontSize: 14,
+  );
+
+  // Calculate the number of columns based on the maximum items per row
+  int columns = 3;
+  List<TableRow> tableRows = [];
+  for (int i = 0; i < widget.detailInfo.length; i += columns) {
     List<Widget> cells = [];
-    for (int j = 0; j < 3; j++) {
-      // Check if the index is within bounds of the list
+    for (int j = 0; j < columns; j++) {
       if (i + j < widget.detailInfo.length) {
         var detailParts = widget.detailInfo[i + j].split('-');
         if (detailParts.length >= 2) {
           cells.add(
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: Offset(0, 2), // changes position of shadow
+            Container(
+              padding: EdgeInsets.all(8),
+              margin: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: RichText(
+                text: TextSpan(
+                  text: '${detailParts[0]}: ',
+                  style: titleStyle,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: detailParts.sublist(1).join('-'),
+                      style: dataStyle,
                     ),
                   ],
-                ),
-                child: RichText(
-                  text: TextSpan(
-                    text: '${detailParts[0]}: ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: detailParts.sublist(1).join('-'),
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ),
           );
+        } else {
+          // Ensure empty cells are added if there's no data
+          cells.add(Container());
         }
       } else {
-        cells.add(Expanded(child: Container())); // Empty expanded widget
+        // Add empty containers to ensure the structure remains intact
+        cells.add(Container());
       }
     }
-    rows.add(Row(children: cells));
+    tableRows.add(TableRow(children: cells));
   }
-  return Column(children: rows);
+
+  return Table(
+    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+    children: tableRows,
+  );
 }
 
-  Widget _buildResultTable() {
-    return Table(
-      border: TableBorder.all(color: Colors.grey.shade300),
-      columnWidths: const <int, TableColumnWidth>{
-        0: FlexColumnWidth(),
-        1: FlexColumnWidth(),
-        2: FlexColumnWidth(2),
-        3: FlexColumnWidth(),
-        4: FlexColumnWidth(),
-        5: FlexColumnWidth(),
-      },
+
+Widget _buildResultTable() {
+  List<TableRow> rows = [
+    TableRow(
+      decoration: BoxDecoration(color: Colors.deepPurple.shade100),
       children: [
-        TableRow(
-          children: [
-            _buildTableHeader('Sem'),
-            _buildTableHeader('Subject Code'),
-            _buildTableHeader('Subject Title'),
-            _buildTableHeader('Credit'),
-            _buildTableHeader('Grade'),
-            _buildTableHeader('ATT Code'),
-          ],
-        ),
-        for (int i = 0; i < widget.allSubjects.length; i++)
-          TableRow(
-            decoration: BoxDecoration(
-              color: i % 2 == 0 ? Colors.grey.shade100 : null,
-            ),
-            children: [
-              _buildTableCell(widget.allSem[i]),
-              _buildTableCell(widget.allSubjectCode[i]),
-              _buildTableCell(widget.allSubjects[i]),
-              _buildTableCell(widget.allSubjectMarks[i]),
-              _buildTableCell(widget.allSubjectGrade[i]),
-              _buildTableCell(widget.allAtt[i]),
-            ],
-          ),
+        _buildTableHeader('Sem'),
+        _buildTableHeader('Subject Code'),
+        _buildTableHeader('Subject Title'),
+        _buildTableHeader('Credit'),
+        _buildTableHeader('Grade'),
+        _buildTableHeader('ATT Code'),
       ],
+    ),
+  ];
+
+  String? previousSem;
+  for (int i = 0; i < widget.allSubjects.length; i++) {
+    // Check if the semester has changed and it's not the first entry
+    if (previousSem != null && widget.allSem[i] != previousSem) {
+      // Add a divider row that spans all columns
+      rows.add(_buildDividerRow(6)); // Assuming you have 6 columns
+    }
+    // Add the regular data row
+    rows.add(
+      TableRow(
+        decoration: BoxDecoration(
+          color: i % 2 == 0 ? Colors.grey.shade100 : null,
+        ),
+        children: [
+          _buildTableCell(widget.allSem[i]),
+          _buildTableCell(widget.allSubjectCode[i]),
+          _buildTableCell(widget.allSubjects[i]),
+          _buildTableCell(widget.allSubjectMarks[i]), // Assuming this is the Credit column
+          _buildTableCell(widget.allSubjectGrade[i]), // Assuming this is the Grade column
+          _buildTableCell(widget.allAtt[i]), // Assuming this is the ATT Code column
+        ],
+      ),
     );
+    previousSem = widget.allSem[i];
   }
 
-  Widget _buildTableHeader(String title) {
+  return Table(
+    border: TableBorder.all(color: Colors.grey.shade300),
+    columnWidths: const <int, TableColumnWidth>{
+      0: FlexColumnWidth(),
+      1: FlexColumnWidth(),
+      2: FlexColumnWidth(2),
+      3: FlexColumnWidth(),
+      4: FlexColumnWidth(),
+      5: FlexColumnWidth(),
+    },
+    children: rows,
+  );
+}
+
+TableRow _buildDividerRow(int numberOfColumns) {
+  return TableRow(
+    children: List.generate(
+      numberOfColumns,
+      (_) => TableCell(
+        child: Container(
+          height: 2, // Increase the thickness of the divider line
+          color: Colors.black87, // Use a darker shade for the divider line
+        ),
+      ),
+    ),
+    decoration: BoxDecoration(
+      border: Border(
+        top: BorderSide(width: 2, color: Colors.black87), // Make the top border thicker and darker
+      ),
+    ),
+  );
+}
+
+
+
+
+ Widget _buildTableHeader(String title) {
     return TableCell(
       child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
             title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              color: Colors.deepPurple,
             ),
           ),
         ),
@@ -216,16 +266,24 @@ Widget _buildDetailInfo() {
     );
   }
 
-  Widget _buildTableCell(String text) {
+  Widget _buildTableCell(String text, {bool isGrade = false}) {
+    Color? textColor;
+    if (isGrade && text == 'A') {
+      textColor = Colors.green;  // Example of conditional formatting
+    }
+
     return TableCell(
       child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(text),
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            text,
+            style: TextStyle(color: textColor),
+          ),
         ),
-      ),
-    );
-  }
+     ),
+);
+}
 }
 
 
@@ -288,128 +346,3 @@ class _ViewState extends State<View> {
 
 
 
-
-
-
-// child: Table(
-//   border: TableBorder.all(),
-//   children: [
-//     TableRow(children: [
-//       TableCell(
-//         child: Container(
-//           width: 150, // Adjust the width as needed
-//           child: Center(
-//             child: SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Text(
-//                 'Subject Title',
-//                 style: TextStyle(fontWeight: FontWeight.bold),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//       TableCell(
-//         child: Container(
-//           width: 100, // Adjust the width as needed
-//           child: Center(
-//             child: SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Text(
-//                 'Code',
-//                 style: TextStyle(fontWeight: FontWeight.bold),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//       TableCell(
-//         child: Container(
-//           width: 100, // Adjust the width as needed
-//           child: Center(
-//             child: SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Text(
-//                 'Grades',
-//                 style: TextStyle(fontWeight: FontWeight.bold),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//       TableCell(
-//         child: Container(
-//           width: 100, // Adjust the width as needed
-//           child: Center(
-//             child: SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Text(
-//                 'Credit',
-//                 style: TextStyle(fontWeight: FontWeight.bold),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     ]),
-//     for (int i = 0; i < widget.allSubjects.length; i++)
-//       TableRow(children: [
-//         TableCell(
-//           child: Container(
-//             width: 150, // Adjust the width as needed
-//             child: Center(
-//               child: SingleChildScrollView(
-//                 scrollDirection: Axis.horizontal,
-//                 child: Text(
-//                   widget.allSubjects[i],
-//                   style: TextStyle(fontWeight: FontWeight.normal),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//         TableCell(
-//           child: Container(
-//             width: 100, // Adjust the width as needed
-//             child: Center(
-//               child: SingleChildScrollView(
-//                 scrollDirection: Axis.horizontal,
-//                 child: Text(
-//                   widget.allSubjectCode[i],
-//                   style: TextStyle(fontWeight: FontWeight.normal),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//         TableCell(
-//           child: Container(
-//             width: 100, // Adjust the width as needed
-//             child: Center(
-//               child: SingleChildScrollView(
-//                 scrollDirection: Axis.horizontal,
-//                 child: Text(
-//                   widget.allSubjectMarks[i],
-//                   style: TextStyle(fontWeight: FontWeight.normal),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//         TableCell(
-//           child: Container(
-//             width: 100, // Adjust the width as needed
-//             child: Center(
-//               child: SingleChildScrollView(
-//                 scrollDirection: Axis.horizontal,
-//                 child: Text(
-//                   widget.allSubjectGrade[i],
-//                   style: TextStyle(fontWeight: FontWeight.normal),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ]),
-//   ],
-// ),
