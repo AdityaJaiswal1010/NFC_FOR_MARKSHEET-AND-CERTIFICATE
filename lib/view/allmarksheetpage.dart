@@ -21,6 +21,7 @@ class AllMarksheetPage extends StatefulWidget {
   final Uint8List byteData;
   final List<String> allAtt;
   final List<String> allSem;
+  final List<String> month_year;
 
   const AllMarksheetPage(
       this.allSubjectCode,
@@ -30,7 +31,8 @@ class AllMarksheetPage extends StatefulWidget {
       this.detailInfo,
       this.byteData,
       this.allAtt,
-      this.allSem, {
+      this.allSem, 
+      this.month_year, {
         Key? key,
       }) : super(key: key);
 
@@ -183,34 +185,39 @@ Widget _buildResultTable() {
         _buildTableHeader('Credit'),
         _buildTableHeader('Grade'),
         _buildTableHeader('ATT Code'),
+        _buildTableHeader('Month & Year'),
       ],
     ),
   ];
 
   String? previousSem;
+  bool isAlternateColor = false; // Flag to keep track of row color based on semester change
+
   for (int i = 0; i < widget.allSubjects.length; i++) {
-    // Check if the semester has changed and it's not the first entry
-    if (previousSem != null && widget.allSem[i] != previousSem) {
-      // Add a divider row that spans all columns
-      rows.add(_buildDividerRow(6)); // Assuming you have 6 columns
+    // Check if the semester has changed, indicating we need a divider
+    if (previousSem != null && previousSem != widget.allSem[i]) {
+      rows.add(_buildDividerRow(7)); // Add a divider row when semester changes
+      isAlternateColor = !isAlternateColor; // Toggle the color for the new semester
     }
-    // Add the regular data row
+    
     rows.add(
       TableRow(
         decoration: BoxDecoration(
-          color: i % 2 == 0 ? Colors.grey.shade100 : null,
+          color: isAlternateColor ? Colors.grey.shade200 : Colors.white,
         ),
         children: [
           _buildTableCell(widget.allSem[i]),
           _buildTableCell(widget.allSubjectCode[i]),
           _buildTableCell(widget.allSubjects[i]),
-          _buildTableCell(widget.allSubjectMarks[i]), // Assuming this is the Credit column
-          _buildTableCell(widget.allSubjectGrade[i]), // Assuming this is the Grade column
-          _buildTableCell(widget.allAtt[i]), // Assuming this is the ATT Code column
+          _buildTableCell(widget.allSubjectMarks[i]), // Assuming this represents Credit
+          _buildTableCell(widget.allSubjectGrade[i]), // Assuming this represents Grade
+          _buildTableCell(widget.allAtt[i]), // Assuming this represents ATT Code
+          _buildTableCell(widget.month_year[i]),
         ],
       ),
     );
-    previousSem = widget.allSem[i];
+
+    previousSem = widget.allSem[i]; // Update the previousSem for the next iteration
   }
 
   return Table(
@@ -222,6 +229,7 @@ Widget _buildResultTable() {
       3: FlexColumnWidth(),
       4: FlexColumnWidth(),
       5: FlexColumnWidth(),
+      6: FlexColumnWidth(),
     },
     children: rows,
   );
@@ -233,18 +241,15 @@ TableRow _buildDividerRow(int numberOfColumns) {
       numberOfColumns,
       (_) => TableCell(
         child: Container(
-          height: 2, // Increase the thickness of the divider line
-          color: Colors.black87, // Use a darker shade for the divider line
+          height: 2, // Height of the divider line
+          color: Colors.black, // Color of the divider line
         ),
-      ),
-    ),
-    decoration: BoxDecoration(
-      border: Border(
-        top: BorderSide(width: 2, color: Colors.black87), // Make the top border thicker and darker
       ),
     ),
   );
 }
+
+
 
 
 

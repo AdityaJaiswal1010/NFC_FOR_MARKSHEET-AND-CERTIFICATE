@@ -26,7 +26,7 @@ class ReadRecordDetail extends StatelessWidget {
   final Uint8List byteData;
   final List<String> allSem;
   final List<String> allAtt;
-
+  final List<String> month_year;
   ReadRecordDetail(
     this.ndefWidgets,
     this.maildata,
@@ -49,6 +49,7 @@ class ReadRecordDetail extends StatelessWidget {
     this.allPersonalData, 
     this.allAtt,
     this.allSem,
+    this.month_year,
      {
     Key? key,
   }) : super(key: key);
@@ -67,10 +68,14 @@ class ReadRecordDetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Image.asset(
-                'assets/xyz.png',
+                'assets/srm_logo.jpeg',
+                height: 100,
                 width: 200,
               ),
             ),
+            SizedBox(height: 20),
+         Text('SRM Institute of Science and Technology', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text("Deemed to be University u/s 3 of UGC Act, 1956", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
             SizedBox(height: 20),
             // ElevatedButton(
             //   onPressed: () {
@@ -109,6 +114,7 @@ class ReadRecordDetail extends StatelessWidget {
                       byteData,
                       allAtt,
                       allSem,
+                      month_year,
                     ),
                   ),
                 );
@@ -136,3 +142,5 @@ class ReadRecordDetail extends StatelessWidget {
     );
   }
 }
+
+

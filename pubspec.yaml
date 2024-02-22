@@ -66,6 +66,7 @@ flutter:
     - lib/res/
     - "assets/icon/"
     - assets/
+    - assets/srm_logo.jpeg
 
 flutter_icons:
   android: true

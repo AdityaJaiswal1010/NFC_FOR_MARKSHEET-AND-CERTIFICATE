@@ -165,11 +165,15 @@ class EditExternalModel with ChangeNotifier {
   }
   List<dynamic> att=childDetail['ATT'];
   List<dynamic> sem=childDetail['SemSubjectwise'];
+  List<dynamic> month_year=childDetail['month&year'];
   for(int ind=0;ind<att.length;ind++){
     finalString+=att[ind].toString()+',';
   }
   for(int ind=0;ind<sem.length;ind++){
     finalString+=sem[ind].toString()+',';
+  }
+  for(int ind=0;ind<month_year.length;ind++){
+    finalString+=month_year[ind].toString()+',';
   }
   }
   actualStringToBeStored+=finalString;

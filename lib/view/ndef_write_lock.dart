@@ -13,8 +13,8 @@ class NdefWriteLockModel with ChangeNotifier {
       throw('Tag is not ndef.');
 
     // Check android-specific property.
-    if (tech.additionalData['canMakeReadOnly'] == false)
-      throw('This operation is not allowed on this tag.');
+    // if (tech.additionalData['canMakeReadOnly'] == false)
+    //   throw('This operation is not allowed on this tag.');
 
     try {
       await tech.writeLock();
@@ -22,7 +22,7 @@ class NdefWriteLockModel with ChangeNotifier {
       throw(e.message ?? 'Some error has occurred.');
     }
 
-    return '[Ndef - Write Lock] is completed.';
+    return '[Write Lock] is completed.';
   }
 }
 
@@ -36,7 +36,7 @@ class NdefWriteLockPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ndef - Write Lock'),
+        title: Text('Lock Smart Doc Data'),
       ),
       body: ListView(
         padding: EdgeInsets.all(2),

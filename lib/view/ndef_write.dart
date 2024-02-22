@@ -37,7 +37,7 @@ class NdefWriteModel with ChangeNotifier {
       throw('Tag is not ndef.');
 
     if (!tech.isWritable)
-      throw('Tag is not ndef writable.');
+      throw('Tag is not writable.');
 
     try {
       final message = NdefMessage(recordList.map((e) => e.record).toList());
@@ -46,7 +46,7 @@ class NdefWriteModel with ChangeNotifier {
       throw(e.message ?? 'Some error has occurred.');
     }
 
-    return '[Ndef - Write] is completed.';
+    return '[Write] is completed.';
   }
 }
 

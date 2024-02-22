@@ -173,6 +173,7 @@ class _TagInfoState extends State<_TagInfo> {
   @override
   Widget build(BuildContext context) {
     late List<String> allCredit;
+    late List<String> month_year;
     late List<String> allGrade;
     late List<String> allSem;
     late List<String> allAtt;
@@ -392,6 +393,12 @@ class _TagInfoState extends State<_TagInfo> {
     allSem=temp5;
   });
   print(allSem);
+    counterForListing+=refSize;
+  List<String> temp6=actualPairedString.sublist(counterForListing,counterForListing+refSize);
+  setState(() {
+    month_year=temp6;
+  });
+  print(month_year);
   // print(allSubjectsCode);
   // print(allGrade);
   // print(allCredit);
@@ -710,6 +717,7 @@ class _TagInfoState extends State<_TagInfo> {
                           allPersonalData,
                           allAtt,
                           allSem,
+                          month_year,
                           ),
                     ));
               },
