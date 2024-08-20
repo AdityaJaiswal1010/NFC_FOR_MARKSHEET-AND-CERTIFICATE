@@ -554,6 +554,317 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'dart:io';
+// import 'package:app/repository/repository.dart';
+// import 'package:app/view/CloneDbContent.dart';
+// import 'package:app/view/ImgByteImg.dart';
+// import 'package:app/view/ScanMifareClassic.dart';
+// import 'package:app/view/about.dart';
+// import 'package:app/view/common/form_row.dart';
+// import 'package:app/view/ndef_format.dart';
+// import 'package:app/view/ndef_write.dart';
+// import 'package:app/view/ndef_write_lock.dart';
+// import 'package:app/view/paymentScreen.dart';
+// import 'package:app/view/tag_read.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:csv/csv.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:provider/provider.dart';
+
+// class App extends StatefulWidget {
+//   static Future<Widget> withDependency() async {
+//     final repo = await Repository.createInstance();
+//     return MultiProvider(
+//       providers: [
+//         Provider<Repository>.value(
+//           value: repo,
+//         ),
+//       ],
+//       child: App(),
+//     );
+//   }
+
+//   @override
+//   State<App> createState() => _AppState();
+// }
+
+// class _AppState extends State<App> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: _Home(),
+//       theme: ThemeData(
+//         primaryColor: Color(0xFF4D8CFE),
+//         hintColor: Colors.black,
+//         scaffoldBackgroundColor: Color(0xFFF5F5F5),
+//         appBarTheme: AppBarTheme(
+//           color: Color(0xFF4D8CFE),
+//         ),
+//         elevatedButtonTheme: ElevatedButtonThemeData(
+//           style: ElevatedButton.styleFrom(
+//             primary: Color(0xFF4D8CFE),
+//             shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(12),
+//             ),
+//             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+//           ),
+//         ),
+//         textButtonTheme: TextButtonThemeData(
+//           style: TextButton.styleFrom(
+//             primary: Color(0xFF4D8CFE),
+//           ),
+//         ),
+//       ),
+//       darkTheme: ThemeData.dark(),
+//     );
+//   }
+// }
+
+// class _Home extends StatefulWidget {
+//   @override
+//   State<_Home> createState() => _HomeState();
+// }
+
+// class _HomeState extends State<_Home> {
+//   bool isPressed = true;
+//   TextEditingController regnoController = TextEditingController();
+//   List<String> headers = [];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Center(
+//           child: Text(
+//             'Smart Docs',
+//             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//           ),
+//         ),
+//       ),
+//       body: ListView(
+//         padding: EdgeInsets.all(20),
+//         children: [
+//           Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               SizedBox(height: 30),
+//               Center(
+//                 child: Container(
+//                   height: 200,
+//                   width: 200,
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(30),
+//                     color: Color(0xFFFFA726), // Orange color
+//                     boxShadow: [
+//                       BoxShadow(
+//                         blurRadius: 8,
+//                         offset: Offset(0, 2),
+//                         color: Colors.grey.withOpacity(0.3),
+//                       ),
+//                     ],
+//                   ),
+//                   child: InkWell(
+//                     onTap: () {
+//                       Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => TagReadPage.withDependency(),
+//                         ),
+//                       );
+//                     },
+//                     borderRadius: BorderRadius.circular(30),
+//                     child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         Icon(
+//                           FontAwesomeIcons.nfcSymbol,
+//                           size: 50,
+//                           color: Colors.black,
+//                         ),
+//                         SizedBox(height: 10),
+//                         Text(
+//                           'Scan Smart Doc',
+//                           style: TextStyle(
+//                             fontSize: 20,
+//                             color: Colors.black,
+//                             fontWeight: FontWeight.bold,
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(height: 30),
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   Navigator.push(
+//                     context,
+//                     PageRouteBuilder(
+//                       pageBuilder: (context, animation, secondaryAnimation) =>
+//                           NdefWriteLockPage.withDependency(),
+//                       transitionsBuilder:
+//                           (context, animation, secondaryAnimation, child) {
+//                         var begin = Offset(0.0, 1.0);
+//                         var end = Offset.zero;
+//                         var curve = Curves.easeInOut;
+//                         var tween = Tween(begin: begin, end: end)
+//                             .chain(CurveTween(curve: curve));
+//                         return SlideTransition(
+//                           position: animation.drive(tween),
+//                           child: child,
+//                         );
+//                       },
+//                     ),
+//                   );
+//                 },
+//                 child: Row(
+//                   mainAxisSize: MainAxisSize.min,
+//                   children: [
+//                     Icon(FontAwesomeIcons.userLock, color: Colors.white),
+//                     SizedBox(width: 20),
+//                     Text('Write Lock', style: TextStyle(fontSize: 18)),
+//                   ],
+//                 ),
+//               ),
+//               SizedBox(height: 30),
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   Navigator.push(
+//                     context,
+//                     PageRouteBuilder(
+//                       pageBuilder: (context, animation, secondaryAnimation) =>
+//                           PaymentScreen(),
+//                       transitionsBuilder:
+//                           (context, animation, secondaryAnimation, child) {
+//                         var begin = Offset(0.0, 1.0);
+//                         var end = Offset.zero;
+//                         var curve = Curves.easeInOut;
+//                         var tween = Tween(begin: begin, end: end)
+//                             .chain(CurveTween(curve: curve));
+//                         return SlideTransition(
+//                           position: animation.drive(tween),
+//                           child: child,
+//                         );
+//                       },
+//                     ),
+//                   );
+//                 },
+//                 child: Row(
+//                   mainAxisSize: MainAxisSize.min,
+//                   children: [
+//                     Icon(FontAwesomeIcons.moneyCheckAlt, color: Colors.white),
+//                     SizedBox(width: 20),
+//                     Text('Payment', style: TextStyle(fontSize: 18)),
+//                   ],
+//                 ),
+//               ),
+//               SizedBox(height: 30),
+//               Text(
+//                 'Admin Login',
+//                 style: TextStyle(
+//                   fontSize: 24,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               SizedBox(height: 20),
+//               TextField(
+//                 controller: regnoController,
+//                 decoration: InputDecoration(
+//                   border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                   labelText: 'Enter Admin ID',
+//                 ),
+//               ),
+//               SizedBox(height: 20),
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   var adminList = await FirebaseFirestore.instance
+//                       .collection('admin')
+//                       .doc('F0BED80evF2AMUSso7mH')
+//                       .get();
+//                   Map<String, dynamic> mdata = adminList.data()!;
+//                   List<dynamic> alladmin = mdata['admins'];
+//                   if (alladmin.contains(regnoController.text.toString())) {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => NdefWritePage.withDependency(),
+//                       ),
+//                     );
+//                   } else {
+//                     ScaffoldMessenger.of(context).showSnackBar(
+//                       const SnackBar(
+//                         content: Text('Invalid Admin'),
+//                       ),
+//                     );
+//                     return null;
+//                   }
+//                 },
+//                 child: Text('Enter'),
+//               ),
+//               SizedBox(height: 30),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import 'dart:io';
 import 'package:app/repository/repository.dart';
 import 'package:app/view/CloneDbContent.dart';
@@ -564,6 +875,7 @@ import 'package:app/view/common/form_row.dart';
 import 'package:app/view/ndef_format.dart';
 import 'package:app/view/ndef_write.dart';
 import 'package:app/view/ndef_write_lock.dart';
+import 'package:app/view/paymentScreen.dart';
 import 'package:app/view/tag_read.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
@@ -590,17 +902,65 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  int _currentIndex = 0;
+
+  final List<Widget> _children = [
+    _Home(),
+    _Explore(), // Moved Admin Login functionality here
+    // PlaceholderWidget('Chat Page'), // Replace with your chat page
+  ];
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: _Home(),
+      home: Scaffold(
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.explore),
+              label: 'Admin',
+            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.chat),
+            //   label: 'Chat',
+            // ),
+          ],
+        ),
+      ),
       theme: ThemeData(
         primaryColor: Color(0xFF4D8CFE),
         hintColor: Colors.black,
-        scaffoldBackgroundColor: Color(0xFFEAF1FF),
+        scaffoldBackgroundColor: Color(0xFFF5F5F5),
         appBarTheme: AppBarTheme(
           color: Color(0xFF4D8CFE),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: Color(0xFF4D8CFE),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Color(0xFF4D8CFE),
+          ),
         ),
       ),
       darkTheme: ThemeData.dark(),
@@ -614,27 +974,14 @@ class _Home extends StatefulWidget {
 }
 
 class _HomeState extends State<_Home> {
-  bool isPressed = true;
-  TextEditingController regnoController = TextEditingController();
-  List<String> headers = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Row(
-            children: [
-              // Image.asset(
-              //   'assets/tinkertech.jpg',
-              //   fit: BoxFit.cover,
-              //   height: 32,
-              // ),
-              Text(
-                'Smart Docs',
-                textAlign: TextAlign.center,
-              ),
-            ],
+          child: Text(
+            'Welcome to Smart Docs',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -642,271 +989,224 @@ class _HomeState extends State<_Home> {
         padding: EdgeInsets.all(20),
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 30),
-              Center(
-  child: Container(
-    height: 200,
-    width: 200,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(30),
-      color: Theme.of(context).colorScheme.surface, // Updated to use color scheme
-      boxShadow: [
-        BoxShadow(
-          blurRadius: 8,
-          offset: Offset(0, 2),
-          color: Colors.grey.withOpacity(0.3),
-        ),
-      ],
-    ),
-    child: InkWell( // Use InkWell for ripple effect
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TagReadPage.withDependency(),
-          ),
-        );
-      },
-      borderRadius: BorderRadius.circular(30), // Match container's border radius
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            FontAwesomeIcons.nfcSymbol,
-            size: 50,
-            color: Colors.black,
-          ),
-          SizedBox(height: 10),
-          Text(
-            'Scan Smart Doc',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    ),
-  ),
-),
-SizedBox(height: 30),
-Center(
-  child: Column(
-    children: [
-      ElevatedButton(
-        onPressed: () async {
-          Navigator.push(
-            context,
-            PageRouteBuilder( // Use PageRouteBuilder for custom animations
-              pageBuilder: (context, animation, secondaryAnimation) => NdefWriteLockPage.withDependency(),
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                var begin = Offset(0.0, 1.0);
-                var end = Offset.zero;
-                var curve = Curves.easeInOut;
-                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                return SlideTransition(
-                  position: animation.drive(tween),
-                  child: child,
-                );
-              },
-            ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).colorScheme.primary, // Use theme's primary color
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          elevation: 5,
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Row(
-            children: [
-              Icon(
-            FontAwesomeIcons.userLock,
-            color: Colors.black,
-          ),
-          SizedBox(width: 70,),
-              Text(
-                'Write Lock',
-                style: TextStyle(fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-
-              SizedBox(height: 30,),
-              Center(
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
                 child: Column(
                   children: [
+                    Image.asset(
+                      'assets/tinkertech.jpg', // Replace with the actual image URL
+                      height: 150,
+                    ),
+                    SizedBox(height: 10),
                     Text(
-                      'Admin Login',
+                      'Scan Smart Doc',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    TextField(
-                      controller: regnoController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter Admin Id',
-                        
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () async {
-                        var adminList = await FirebaseFirestore.instance
-                            .collection('admin')
-                            .doc('F0BED80evF2AMUSso7mH')
-                            .get();
-                        Map<String, dynamic> mdata = adminList.data()!;
-                        List<dynamic> alladmin = mdata['admins'];
-                        if (alladmin.contains(regnoController.text.toString())) {
+                    SizedBox(height: 10),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  NdefWritePage.withDependency(),
+                              builder: (context) => TagReadPage.withDependency(),
                             ),
                           );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Invalid Admin'),
-                            ),
-                          );
-                          return null;
-                        }
-                      },
-                      child: Text('Enter'),
-                    )
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xFF4D8CFE), // Changed the color to blue
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        ),
+                        child: Text('Scan Now', style: TextStyle(fontSize: 18)),
+                      ),
+                    ),
                   ],
                 ),
               ),
-
-
-
-
-              
-
-
-
-
-              //   Center(
-              //   child: Column(
-              //     children: [
-              //       // Text(
-              //       //   'Admin Login',
-              //       //   style: TextStyle(
-              //       //     fontSize: 24,
-              //       //   ),
-              //       // ),
-              //       // SizedBox(height: 20),
-              //       // TextField(
-              //       //   controller: regnoController,
-              //       //   decoration: InputDecoration(
-              //       //     border: OutlineInputBorder(),
-              //       //     labelText: 'Enter Admin Id',
-                        
-              //       //   ),
-              //       // ),
-              //       // SizedBox(height: 20),
-              //       ElevatedButton(
-              //         onPressed: () async {
-              //           // var adminList = await FirebaseFirestore.instance
-              //           //     .collection('admin')
-              //           //     .doc('F0BED80evF2AMUSso7mH')
-              //           //     .get();
-              //           // Map<String, dynamic> mdata = adminList.data()!;
-              //           // List<dynamic> alladmin = mdata['admins'];
-              //           // if (alladmin.contains(regnoController.text.toString())) {
-              //             Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                 builder: (context) =>
-              //                     CloneDbData(),
-              //               ),
-              //             );
-              //           // } else {
-              //           //   ScaffoldMessenger.of(context).showSnackBar(
-              //           //     const SnackBar(
-              //           //       content: Text('Invalid Admin'),
-              //           //     ),
-              //           //   );
-              //           //   return null;
-              //           // }
-              //         },
-              //         child: Text('Clone DB Data'),
-              //       )
-              //     ],
-              //   ),
-              // ),
-
-
-
-
-
-
-              SizedBox(height: 30),
-              // Center(
-              //   child: Container(
-              //     height: 200,
-              //     width: 200,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(30),
-              //       color: Theme.of(context).hintColor,
-              //       boxShadow: [
-              //         BoxShadow(
-              //           blurRadius: 10,
-              //           offset: Offset(5, 5),
-              //           color: Colors.grey.withOpacity(0.5),
-              //         ),
-              //       ],
-              //     ),
-              //     child: ElevatedButton(
-              //       onPressed: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => BytecodeToImage(),
-              //           ),
-              //         );
-              //       },
-              //       child: Column(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         crossAxisAlignment: CrossAxisAlignment.center,
-              //         children: [
-              //           Icon(
-              //             FontAwesomeIcons.nfcSymbol,
-              //             size: 50,
-              //             color: Colors.white,
-              //           ),
-              //           SizedBox(height: 10),
-              //           Text(
-              //             'Img Byte Img',
-              //             style: TextStyle(
-              //               fontSize: 20,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              SizedBox(height: 20),
+              Text(
+                'Featured',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: [
+                  _buildFeatureItem(
+                    'assets/tinkertech.jpg',
+                    FontAwesomeIcons.userLock,
+                    'Write Lock',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NdefWriteLockPage.withDependency(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildFeatureItem(
+                    'assets/tinkertech.jpg',
+                    FontAwesomeIcons.moneyCheckAlt,
+                    'Payment',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildFeatureItem(
+      String imageUrl, IconData iconData, String label, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Color(0xFF4D8CFE), // Added color to the widget buttons
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(iconData, size: 40, color: Colors.white), // Icon color to white
+            SizedBox(height: 10),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.white), // Text color to white
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Explore extends StatefulWidget {
+  @override
+  State<_Explore> createState() => _ExploreState();
+}
+
+class _ExploreState extends State<_Explore> {
+  TextEditingController regnoController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Explore',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Admin Login',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: regnoController,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                hintText: 'Enter Admin RegNo',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () async {
+                var adminList = await FirebaseFirestore.instance
+                    .collection('admin')
+                    .doc('F0BED80evF2AMUSso7mH')
+                    .get();
+                Map<String, dynamic> mdata = adminList.data()!;
+                List<dynamic> alladmin = mdata['admins'];
+                if (alladmin.contains(regnoController.text.toString())) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NdefWritePage.withDependency(),
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Invalid Admin'),
+                    ),
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xFF4D8CFE), // Button color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              ),
+              child: Text('Login', style: TextStyle(fontSize: 18)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlaceholderWidget extends StatelessWidget {
+  final String text;
+
+  PlaceholderWidget(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(text, style: TextStyle(fontSize: 24)),
     );
   }
 }
